@@ -1,0 +1,14 @@
+.text-box {
+    width: 32%;
+}
+
+.section-container {
+    display: flex;
+    flex-direction: column;
+}
+  
+.section-container > * {
+  width: 20%;
+  margin-left: 20%; 
+  margin-right: 20%;
+}

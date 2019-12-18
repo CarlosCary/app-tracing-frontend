@@ -1,0 +1,77 @@
+<br>
+<br>
+<br>
+<br>
+<div>
+    <h1 class="center-text">Materias</h1>
+    <a class="material-icons add-button" mat-button routerLink="/student/enrolled">
+        add_box
+    </a>
+</div>
+
+
+<!-- <h1>{{subjectsInfo[0].id_subject}}</h1> -->
+<!-- <h1>{{subjectsData[0].subject_name}}</h1>   -->
+<!--
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8 table1">
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> <a href="google.com.bo">{{element.name}} </a></td>
+    </ng-container>
+
+    <ng-container matColumnDef="semester">
+        <th mat-header-cell *matHeaderCellDef> Semestre </th>
+        <td mat-cell *matCellDef="let element"> {{element.semester}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef> Año </th>
+        <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>-->
+
+
+
+
+
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8 table1">
+    
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsHeaderToDisplay">
+        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsHeaderToDisplay.length">
+            <div class="example-element-detail" [@detailExpand]="'expanded'">
+
+                <div class="example-element-description">
+                    xd: {{element.otroDato}}
+                </div>
+
+                <div class="example-element-description">
+                    Pendientes: 3
+                </div>
+
+                <div class="example-element-description">
+                    Aprobado: <b>No</b>
+                </div>
+
+                <div class="example-element-description">
+                    Fecha límite: 15/12/2019
+                </div>
+            </div>
+        </td>
+    </ng-container>
+    
+
+    <tr mat-header-row *matHeaderRowDef="columnsHeaderToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsHeaderToDisplay;"
+      class="example-element-row">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table> 

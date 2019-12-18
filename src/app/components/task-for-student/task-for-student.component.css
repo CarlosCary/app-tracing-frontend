@@ -1,0 +1,54 @@
+.section-container {
+    display: flex;
+    flex-direction: column;
+}
+  
+.section-container > * {
+  width: 60%;
+  margin-left: 20%; 
+  margin-right: 20%;
+}
+
+
+.center {
+    margin-top: 7%;
+    
+}
+
+.tittle {
+    text-align: center;
+}
+
+.text-box {
+    width: 32%;
+}
+
+.tittle-section {
+    width: 30%;
+}
+
+.new-section {
+    margin-left: 20%; 
+    margin-bottom: 1%;
+}
+
+.create-form {
+    float: right;
+    margin-left: 20%; 
+    margin-right: 20%;
+    margin-bottom: 2%;
+}
+
+.right-space {
+    margin-left: 11.39%; 
+}
+
+.new-document-button {
+    width: 15% !important; 
+}
+
+.next-button {
+    width: 15% !important;
+    /* float: right !important; */
+    margin-left: 70%;
+}

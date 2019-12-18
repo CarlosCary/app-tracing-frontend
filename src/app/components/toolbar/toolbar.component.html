@@ -1,0 +1,9 @@
+<mat-toolbar color="primary" class="app-header">
+    <div><a href="" target="_blank" class="positronx">Seguimiento Documentos Académicos</a></div>
+    <span class="nav-tool-items">
+        <a *ngIf="!isLoggedIn" mat-button routerLink="/login" routerLinkActive="mat-raised-button">Iniciar sesión</a>
+        <a *ngIf="!isLoggedIn" mat-button routerLink="/register" routerLinkActive="mat-raised-button">Crear cuenta</a>
+        <a *ngIf="isLoggedIn" mat-button (click)="userSettings()">{{userName}}</a>
+        <a *ngIf="isLoggedIn" mat-button mat-raised-button routerLink="/login" routerLinkActive="active" (click)="onLogout()">Cerrar sesión</a>
+    </span>
+</mat-toolbar>
