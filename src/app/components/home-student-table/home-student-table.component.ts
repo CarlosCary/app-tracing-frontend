@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjectsService } from 'src/app/services/subjects.service';
+import { TasksService } from 'src/app/services/tasks.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { Router } from '@angular/router';
 
 export interface Subject {
   Nombre: string;
@@ -30,38 +32,50 @@ const ELEMENT_DATA: Subject[] = [
 })
 
 export class HomeStudentTableComponent implements OnInit {
-  columnsHeaderToDisplay: string[] = ['Nombre', 'Semestre', 'Año'];
-  dataSource = ELEMENT_DATA;
+  columnsHeaderToDisplay: string[] = ['name', 'subjectCode', 'semester', 'year'];
+  dataSource:any = ELEMENT_DATA;
+  tasksData;
   subjectsData:any[] = [];
   subjectsInfo: Array<any> = new Array<any>();
   
   subjectsStudent;
-  constructor(private subjectsService: SubjectsService) { 
+  tasksStudent;
+  constructor(private subjectsService: SubjectsService, 
+              private tasksService: TasksService,
+              private router: Router) { 
     
   }
 
   async getSubjects() {
-    const idStudent = JSON.parse(localStorage.getItem("currentUser")).id;
+    const idStudent = JSON.parse(localStorage.getItem("currentUser"))._id;
     this.subjectsService.getStudentSubjects(idStudent).subscribe((data) => {
-      this.dataSource = this.parseSubjects(data);
+      this.dataSource = data;
+      this.dataSource.reverse();
     });
   }
-
-  parseSubjects(subjects) {
-    let model;
-    subjects.forEach(subject => {
-      model = {
-        Nombre: subject.subject_name,
-        Semestre: subject.subject_semester,
-        Año: subject.year
-      }
-      this.subjectsData.push(model);
+  
+  async getTasks() {
+    const idStudent = JSON.parse(localStorage.getItem("currentUser"))._id;
+    console.log("idStudent: ");
+    console.log(idStudent);
+    this.tasksService.getAllTasksStudent(idStudent).subscribe((data) => {
+      this.tasksData = data;
     });
-    return this.subjectsData;
+
   }
 
   async ngOnInit() {
-    this.subjectsStudent = await this.getSubjects();
-    console.log(this.subjectsStudent);
+    await this.getSubjects();
+    await this.getTasks();
+    
+  }
+
+  public prueba(idSubject, idTaskSubject) {
+    return idSubject === idTaskSubject;
+  }
+
+  public sendTask(_id) {
+    localStorage.setItem("taskId", _id);
+    this.router.navigate(['/student/task']);
   }
 }

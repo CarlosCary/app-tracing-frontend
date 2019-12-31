@@ -52,20 +52,14 @@ export class ReviewFormComponent  {
   getSection () {}
 
   async addFormTask () {
-    
-    console.log(this.dataTittles);
-    console.log(this.dataDescriptions);
-    // console.log(this.idTask);
-
-    for(let i = 0; i <= this.dataTittles.length; i++) { 
-      await this.tasksService.addFormTask(this.dataTittles[i], this.dataDescriptions[i],this.idTask).
+    for(let i = 0; i < this.dataTittles.length; i++) { 
+      if(this.dataTittles[i] != null ) {
+        await this.tasksService.addFormTask(this.dataTittles[i], this.dataDescriptions[i],this.idTask).
         subscribe(form => {
-        
-        // console.log("dentro del suscribe");
-        // console.log(this.idTask);
-        return form;
-        // this.router.navigate(['/proffesor/home']);
-      });
+          return form;
+          // this.router.navigate(['/proffesor/home']);
+        });
+      }
     }
   }
 
@@ -76,13 +70,18 @@ export class ReviewFormComponent  {
       await this.tasksService.addDocumentTask(documentsName[i], this.idTask).
         subscribe(document => {
         
-        // console.log("dentro del suscribe");
-        // console.log(this.idTask);
         return document;
         // this.router.navigate(['/proffesor/home']);
       });
     }
-    console.log(this.idTask);
+  }
+
+  async assignTaskAllStudentsSubject() {
+    const idSubject = JSON.parse(localStorage.getItem("taskData")).idSubject;
+    await this.tasksService.assignTaskAllStudentsSubject(idSubject, this.idTask).
+        subscribe(res => {
+        return res;
+      });
   }
 
   async createTask() {
@@ -90,36 +89,34 @@ export class ReviewFormComponent  {
     const idSubject = JSON.parse(localStorage.getItem("taskData")).idSubject;
     const deadline = JSON.parse(localStorage.getItem("taskData")).deadline;
     const visibilityDate = JSON.parse(localStorage.getItem("taskData")).visibilityDate;
-    await this.tasksService.createTask(taskName, idSubject, deadline, visibilityDate).
+    const documentsRequested = JSON.parse(localStorage.getItem("taskData")).documentsRequested;
+    // let formTittles = [];
+    // let formDescriptions = [];
+    // for(let i = 0; i < this.dataTittles.length; i++) { 
+    //   if(this.dataTittles[i] != null ) {
+    //     formTittles.push(this.dataTittles[i]) 
+    //     formDescriptions.push(this.dataDescriptions[i]);
+    //   }
+    // }
+    await this.tasksService.createTask(taskName, idSubject, deadline, visibilityDate, documentsRequested, this.dataTittles, this.dataDescriptions).
     subscribe(task => {
       this.idTask = task;
-      // console.log("dentro del suscribe");
-      // console.log(this.idTask);
-      this.addDocumentsTask();
-      this.addFormTask();
+      // this.addDocumentsTask();
+      // this.addFormTask();
+      // this.assignTaskAllStudentsSubject();
       // this.router.navigate(['/proffesor/home']);
     });
   }
 
   
 
-  async createForm(myForm: NgForm) {
-    // let dataTittles = [];
-    // let dataDescriptions = [];
-    // for(let i = 0; i <= this.count; i++) {
-    //   dataTittles.push((<HTMLInputElement>document.getElementById("descriptionTittle["+i+"]")).value);
-    //   dataDescriptions.push((<HTMLInputElement>document.getElementById("descriptionDetail["+i+"]")).value);
-    // }
-    // console.log(dataTittles);
-    // console.log(dataDescriptions);
-    console.log(localStorage.getItem("taskData"));
+  async createForm() {
     for(let i = 0; i <= this.count; i++) {
       this.dataTittles.push((<HTMLInputElement>document.getElementById("descriptionTittle["+i+"]")).value);
       this.dataDescriptions.push((<HTMLInputElement>document.getElementById("descriptionDetail["+i+"]")).value);
     }
 
     await this.createTask();
-    // await this.createDocuments();
 
     this.router.navigate(['/proffesor/home']);
   }

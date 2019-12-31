@@ -12,16 +12,17 @@
         </div>
         <br>
         <div>
-            <mat-form-field>
-                <input matInput [matDatepicker]="deadline" placeholder="Fecha límite de entrega" id="deadline" disabled>
-                <mat-datepicker-toggle matSuffix [for]="deadline"></mat-datepicker-toggle>
-                <mat-datepicker #deadline disabled="false"></mat-datepicker>
-            </mat-form-field>
 
-            <mat-form-field class="right-space">
+            <mat-form-field>
                 <input matInput [matDatepicker]="visibilityDate" placeholder="Fecha de visibilidad" id="visibility-date" disabled>
                 <mat-datepicker-toggle matSuffix [for]="visibilityDate"></mat-datepicker-toggle>
                 <mat-datepicker #visibilityDate disabled="false"></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="right-space">
+                <input matInput [matDatepicker]="deadline" placeholder="Fecha límite de entrega" id="deadline" disabled>
+                <mat-datepicker-toggle matSuffix [for]="deadline"></mat-datepicker-toggle>
+                <mat-datepicker #deadline disabled="false"></mat-datepicker>
             </mat-form-field>
         
         </div>

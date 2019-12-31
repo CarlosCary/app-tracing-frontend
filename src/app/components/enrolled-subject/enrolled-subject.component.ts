@@ -17,10 +17,9 @@ export class EnrolledSubjectComponent implements OnInit {
 
   onEnrolledSubject(): void {
     const student = JSON.parse(localStorage.getItem("currentUser"));
-    student.id;
     
     this.subjectsService
-    .enrolledSubject(this.code, student.id)
+    .enrolledSubject(this.code, student._id)
     .subscribe( subjectEnrolled => {
       this.router.navigate(['/student/home']);
     });

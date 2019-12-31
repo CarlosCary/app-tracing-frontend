@@ -24,6 +24,7 @@ export class LogInComponent implements OnInit {
       .loginUser(this.user.email, this.user.password)
       .subscribe(
         data => {
+          console.log(data);
           this.authService.setUser(data.user);
           let token = data.id;
           this.authService.setToken(token);

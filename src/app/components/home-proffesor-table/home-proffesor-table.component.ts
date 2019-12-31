@@ -22,7 +22,7 @@ export interface Subject {
 })
 
 export class HomeProffesorTableComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'semester', 'code', 'year', 'options'];
+  displayedColumns: string[] = ['name', 'enrolled','semester', 'code', 'year', 'options'];
   subjectsEnrolled:any[];
   subjectsData:any[];
   // dataSource = subjectsData;
@@ -38,8 +38,16 @@ export class HomeProffesorTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subjectsService.getSubjects().subscribe((data: any[])=>{
+    // this.subjectsService.getSubjects().subscribe((data: any[])=>{
+    //   this.subjectsData = data;
+    //   console.log(this.subjectsData);
+    // })
+    const proffesorId = JSON.parse(localStorage.getItem("currentUser"))._id;
+
+    this.subjectsService.getProffesorSubjects(proffesorId).subscribe((data: any[])=>{
       this.subjectsData = data;
+      console.log(this.subjectsData[0].enrolledStudents.length);
+      this.subjectsData.reverse();
     })
   }
 
@@ -55,6 +63,9 @@ export class HomeProffesorTableComponent implements OnInit {
   }
 
   newTask(idSubject) {
+    console.log("HAY UN ID: ");
+    console.log(idSubject);
+    
     this.saveIdSubject(idSubject);
 
     this.router.navigate(['/proffesor/task']);

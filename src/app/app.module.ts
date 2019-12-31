@@ -22,6 +22,10 @@ import { ReviewFormComponent } from './components/review-form/review-form.compon
 import { InputsReviewFormComponent } from './components/inputs-review-form/inputs-review-form.component';
 import { TaskForStudentComponent } from './components/task-for-student/task-for-student.component';
 import { RequestedDocumentComponent } from './components/requested-document/requested-document.component';
+import { TaskFormComponent } from './components/task-form/task-form.component';
+import { TaskFormRequestedComponent } from './components/task-form-requested/task-form-requested.component';
+import { TaskDocumentsRequestedComponent } from './components/task-documents-requested/task-documents-requested.component';
+
 
 
 @NgModule({
@@ -39,7 +43,10 @@ import { RequestedDocumentComponent } from './components/requested-document/requ
     ReviewFormComponent,
     InputsReviewFormComponent,
     TaskForStudentComponent,
-    RequestedDocumentComponent
+    RequestedDocumentComponent,
+    TaskFormComponent,
+    TaskFormRequestedComponent,
+    TaskDocumentsRequestedComponent
   ],
   imports: [
     BrowserModule,

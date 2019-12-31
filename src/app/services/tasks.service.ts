@@ -14,7 +14,7 @@ export class TasksService {
     "Content-type": "application/json"
   });
   
-  createTask(taskName:string , idSubject:string, deadline:string, visibilityDate:string) {
+  createTask(taskName:string , idSubject:string, deadline:string, visibilityDate:string, documentsRequested, formTittles, formDescriptions) {
     const url_api = "http://localhost:3000/tasks/new";
     
     return this.http
@@ -24,7 +24,10 @@ export class TasksService {
         taskName: taskName,
         idSubject: idSubject, 
         deadline: deadline,
-        visibilityDate: visibilityDate
+        visibilityDate: visibilityDate,
+        documentsRequested: documentsRequested,
+        formTittles: formTittles,
+        formDescriptions: formDescriptions
       },
       { headers: this.headers }
     )
@@ -60,5 +63,30 @@ export class TasksService {
       { headers: this.headers }
     )
     .pipe(map(data => data));
+  }
+
+  assignTaskAllStudentsSubject(idSubject:string , idTask:string) {
+    const url_api = "http://localhost:3000/tasks/students";
+
+    return this.http
+    .post(
+      url_api, 
+      {
+        id_subject: idSubject,
+        id_task: idTask
+      },
+      { headers: this.headers }
+    )
+    .pipe(map(data => data));
+  }
+
+  getAllTasksStudent(id) {
+    const url_api = "http://localhost:3000/tasks/all/"+id;
+    return this.http.get(url_api).pipe(map(data => data));
+  }
+
+  getFormRequestedTask(taskId) {
+    const url_api = "http://localhost:3000/tasks/form/" + taskId;
+    return this.http.get(url_api).pipe(map(data => data));
   }
 }

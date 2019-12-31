@@ -33,7 +33,7 @@ export class SubjectFormComponent implements OnInit {
 
   onRegisterSubject(): void {
     const user = JSON.parse(localStorage.getItem("currentUser"));
-    this.subject.idProffesor = user.id;
+    this.subject.idProffesor = user._id;
     this.subjectsService
     .createSubject(this.subject.name, this.subject.semester, this.subject.year, this.subject.idProffesor)
     .subscribe( subject => {

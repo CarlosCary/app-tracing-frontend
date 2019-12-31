@@ -8,6 +8,7 @@ import { SubjectFormComponent } from './components/subject-form/subject-form.com
 import { EnrolledSubjectComponent } from './components/enrolled-subject/enrolled-subject.component';
 import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { TaskForStudentComponent } from './components/task-for-student/task-for-student.component';
+import { TaskFormComponent } from './components/task-form/task-form.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'proffesor/home', component: HomeProffesorComponent },
   { path: 'proffesor/subject/new', component: SubjectFormComponent },
   { path: 'proffesor/review/form', component: ReviewFormComponent },
-  { path: 'proffesor/task', component: TaskForStudentComponent }
+  { path: 'proffesor/task', component: TaskForStudentComponent },
+  { path: 'student/task', component: TaskFormComponent }
 ];
 
 @NgModule({

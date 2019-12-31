@@ -57,8 +57,8 @@ export class SubjectsService {
     return this.http.get(url_api).pipe(map(data => data));
   }
 
-  getSubject(id) {
-    const url_api = "http://localhost:3000/subjects/"+id;
+  getProffesorSubjects(id) {
+    const url_api = "http://localhost:3000/subjects/proffesor/"+id;
     return this.http.get(url_api).pipe(map(data => data));
   }
 }
