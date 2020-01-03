@@ -40,15 +40,34 @@ export class HomeStudentTableComponent implements OnInit {
   
   subjectsStudent;
   tasksStudent;
+
+  semesterSelected = "Segundo";
+  yearSelected = "2019";
+
+  semester = [
+    {value: 'Primero'},
+    {value: 'Segundo'}
+  ];
+
+  year = [
+    {value: '2018'},
+    {value: '2019'},
+    {value: '2020'},
+    {value: '2021'},
+    {value: '2022'},
+    {value: '2023'},
+    {value: '2024'}
+  ];
+
   constructor(private subjectsService: SubjectsService, 
               private tasksService: TasksService,
               private router: Router) { 
     
   }
 
-  async getSubjects() {
+  async getSubjects(semester, year) {
     const idStudent = JSON.parse(localStorage.getItem("currentUser"))._id;
-    this.subjectsService.getStudentSubjects(idStudent).subscribe((data) => {
+    this.subjectsService.getStudentSubjects(idStudent, semester, year).subscribe((data) => {
       this.dataSource = data;
       this.dataSource.reverse();
     });
@@ -65,7 +84,7 @@ export class HomeStudentTableComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.getSubjects();
+    await this.getSubjects(this.semesterSelected, this.yearSelected);
     await this.getTasks();
     
   }
@@ -77,5 +96,9 @@ export class HomeStudentTableComponent implements OnInit {
   public sendTask(_id) {
     localStorage.setItem("taskId", _id);
     this.router.navigate(['/student/task']);
+  }
+
+  public filter() {
+    this.getSubjects(this.semesterSelected, this.yearSelected);
   }
 }

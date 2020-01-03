@@ -19,7 +19,6 @@ export class TaskDocumentsRequestedComponent implements OnInit {
     const idTask = localStorage.getItem("taskId");
     this.tasksService.getFormRequestedTask(idTask).subscribe((data) => {
       this.documentsRequested = data[0].documentsRequested;
-      console.log(this.documentsRequested);
     });
   }
 

@@ -29,7 +29,6 @@ export class TaskFormRequestedComponent implements OnInit {
       this.tittlesForm = data[0].formRequested.tittleForm;
       this.descriptionsForm = data[0].formRequested.descriptionForm;
       this.documentsRequested = data[0].documentsRequested;
-      console.log(this.documentsRequested);
       this.dataSource = this.generateDataTableData();
     });
 

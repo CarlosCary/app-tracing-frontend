@@ -11,7 +11,7 @@ export class TasksService {
   constructor(private http: HttpClient, private router:Router) { }
 
   headers: HttpHeaders = new HttpHeaders ({
-    "Content-type": "application/json"
+    "Content-type": "application/json",
   });
   
   createTask(taskName:string , idSubject:string, deadline:string, visibilityDate:string, documentsRequested, formTittles, formDescriptions) {
@@ -88,5 +88,31 @@ export class TasksService {
   getFormRequestedTask(taskId) {
     const url_api = "http://localhost:3000/tasks/form/" + taskId;
     return this.http.get(url_api).pipe(map(data => data));
+  }
+
+  sendTask(idTask, idStudent, fileDocument:Array<File>) {
+    const url_api = "http://localhost:3000/tasks/send";
+
+    console.log("tipo de este array xd: ");
+    console.log(fileDocument);
+
+    
+    let prueba = ['uno', 'dos'];
+    
+    let formData = new FormData();
+
+    formData.append("idTask", idTask);
+    formData.append("idStudent", idStudent);
+
+    for(let i = 0; i < fileDocument.length; i++) {
+      formData.append("fileDocument", fileDocument[i]);
+    }
+
+    return this.http
+    .post(
+      url_api,  
+      formData
+    )
+    .pipe(map(data => data));
   }
 }

@@ -21,10 +21,9 @@ a:visited {
 
 a.add-button {
     float: right;   
-    margin-left:15%; 
     margin-right:15%;
-    margin-bottom:0.5%;
     color: black;
+    text-decoration-line: none;
 }
 
 
@@ -32,7 +31,7 @@ a.add-button {
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
-    font-size: 36px;  
+    font-size: 42px;  
     display: inline-block;
     line-height: 1;
     text-transform: none;
@@ -114,3 +113,20 @@ table {
   .click:hover {
     cursor: pointer;
   }
+
+  .search-options {  
+    color: black;
+    margin-left:15%; 
+    display: inline-block;
+    width: 50%;
+  }
+
+  .option-margin {
+    margin-left: 2%;
+  }
+
+  .option-size {
+    width: 15%;
+  }
+
+  

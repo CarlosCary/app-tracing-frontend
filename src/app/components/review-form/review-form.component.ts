@@ -90,21 +90,17 @@ export class ReviewFormComponent  {
     const deadline = JSON.parse(localStorage.getItem("taskData")).deadline;
     const visibilityDate = JSON.parse(localStorage.getItem("taskData")).visibilityDate;
     const documentsRequested = JSON.parse(localStorage.getItem("taskData")).documentsRequested;
-    // let formTittles = [];
-    // let formDescriptions = [];
-    // for(let i = 0; i < this.dataTittles.length; i++) { 
-    //   if(this.dataTittles[i] != null ) {
-    //     formTittles.push(this.dataTittles[i]) 
-    //     formDescriptions.push(this.dataDescriptions[i]);
-    //   }
-    // }
-    await this.tasksService.createTask(taskName, idSubject, deadline, visibilityDate, documentsRequested, this.dataTittles, this.dataDescriptions).
+    
+    await this.tasksService.createTask(taskName, 
+                            idSubject, 
+                            deadline, 
+                            visibilityDate, 
+                            documentsRequested, 
+                            this.dataTittles, 
+                            this.dataDescriptions).
     subscribe(task => {
       this.idTask = task;
-      // this.addDocumentsTask();
-      // this.addFormTask();
-      // this.assignTaskAllStudentsSubject();
-      // this.router.navigate(['/proffesor/home']);
+      
     });
   }
 
