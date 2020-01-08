@@ -85,6 +85,11 @@ export class TasksService {
     return this.http.get(url_api).pipe(map(data => data));
   }
 
+  getAllTasksProffesor(id) {
+    const url_api = "http://localhost:3000/tasks/proffesor/all/"+id;
+    return this.http.get(url_api).pipe(map(data => data));
+  }
+
   getFormRequestedTask(taskId) {
     const url_api = "http://localhost:3000/tasks/form/" + taskId;
     return this.http.get(url_api).pipe(map(data => data));
@@ -112,6 +117,31 @@ export class TasksService {
     .post(
       url_api,  
       formData
+    )
+    .pipe(map(data => data));
+  }
+
+  getTasksStudentSubject(idSubject, idStudent) {
+    const url_api = "http://localhost:3000/tasks/proffesor/" + idSubject + "/" + idStudent;
+    return this.http.get(url_api).pipe(map(data => data));
+  }
+  
+  getTaskSubmitted(idTask) {
+    const url_api = "http://localhost:3000/tasks/submitted/" + idTask;
+    return this.http.get(url_api).pipe(map(data => data));
+  }
+
+  taskChecked(idTaskSubmitted, state, taskCheckedDescription) {
+    const url_api = "http://localhost:3000/tasks/proffesor/checked";
+    return this.http
+    .post(
+      url_api, 
+      {
+        idTaskSubmitted: idTaskSubmitted,
+        taskSubmittedState: state,
+        taskCheckedDescription: taskCheckedDescription
+      },
+      { headers: this.headers }
     )
     .pipe(map(data => data));
   }

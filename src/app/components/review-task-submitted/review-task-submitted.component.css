@@ -82,3 +82,8 @@ table {
 .left-space {
   margin-left: 15%;
 }
+
+.text-box {
+  width: 40%;
+  height: auto;
+}

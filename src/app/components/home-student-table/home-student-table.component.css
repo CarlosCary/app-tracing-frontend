@@ -99,6 +99,7 @@ table {
   
   .example-element-description {
     padding: 16px;
+    width: 12em;
   }
   
   .example-element-description-attribution {

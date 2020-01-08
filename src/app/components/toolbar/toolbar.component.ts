@@ -12,17 +12,24 @@ export class ToolbarComponent implements OnInit {
 
   isLoggedIn:boolean;
   userName:any;
-  
+  role:string;
+
   constructor(private authService: AuthService, private router: Router) {
   }
-
+  getRoleLabel(role) {
+    if(role == "proffesor")
+      return "Docente";
+    if(role == "student")
+      return "Estudiante";
+    
+    return "No valido!";
+  }
   ngOnInit() {
     if(localStorage.getItem("currentUser")) {
       this.isLoggedIn = true;
       const user = JSON.parse(localStorage.getItem("currentUser"));
-      this.userName = user.username;
-      
-      
+      this.userName = user.name;
+      this.role = this.getRoleLabel(user.role);
     }
     else {
       this.isLoggedIn = false;

@@ -57,16 +57,19 @@ export class SubjectsService {
     console.log("semestre");
     console.log(semester);
     const url_api = "http://localhost:3000/subjects/student/"+id+"/"+semester+"/"+year;
-    return this.http.get(url_api, {
-      params: {
-        semester: semester,
-        year: year
-      }
-    }).pipe(map(data => data));
+    return this.http.get(url_api).pipe(map(data => data));
   }
 
   getProffesorSubjects(id) {
     const url_api = "http://localhost:3000/subjects/proffesor/"+id;
+    return this.http.get(url_api).pipe(map(data => data));
+  }
+
+  getStudentsDataEnrolledSubject(idSubject) {
+    const url_api = "http://localhost:3000/subjects/enrolled/"+idSubject;
+    console.log("vino al servicio ");
+    console.log(idSubject);
+    
     return this.http.get(url_api).pipe(map(data => data));
   }
 }

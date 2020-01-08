@@ -1,0 +1,30 @@
+<app-toolbar></app-toolbar>
+
+<br>
+<br>
+<br>
+
+<h1 class="tittle-students">Estudiantes inscritos</h1>
+
+
+<table mat-table [dataSource]="studentsData" multiTemplateDataRows class="mat-elevation-z8 table1">
+    
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Estudiante </th>
+        <td mat-cell *matCellDef="let student"> 
+            <a [routerLink]="['/proffesor/tasks',idSubject ,student._id]"> {{student.name}} </a> 
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsHeaderToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsHeaderToDisplay;"
+      class="example-element-row">
+    </tr>
+</table>
+
+<mat-list *ngFor="let student of studentsData">
+    <mat-list-item>
+        <!-- TODO OBTENER LISTA DE TAREAS DE LOS ESTUDIATNES -->
+        
+    </mat-list-item>
+</mat-list>

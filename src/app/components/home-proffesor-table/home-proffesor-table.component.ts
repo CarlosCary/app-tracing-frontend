@@ -4,6 +4,8 @@ import { SubjectsService } from 'src/app/services/subjects.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { TasksService } from 'src/app/services/tasks.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 export interface Subject {
   id: number;
@@ -18,30 +20,44 @@ export interface Subject {
 @Component({
   selector: 'app-home-proffesor-table',
   templateUrl: './home-proffesor-table.component.html',
-  styleUrls: ['./home-proffesor-table.component.css']
+  styleUrls: ['./home-proffesor-table.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 
 export class HomeProffesorTableComponent implements OnInit {
   displayedColumns: string[] = ['name', 'enrolled','semester', 'code', 'year', 'options'];
   subjectsEnrolled:any[];
   subjectsData:any[];
-  // dataSource = subjectsData;
+  tasksData;
 
-  
   constructor(private subjectsService: SubjectsService, 
     iconRegistry: MatIconRegistry, 
     sanitizer: DomSanitizer,
-    private router: Router) { 
+    private router: Router,
+    private tasksService: TasksService) { 
     iconRegistry.addSvgIcon(
       'thumbs-up',
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/new-task.svg'));
   }
 
-  ngOnInit() {
-    // this.subjectsService.getSubjects().subscribe((data: any[])=>{
-    //   this.subjectsData = data;
-    //   console.log(this.subjectsData);
-    // })
+  async getTasks() {
+    const idProffesor = JSON.parse(localStorage.getItem("currentUser"))._id;
+    console.log("idProffesor: ");
+    console.log(idProffesor);
+    this.tasksService.getAllTasksProffesor(idProffesor).subscribe((data) => {
+      this.tasksData = data;
+      console.log(this.tasksData);
+    });
+  }
+
+  async ngOnInit() {
+    await this.getTasks();
     const proffesorId = JSON.parse(localStorage.getItem("currentUser"))._id;
 
     this.subjectsService.getProffesorSubjects(proffesorId).subscribe((data: any[])=>{
@@ -57,8 +73,6 @@ export class HomeProffesorTableComponent implements OnInit {
   }
 
   saveIdSubject(idSubject) {
-    //TODO 
-    // console.log(idSubject);
     localStorage.setItem("idSubject", idSubject);
   }
 
@@ -69,5 +83,9 @@ export class HomeProffesorTableComponent implements OnInit {
     this.saveIdSubject(idSubject);
 
     this.router.navigate(['/proffesor/task']);
+  }
+  
+  public isIdSubjectIdTaskSubject(idSubject, idTaskSubject) {
+    return idSubject === idTaskSubject;
   }
 }

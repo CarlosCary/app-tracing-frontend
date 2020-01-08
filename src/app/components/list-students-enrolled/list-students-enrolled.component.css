@@ -1,0 +1,11 @@
+table.table1 {
+    width: 30%; 
+    margin-left:10%; 
+    margin-right:15%;
+    
+  overflow: hidden;
+}
+
+.tittle-students {
+    margin-left: 10%;
+}

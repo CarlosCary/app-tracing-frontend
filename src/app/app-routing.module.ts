@@ -9,6 +9,9 @@ import { EnrolledSubjectComponent } from './components/enrolled-subject/enrolled
 import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { TaskForStudentComponent } from './components/task-for-student/task-for-student.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
+import { ListStudentsEnrolledComponent } from './components/list-students-enrolled/list-students-enrolled.component';
+import { ListTaskStudentSubjectComponent } from './components/list-task-student-subject/list-task-student-subject.component';
+import { ReviewTaskSubmittedComponent } from './components/review-task-submitted/review-task-submitted.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -20,7 +23,11 @@ const routes: Routes = [
   { path: 'proffesor/subject/new', component: SubjectFormComponent },
   { path: 'proffesor/review/form', component: ReviewFormComponent },
   { path: 'proffesor/task', component: TaskForStudentComponent },
-  { path: 'student/task', component: TaskFormComponent }
+  { path: 'student/task', component: TaskFormComponent },
+  { path: 'proffesor/subject/students/:idSubject', component: ListStudentsEnrolledComponent },
+  { path: 'proffesor/tasks/:idSubject/:idStudent', component: ListTaskStudentSubjectComponent },
+  { path: 'proffesor/task/submitted/:idTask', component: ReviewTaskSubmittedComponent }
+
 ];
 
 @NgModule({

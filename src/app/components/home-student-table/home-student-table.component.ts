@@ -4,20 +4,6 @@ import { TasksService } from 'src/app/services/tasks.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Router } from '@angular/router';
 
-export interface Subject {
-  Nombre: string;
-  Semestre: string;
-  Año: number;
-  otroDato;
-}
-
-const ELEMENT_DATA: Subject[] = [
-  { Nombre: 'Seminario de grado', Semestre: 'Primero', Año: 2019, otroDato: 1},
-  { Nombre: 'Taller de grado', Semestre: 'Segundo', Año: 2019, otroDato: 2},
-  { Nombre: 'Seminario de grado', Semestre: 'Primero', Año: 2019, otroDato: 3},
-  { Nombre: 'Taller de grado', Semestre: 'Segundo', Año: 2019, otroDato: 4},
-];
-
 @Component({
   selector: 'app-home-student-table',
   templateUrl: './home-student-table.component.html',
@@ -33,7 +19,7 @@ const ELEMENT_DATA: Subject[] = [
 
 export class HomeStudentTableComponent implements OnInit {
   columnsHeaderToDisplay: string[] = ['name', 'subjectCode', 'semester', 'year'];
-  dataSource:any = ELEMENT_DATA;
+  dataSource
   tasksData;
   subjectsData:any[] = [];
   subjectsInfo: Array<any> = new Array<any>();
@@ -54,9 +40,7 @@ export class HomeStudentTableComponent implements OnInit {
     {value: '2019'},
     {value: '2020'},
     {value: '2021'},
-    {value: '2022'},
-    {value: '2023'},
-    {value: '2024'}
+    {value: '2022'}
   ];
 
   constructor(private subjectsService: SubjectsService, 
@@ -86,10 +70,9 @@ export class HomeStudentTableComponent implements OnInit {
   async ngOnInit() {
     await this.getSubjects(this.semesterSelected, this.yearSelected);
     await this.getTasks();
-    
   }
 
-  public prueba(idSubject, idTaskSubject) {
+  public isIdSubjectIdTaskSubject(idSubject, idTaskSubject) {
     return idSubject === idTaskSubject;
   }
 

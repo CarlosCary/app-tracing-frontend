@@ -25,6 +25,9 @@ import { RequestedDocumentComponent } from './components/requested-document/requ
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { TaskFormRequestedComponent } from './components/task-form-requested/task-form-requested.component';
 import { TaskDocumentsRequestedComponent } from './components/task-documents-requested/task-documents-requested.component';
+import { ListStudentsEnrolledComponent } from './components/list-students-enrolled/list-students-enrolled.component';
+import { ListTaskStudentSubjectComponent } from './components/list-task-student-subject/list-task-student-subject.component';
+import { ReviewTaskSubmittedComponent } from './components/review-task-submitted/review-task-submitted.component';
 
 
 
@@ -46,7 +49,10 @@ import { TaskDocumentsRequestedComponent } from './components/task-documents-req
     RequestedDocumentComponent,
     TaskFormComponent,
     TaskFormRequestedComponent,
-    TaskDocumentsRequestedComponent
+    TaskDocumentsRequestedComponent,
+    ListStudentsEnrolledComponent,
+    ListTaskStudentSubjectComponent,
+    ReviewTaskSubmittedComponent
   ],
   imports: [
     BrowserModule,
