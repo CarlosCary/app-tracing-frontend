@@ -97,12 +97,6 @@ export class TasksService {
 
   sendTask(idTask, idStudent, fileDocument:Array<File>) {
     const url_api = "http://localhost:3000/tasks/send";
-
-    console.log("tipo de este array xd: ");
-    console.log(fileDocument);
-
-    
-    let prueba = ['uno', 'dos'];
     
     let formData = new FormData();
 
@@ -144,5 +138,43 @@ export class TasksService {
       { headers: this.headers }
     )
     .pipe(map(data => data));
+  }
+
+  getStudentsTasksSubmitted(idTask) {
+    const url_api = "http://localhost:3000/tasks/subject/" + idTask + "/" + "students";
+    return this.http.get(url_api).pipe(map(data => data));
+  }
+
+  getStudentSubjectsTasks(idStudent) {
+    const url_api = "http://localhost:3000/tasks/subjects/" + idStudent;
+    return this.http.get(url_api).pipe(map(data => data));
+  }
+
+  getTaskSubmittedData(idTask, idStudent) {
+    const url_api = "http://localhost:3000/tasks/submitted/" + idTask + "/" + idStudent;
+    return this.http.get(url_api).pipe(map(data => data));
+  }
+
+  getTaskDate(idTask) {
+    const url_api = "http://localhost:3000/tasks/date/" + idTask;
+    return this.http.get(url_api).pipe(map(data => data));
+  }
+
+  updateTaskDate(idTask, deadline) {
+    const url_api = "http://localhost:3000/tasks/date/update";
+    return this.http.put(url_api, 
+      {
+        idTask: idTask,
+        deadline
+      },
+      { headers: this.headers }
+    )
+    .pipe(map(data => data));
+  }
+
+  getTaskSubmittedData2(idTask, idStudent, idTaskSubmitted) {
+    // const url_api = "http://localhost:3000/tasks/submitted/" + idTask + "/" + idStudent;
+    const url_api = "http://localhost:3000/tasks/submitted/" + idTask + "/" + idStudent + "/" + idTaskSubmitted;
+    return this.http.get(url_api).pipe(map(data => data));
   }
 }

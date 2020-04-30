@@ -1,0 +1,73 @@
+<mat-toolbar color="primary" class="app-header">
+    
+    <div *ngIf="isProffesor else studentAccount">
+        <a [routerLink]="['/proffesor/home']" class="positronx">Seguimiento Documentos Académicos</a>
+    </div>
+
+    <ng-template #studentAccount>
+        <a [routerLink]="['/student/home']" class="positronx">Seguimiento Documentos Académicos</a>
+    </ng-template>
+  
+    <div>
+        <span *ngIf="isProffesor">
+            <button mat-raised-button [matMenuTriggerFor]="menu">
+                Mis Formularios<mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/proffesor/forms/task']">
+                    Mis formularios de tareas
+                </button>
+                <button mat-menu-item [routerLink]="['/proffesor/forms/review']">
+                    Mis formularios de revisión
+                </button>
+            </mat-menu>          
+        </span>
+        <span *ngIf="isProffesor">
+            <button mat-raised-button matBadge="{{allDocumentsNotifications}}" 
+                    [matMenuTriggerFor]="menu" [matBadgeHidden]="hideDocumentsNotification"
+                    matBadgePosition="after" matBadgeColor="warn" >
+                    Mis Documentos<mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                
+                <button mat-menu-item  [routerLink]="['/proffesor/documents/review/tutor']">
+                    <span matBadgeOverlap="false" matBadgePosition="after" matBadge="{{tutorDocumentsNotification}}"
+                        matBadgeColor="warn" [matBadgeHidden]="hideTutorDocumentsNotification">
+                        Documentos asignados como tutor
+                    </span>    
+                </button>
+                <button mat-menu-item [routerLink]="['/proffesor/documents/review/rapporteur']">
+                    <span matBadgeOverlap="false" matBadgePosition="after" matBadge="{{rapporteourDocumentsNotification}}"
+                        matBadgeColor="warn" [matBadgeHidden]="hideRapporteourDocumentsNotification">
+                        Documentos asignados como relator
+                    </span>
+                </button>
+
+                <button mat-menu-item 
+                    [routerLink]="['/proffesor/documents/review']">
+                    <span matBadgeOverlap="false" matBadgePosition="after" matBadge="{{allDocumentsNotifications}}"
+                        matBadgeColor="warn" [matBadgeHidden]="hideDocumentsNotification">
+                        Todos mis documentos asignados
+                    </span>
+                </button>
+            </mat-menu>          
+        </span>
+        <span class="nav-tool-items">
+                <a *ngIf="!isLoggedIn" mat-button routerLink="/login" routerLinkActive="mat-raised-button">Iniciar sesión</a>
+                <a *ngIf="!isLoggedIn" mat-button routerLink="/register" routerLinkActive="mat-raised-button">Crear cuenta</a>
+                <button *ngIf="isLoggedIn" mat-raised-button [matMenuTriggerFor]="menu">{{role}}: {{userName}}<mat-icon>keyboard_arrow_down</mat-icon></button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item [routerLink]="['/edit/account', idAccount] ">
+                        Editar mis datos personales
+                    </button>
+                    <button mat-menu-item [routerLink]="['/edit/account/password', idAccount] ">
+                        Cambiar mi contraseña
+                    </button>
+                </mat-menu>
+                <a *ngIf="isLoggedIn" mat-raised-button routerLink="/login" routerLinkActive="active" (click)="onLogout()">Cerrar sesión</a>
+        </span>
+
+        
+    </div>
+</mat-toolbar>

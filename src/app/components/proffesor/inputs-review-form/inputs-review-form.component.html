@@ -1,0 +1,24 @@
+<div *ngIf="!isRemoved" class="section-container">
+    <div *ngIf="isShowClearButton">
+        <button mat-mini-fab color="warn" (click)='remove()'>
+            <mat-icon >clear</mat-icon>
+        </button>
+    </div>
+    <br>
+    <div>
+        <mat-form-field  hintLabel="{{hintTittleLabel}}" class="tittle-section">
+            <input matInput disabled="{{isTittleDisabled}}" maxlength="30" placeholder="{{tittleLabel}}" [(ngModel)]="tittle" id="descriptionTittle[{{idNumber}}]" >
+            <!-- <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint> -->
+        </mat-form-field>
+    </div>
+    <p>
+        <mat-form-field appearance="outline" class="text-box">
+            <mat-label>{{descriptionLabel}}</mat-label>
+            <textarea id="descriptionDetail[{{idNumber}}]" [(ngModel)]="description" matInput maxlength="300" rows="5"></textarea>
+              
+            <!-- <mat-hint>{{input.value?.length || 0}}/300</mat-hint> -->
+        </mat-form-field>
+    </p>
+    <mat-divider></mat-divider>
+    <br>
+</div>

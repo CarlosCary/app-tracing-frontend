@@ -1,0 +1,129 @@
+.center-text {
+    text-align:center;
+    box-align: center;
+}
+
+table.table1 {
+    width:70%; 
+    margin-left:15%; 
+    margin-right:15%;
+    
+  overflow: hidden;
+}
+
+.mat-column-name{
+    flex: 0 0 100px;
+}
+
+a:visited {
+    color:blue;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 36px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+a.add-button {
+    float: right;   
+    margin-left:15%; 
+    margin-right:15%;
+    margin-bottom:0.5%;
+    color: black;
+}
+
+
+
+table {
+    width: 100%;
+  }
+  
+  tr.example-detail-row {
+    height: 0;
+  }
+  
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+  
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .example-element-diagram {
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+  
+  .example-element-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+  }
+  
+  .example-element-description {
+    padding: 16px;
+    width: 12em;
+  }
+  
+  .example-element-description-attribution {
+    opacity: 0.5;
+  }
+
+  .click {
+    color: blue;
+    text-decoration: underline;
+  }
+
+  .click:hover {
+    cursor: pointer;
+  }
+
+  .search-options {  
+    color: black;
+    margin-left:15%; 
+    display: inline-block;
+    width: 50%;
+  }
+
+  .option-margin {
+    margin-left: 2%;
+  }
+
+  .option-size {
+    width: 15%;
+  }
+
+.icon {
+  font-size: 28px;
+}
+
+.material-icons {
+  color: black;
+  height: 28px;
+}

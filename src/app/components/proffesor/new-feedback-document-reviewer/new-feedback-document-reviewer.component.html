@@ -1,0 +1,42 @@
+<app-toolbar></app-toolbar>
+<br>
+<br>
+<br>
+<br>
+
+<h1 class="center-text"> Revisión de {{taskName}}</h1>
+
+<table mat-table [dataSource]="reviewData" class="mat-elevation-z8 table1">
+    
+    <ng-container matColumnDef="author" >
+        <th mat-header-cell *matHeaderCellDef> Título </th>
+        <td mat-cell *matCellDef="let review" class="width-tittle"> 
+            <b>{{review.tittle}}</b>
+        </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="file">
+        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let review" class="width-description"> 
+                <div *ngIf="review.isText else file">
+                    {{review.description}} 
+                </div>
+    
+                <ng-template #file>
+                    <a href="{{APILink}}/{{review.path}}" target="_blank">Descargar documento</a>
+                </ng-template>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsHeaderToDisplay" ></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsHeaderToDisplay;"></tr>
+</table>
+
+<br>
+<br>
+
+<ng-template #section>
+</ng-template>
+
+
+<br>
+<button mat-raised-button class="form-button" color="primary" (click)="saveForm()">Enviar revisión</button>

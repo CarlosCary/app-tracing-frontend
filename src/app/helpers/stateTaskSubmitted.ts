@@ -4,7 +4,7 @@ class StateTaskSubmitted {
 
         switch(state) { 
             case "none": { 
-                return "Sin revisar";
+                return "Sin tribunal asignado";
             } 
 
             case "checked": { 

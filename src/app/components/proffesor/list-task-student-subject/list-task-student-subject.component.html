@@ -1,0 +1,42 @@
+<app-toolbar></app-toolbar>
+
+<br>
+<br>
+<br>
+
+<h1 class="tittle-students">Tareas asignadas al estudiante</h1>
+
+
+<table mat-table [dataSource]="tasksData" multiTemplateDataRows class="mat-elevation-z8 table1">
+    
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Tarea </th>
+        <td mat-cell *matCellDef="let task"> 
+            <div *ngIf="isSubmitted(task) else noSubmitted">
+                <a [routerLink]="['/proffesor/task/submitted', task.idTask, idStudent]"> {{task.name}} </a> 
+            </div>
+            <ng-template #noSubmitted>
+                <p>{{task.name}}</p>
+            </ng-template>
+            
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let task">
+            <div *ngIf="isSubmitted(task) else noSubmitted">
+                <p> {{task.state}} </p>
+            </div>
+            <ng-template #noSubmitted>
+                <p>No se entrego</p>
+            </ng-template>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsHeaderToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsHeaderToDisplay;"
+      class="example-element-row">
+    </tr>
+</table>
+

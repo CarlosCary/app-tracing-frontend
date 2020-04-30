@@ -1,0 +1,57 @@
+<app-toolbar></app-toolbar>
+
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Crear materia</mat-card-title>
+      </mat-card-header>
+      <br>
+      <br>
+      <form class="example-form" #formRegister="ngForm" (ngSubmit)="onRegisterSubject()">
+  
+        <mat-card-content>
+            <mat-label ><strong>Seleccione una materia: </strong></mat-label>
+            <mat-radio-group [value]="selected" required [formControl]="selectFormControlSubject" [(ngModel)]="subject.name">
+              <mat-radio-button class="example-radio-button" *ngFor="let subject of subjects" [value]="subject">
+                {{subject}}
+              </mat-radio-button>
+            </mat-radio-group>
+
+            <br>
+            <br>
+
+            <mat-label ><strong>Seleccione el semestre: </strong></mat-label>
+            <mat-radio-group class="top-space" [value]="selected" required [formControl]="selectFormControlSemester" [(ngModel)]="subject.semester">
+              <mat-radio-button class="example-radio-button" *ngFor="let semester of semesters" [value]="semester">
+                {{semester}}
+              </mat-radio-button>
+            </mat-radio-group>
+
+            <!-- <mat-form-field class="example-full-width">
+              <mat-label>Materia</mat-label>
+              <mat-select [value]="selected" required [formControl]="selectFormControlSubject" [(ngModel)]="subject.name">
+                <mat-option [value]="subject" *ngFor="let subject of subjects" >{{subject}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> 
+          
+            <mat-form-field class="example-full-width">
+              <mat-label>Semestre</mat-label>
+              <mat-select [value]="selected" required [formControl]="selectFormControlSemester" [(ngModel)]="subject.semester">
+                <mat-option [value]="semester" *ngFor="let semester of semesters" >{{semester}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="selectFormControlSemester.hasError('required')">Por favor seleccione un semestre</mat-error>
+            </mat-form-field> -->
+
+            <!-- <mat-form-field class="example-full-width">
+                <input matInput placeholder="Año" [(ngModel)]="" [ngModelOptions]="{standalone: true}" required> 
+            </mat-form-field> -->
+        </mat-card-content>
+        <br>
+        <br>
+        <button mat-raised-button color="primary" class="btn-block">Crear materia</button>
+  
+      </form>
+    </mat-card>
+  </div>

@@ -1,0 +1,14 @@
+.left-space {
+    margin-top: 2%; 
+    margin-left: 22%; 
+}
+
+.label-selector h4 {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.selector-space mat-form-field {
+    margin-right: 10px;
+}
+

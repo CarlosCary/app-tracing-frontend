@@ -1,0 +1,61 @@
+<app-toolbar></app-toolbar>
+
+<br>
+<br>
+<br>
+
+<h1 class="center-text"> Revisión de {{taskName}}</h1>
+<h2 class="left-space">Formulario de revisión</h2>
+
+<table mat-table [dataSource]="reviewData" class="mat-elevation-z8 table1">
+    
+    <ng-container matColumnDef="tittle" >
+        <th mat-header-cell *matHeaderCellDef> Título </th>
+        <td mat-cell *matCellDef="let review" class="width-tittle"> 
+            <b>{{review.tittle}}</b>
+        </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let review" class="width-description"> 
+                <div *ngIf="review.isText else file">
+                    {{review.description}} 
+                </div>
+    
+                <ng-template #file>
+                    <a href="{{APILink}}/{{review.path}}" target="_blank">Descargar documento</a>
+                </ng-template>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsHeaderToDisplay" ></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsHeaderToDisplay;"></tr>
+</table>
+
+<div class="reviews">
+    <h2 class="left-space">Revisiones </h2>
+    
+    <div *ngFor="let reviewProffesorData of reviewsProffesorData">
+        <h3 class="left-space"> {{reviewProffesorData.proffesorName}}: </h3>
+
+        <table mat-table [dataSource]="reviewProffesorData.answersProffesor" class="mat-elevation-z8 table1">
+    
+            <ng-container matColumnDef="tittle" >
+                <th mat-header-cell *matHeaderCellDef> Título </th>
+                <td mat-cell *matCellDef="let review" class="width-tittle"> 
+                    <b>{{review.tittle}}</b>
+                </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                <td mat-cell *matCellDef="let review" class="width-description"> 
+                    {{review.answer}} 
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsHeaderToDisplay" ></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsHeaderToDisplay;"></tr>
+        </table>
+            
+    </div>
+</div>

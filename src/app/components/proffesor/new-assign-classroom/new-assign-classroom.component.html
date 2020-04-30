@@ -1,0 +1,16 @@
+<app-toolbar></app-toolbar>
+
+<div class="card-classroom">
+    <h1>Asignar aula</h1>
+    <br>
+    <mat-card-content>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Aula" [(ngModel)]="classroom" required> 
+        </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="assignClassroom()">Asignar aula</button>
+    </mat-card-actions>
+    
+</div>

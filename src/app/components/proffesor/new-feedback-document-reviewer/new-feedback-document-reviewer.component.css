@@ -1,0 +1,12 @@
+table.table1 {
+  width: 70%; 
+  margin-left: 15%; 
+  margin-right: 15%;
+    
+  overflow: hidden;
+}
+
+.form-button {
+  margin-left: 20%; 
+  margin-bottom: 5%;
+}

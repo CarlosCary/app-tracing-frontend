@@ -1,0 +1,42 @@
+<app-toolbar></app-toolbar>
+<br>
+<br>
+<br>
+<br>
+<h1 class="center-text">Nuevo formulario de tarea</h1>
+
+<div class="section-container">
+    <div>
+        <mat-form-field  hintLabel="Máximo 30 carácteres" class="tittle-section">
+            <input matInput maxlength="30" placeholder="Nombre del formulario" id="formTittle" required>
+        </mat-form-field>
+    </div>
+
+</div>
+
+<h3 class="margin-left">Secciones: </h3>
+
+<div class="section-container">
+    <div>
+        <mat-form-field  hintLabel="Máximo 30 carácteres" class="tittle-section">
+            <input matInput maxlength="30" placeholder="Ingrese el título de la sección" id="descriptionTittle" required>
+        </mat-form-field>
+    </div>
+    <p>
+        <mat-form-field appearance="outline" class="text-box">
+            <mat-label>Descripción de la sección</mat-label>
+            <textarea id="descriptionDetail" matInput maxlength="300" rows="5" required></textarea>
+        </mat-form-field>
+    </p>
+    <mat-divider></mat-divider>
+    <br>
+</div>
+
+<ng-template #section>
+</ng-template>
+
+
+<div class="margin-left">
+    <button mat-raised-button class="add-section" (click)="addSection()">Agregar sección</button>
+    <button mat-raised-button color="primary" class="save-button" (click)="saveForm()">Guardar formulario</button>
+</div>

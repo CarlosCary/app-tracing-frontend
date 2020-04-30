@@ -1,0 +1,16 @@
+table.table1 {
+  width: 70%; 
+  margin-left: 15%; 
+  margin-right: 15%;
+    
+  overflow: hidden;
+}
+
+.left-space {
+  margin-top: 2%; 
+  margin-left: 15%; 
+}
+
+.reviews {
+  margin-bottom: 5%;
+}

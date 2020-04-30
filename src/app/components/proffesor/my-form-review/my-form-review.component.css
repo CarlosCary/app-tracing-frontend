@@ -1,0 +1,28 @@
+.center-text {
+    text-align: center;
+}
+
+.section-container > * {
+    width: 60%;
+    margin-left: 20%; 
+    margin-right: 20%;
+}
+
+.text-box {
+    width: 70%;
+    height: auto;
+}
+
+.tittle-section {
+    width: 30%;
+}
+
+.margin-left {
+    margin-left: 20%;    
+}
+
+.save-button {
+    float: right;
+    margin-right: 20%;
+}
+

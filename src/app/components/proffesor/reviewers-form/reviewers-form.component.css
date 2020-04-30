@@ -1,0 +1,40 @@
+.left-space {
+    margin-left: 20%;
+    margin-bottom: 2%;
+}
+
+.section-container > * {
+    width: 60%;
+    margin-left: 20%; 
+    margin-right: 20%;
+}
+
+.tittle-section {
+    width: 30%;
+}
+
+.text-box {
+    width: 70%;
+    height: auto;
+}
+
+.reviewers-size {
+    width: 60%;
+}
+.label-selector h4 {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.selector-space mat-form-field {
+    margin-right: 10px;
+}
+
+.button-inline {
+    display: inline-block;
+}
+
+.button-add-reviewers {
+    margin-left: 1%;
+    padding: 3px 3px;
+}

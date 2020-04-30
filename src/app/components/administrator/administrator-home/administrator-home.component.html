@@ -1,0 +1,49 @@
+<app-toolbar></app-toolbar>
+
+<br>
+<br>
+<br>
+<br>
+<div>
+    <h1 class="center-text">Cuentas docentes</h1>
+    <a class="material-icons add-button" mat-button routerLink="/administrator/new/account">
+        person_add
+    </a>
+</div>
+
+
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8 table1">
+    
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre y apellido </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Correo electrónico </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="career">
+        <th mat-header-cell *matHeaderCellDef> Carrera </th>
+        <td mat-cell *matCellDef="let element"> {{element.career}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef> Rol </th>
+        <td mat-cell *matCellDef="let element"> {{getRoleLabel(element.role)}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element">
+            <i class="material-icons button-size" [routerLink]="['/administrator/edit/account', element._id]">edit</i>
+            <i class="material-icons button-size" [routerLink]="['/administrator/edit/account', element._id]">delete</i>
+        </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="columnsHeaderToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsHeaderToDisplay;"
+      class="example-element-row">
+    </tr>
+</table>

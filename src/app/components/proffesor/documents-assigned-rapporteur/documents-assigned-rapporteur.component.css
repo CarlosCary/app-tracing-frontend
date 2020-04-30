@@ -1,0 +1,12 @@
+table.table1 {
+    width:70%; 
+    margin-left:15%; 
+    margin-right:15%;
+    
+  overflow: hidden;
+}
+
+.center-text {
+    text-align:center;
+    box-align: center;
+}

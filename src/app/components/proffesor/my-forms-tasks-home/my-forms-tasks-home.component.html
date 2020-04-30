@@ -1,0 +1,35 @@
+<app-toolbar></app-toolbar>
+<br>
+<br>
+<br>
+<br>
+
+<div>
+    <h1 class="center-text">Mis formularios de tarea</h1>
+    <div class="search-options">
+    </div>
+    
+    <a class="material-icons add-button"  [routerLink]="['/proffesor/new/form/task']">
+        add_box
+    </a>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table1">
+    
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let formTask"> {{formTask.formTittle}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let formTask" class="button-edit"> 
+                <i class="material-icons button-size" [routerLink]="['/proffesor/edit/form/task', formTask._id]">edit</i>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsHeaderToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsHeaderToDisplay;"
+          class="example-element-row">
+        </tr>
+</table> 

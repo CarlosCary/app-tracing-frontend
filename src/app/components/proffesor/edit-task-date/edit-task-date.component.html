@@ -1,0 +1,30 @@
+<app-toolbar></app-toolbar>
+
+<br>
+<br>
+<br>
+<br>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <h2>Editar fecha</h2>
+      </mat-card-header>
+  
+      <form class="example-form" #formRegister="ngForm" (ngSubmit)="changeDate()">
+  
+        <mat-card-content>
+            <mat-form-field>
+                <input matInput [matDatepicker]="currentDatePicker" 
+                      placeholder="Fecha límite" [(ngModel)]="currentDate" [ngModelOptions]="{standalone: true}"
+                      id="date">
+                <mat-datepicker-toggle matSuffix [for]="currentDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #currentDatePicker disabled="false"></mat-datepicker>
+            </mat-form-field>
+        </mat-card-content>
+        <br>
+        <br>
+        <button mat-raised-button color="primary" class="btn-block">Cambiar fecha</button>
+  
+      </form>
+    </mat-card>
+  </div>

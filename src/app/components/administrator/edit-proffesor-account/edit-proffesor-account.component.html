@@ -1,0 +1,47 @@
+<app-toolbar></app-toolbar>
+
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box color-background">
+      <mat-card-header>
+        <mat-card-title>Editar cuenta docente</mat-card-title>
+      </mat-card-header>
+      <br>
+      <form class="example-form" #formRegister="ngForm" (ngSubmit)="editProffesorAccount()">
+  
+        <mat-card-content>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Nombre y apellido" [(ngModel)]="proffesorData.name" [ngModelOptions]="{standalone: true}" required> 
+            </mat-form-field>
+          
+            <mat-form-field class="example-full-width">
+                <mat-label>Seleccione una carrera</mat-label>
+                <mat-select [(ngModel)]="proffesorData.career" [ngModelOptions]="{standalone: true}" required>
+                    <mat-option *ngFor="let career of careers" [value]="career">
+                        {{career}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <section class="example-section">
+                <label>Elija un rol:</label>
+                <mat-radio-group [(ngModel)]="proffesorData.role" [ngModelOptions]="{standalone: true}">
+                  <mat-radio-button class="example-margin" value="proffesor">Docente</mat-radio-button>
+                  <mat-radio-button class="example-margin" value="director">Director</mat-radio-button>
+                </mat-radio-group>
+            </section>
+            <section class="example-section">
+                <label>Elija un grado académico:</label>
+                <mat-radio-group [(ngModel)]="proffesorData.academicDegree" [ngModelOptions]="{standalone: true}">
+                    <mat-radio-button class="academic-degree" value="graduate">Ingeniero</mat-radio-button>
+                    <mat-radio-button class="academic-degree" value="magister">Magister</mat-radio-button>
+                    <mat-radio-button class="academic-degree" value="phd">Doctor</mat-radio-button>
+                </mat-radio-group>
+            </section>
+          
+        </mat-card-content>
+        <br>
+        <br>
+        <button mat-raised-button color="primary" class="btn-block">Guardar cambios</button>
+      </form>
+    </mat-card>
+  </div>

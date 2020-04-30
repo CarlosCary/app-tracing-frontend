@@ -1,0 +1,91 @@
+<app-toolbar></app-toolbar>
+
+<br>
+<br>
+<br>
+<br>
+
+<h2 class="left-space">Seleccione a los revisores: </h2>
+<form class="example-form" [formGroup]="committeForm">
+    <div class = "left-space label-selector selector-space">
+        <h4>Director:</h4>
+        <mat-form-field>
+            <mat-label>Seleccione revisor</mat-label>
+            <mat-select formControlName="director">
+                <mat-option *ngFor="let director of directors" [value]="director._id">
+                    {{director.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="committeFromControls.director.hasError('required')">Debe seleccionar un director</mat-error>
+        </mat-form-field>
+        
+        <h4>Relator:</h4>
+        <mat-form-field>
+            <mat-label>Seleccione revisor</mat-label>
+            <mat-select formControlName="rapporteur">
+                <mat-option *ngFor="let proffesor of proffesors" [value]="proffesor._id">
+                    {{proffesor.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="committeFromControls.rapporteur.hasError('required')">Debe seleccionar un relator</mat-error>
+        </mat-form-field>
+        
+        <h4>Tutor:</h4>
+        <mat-form-field>
+            <mat-label>Seleccione revisor</mat-label>
+            <mat-select formControlName="tutor">
+                <mat-option *ngFor="let proffesor of proffesors" [value]="proffesor._id">
+                    {{proffesor.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="committeFromControls.tutor.hasError('required')">Debe seleccionar un tutor</mat-error>
+        </mat-form-field>
+    </div>
+</form>
+    <div class="left-space reviewers-size">
+        <ng-template #reviewer></ng-template>
+        <!-- <div>
+            <h4 class="button-inline">Agregar otro revisor: </h4>
+            <button class="button-add-reviewers" (click)="addReviewer()"><mat-icon>group_add</mat-icon></button>
+        </div> -->
+    </div>
+    
+    <h2 class="left-space">Formulario de revisión: </h2>
+
+    <div class="left-space">
+
+        <div class="new-section">
+            <mat-form-field>
+                <mat-label>Mis formularios</mat-label>
+                <mat-select [(value)]="selectedForm">
+                    <mat-option (click)="selectForm('none')">*Ninguno</mat-option>
+                    <mat-option *ngFor="let reviewForm of reviewForms" [value]="reviewForm._id" (click)="selectForm(reviewForm._id)">
+                        {{reviewForm.formTittle}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <button class="new-section" mat-raised-button (click)="addSection()">Agregar nueva sección</button>
+    </div>
+
+    <div class="section-container">
+        <div>
+            <mat-form-field  hintLabel="Máximo 30 carácteres" class="tittle-section">
+                <input matInput [(ngModel)]="tittleSection" maxlength="30" placeholder="Ingrese el título de la sección">
+            </mat-form-field>
+        </div>
+        <p>
+            <mat-form-field appearance="outline" class="text-box">
+                <mat-label>Descripción de la sección</mat-label>
+                <textarea [(ngModel)]="descriptionSection" matInput maxlength="300" rows="5"></textarea>
+            </mat-form-field>
+        </p>
+        <mat-divider></mat-divider>
+        <br>
+        <ng-template #section></ng-template>
+    </div>
+    <div class="left-space">
+        <button mat-raised-button color="primary" (click)="saveFormReview()">Crear revisión</button>
+    </div>
+    

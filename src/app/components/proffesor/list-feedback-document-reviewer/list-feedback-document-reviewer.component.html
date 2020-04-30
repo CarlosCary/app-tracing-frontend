@@ -1,0 +1,49 @@
+<ng-template #toolbar></ng-template>
+
+<br>
+<br>
+<br>
+<br>
+
+<h1 class="center-text">Documentos asignados</h1>
+<br>
+
+<table mat-table [dataSource]="documentsData" multiTemplateDataRows class="mat-elevation-z8 table1">
+    
+    <ng-container matColumnDef="taskName">
+        <th mat-header-cell *matHeaderCellDef> Tarea </th>
+        <td mat-cell *matCellDef="let document"> 
+            <a [routerLink]="['/proffesor/new/review', document.idReview, document.taskName]">{{document.taskName}}</a>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="studentName">
+        <th mat-header-cell *matHeaderCellDef> Estudiante </th>
+        <td mat-cell *matCellDef="let document">
+            {{document.studentName}}
+        </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let document">
+            <a class="material-icons button-size" 
+                [routerLink]="['/proffesors/review', document.idReview, document.taskName]"
+                title="Ver revisiones">
+                remove_red_eye
+            </a>
+            <a class="material-icons button-size" 
+                [routerLink]="['/proffesor/new/review', document.idReview, document.taskName]"
+                title="Realizar revisión">
+                edit
+            </a>
+        </td>
+        
+    </ng-container>
+
+    
+    <tr mat-header-row *matHeaderRowDef="columnsHeaderToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsHeaderToDisplay;"
+      class="example-element-row">
+    </tr>
+</table>

@@ -1,0 +1,83 @@
+<br>
+<br>
+<br>
+<br>
+<div>
+    <h1 class="center-text">Materias</h1>
+    <div class="search-options"> 
+        <mat-form-field class="option-size">
+            <mat-label>Semestre</mat-label>
+            <mat-select [(value)]="semesterSelected">
+              <mat-option *ngFor="let semester of semester" [value]="semester.value">
+                {{semester.value}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>  
+
+        <mat-form-field class="option-margin option-size">
+            <mat-label>Año</mat-label>
+            <mat-select [(value)]="yearSelected">
+              <mat-option *ngFor="let year of year" [value]="year.value" id="year">
+                {{year.value}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <button (click)="filter()" class="option-margin" mat-raised-button color="primary" >
+            Filtrar
+        </button>
+    </div>
+    
+    <a class="material-icons add-button"  routerLink="/student/enrolled"
+        title="Inscribirme a una materia">
+        add_box
+    </a>
+    
+</div>
+
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8 table1">
+    
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> <a href="google.com.bo">{{element.name}} </a></td>
+    </ng-container>
+
+    <ng-container matColumnDef="subjectCode">
+        <th mat-header-cell *matHeaderCellDef> Código </th>
+        <td mat-cell *matCellDef="let element"> {{element.subjectCode}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="semester">
+        <th mat-header-cell *matHeaderCellDef> Semestre </th>
+        <td mat-cell *matCellDef="let element"> {{element.semester}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef> Año </th>
+        <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+    </ng-container>
+    
+
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsHeaderToDisplay.length">
+            <div class="example-element-detail" [@detailExpand]="'expanded'" *ngFor="let task of tasksData">
+                <div class="example-element-detail" *ngIf="isIdSubjectIdTaskSubject(element._id, task.idSubject)">
+                    <div class="example-element-description" >
+                        <div (click)="sendTask(task._id)" class="click">{{task.name}}</div>
+                    </div>
+
+                    <div class="example-element-description">
+                        Fecha límite: {{task.deadline}}
+                    </div>
+
+                </div>
+            </div>
+        </td>
+    </ng-container>    
+
+    <tr mat-header-row *matHeaderRowDef="columnsHeaderToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsHeaderToDisplay;"
+      class="example-element-row">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table> 
