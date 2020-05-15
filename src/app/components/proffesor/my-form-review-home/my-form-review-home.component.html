@@ -9,7 +9,7 @@
     <div class="search-options">
     </div>
     
-    <a class="material-icons add-button"  [routerLink]="['/proffesor/new/form/review']">
+    <a class="material-icons add-button" matTooltip="Nuevo formulario" [routerLink]="['/proffesor/new/form/review']">
         add_box
     </a>
 </div>
@@ -24,7 +24,7 @@
         <ng-container matColumnDef="options">
             <th mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let reviewForm" class="button-edit"> 
-                <i class="material-icons button-size" [routerLink]="['/proffesor/edit/form/review', reviewForm._id]">edit</i>
+                <i matTooltip="Editar formulario" class="material-icons button-size" [routerLink]="['/proffesor/edit/form/review', reviewForm._id]">edit</i>
             </td>
         </ng-container>
 

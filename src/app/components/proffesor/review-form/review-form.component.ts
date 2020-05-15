@@ -1,8 +1,9 @@
 import { Component, ViewChild, ElementRef, Directive, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { InputsReviewFormComponent } from '../inputs-review-form/inputs-review-form.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TasksService } from 'src/app/services/tasks.service';
 import { FormsService } from 'src/app/services/forms.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-review-form',
@@ -12,7 +13,9 @@ import { FormsService } from 'src/app/services/forms.service';
 
 export class ReviewFormComponent  {
   @ViewChild('section', {read: ViewContainerRef, static:false}) container: ViewContainerRef;
+  taskForm: FormGroup;
   
+  idSubject;
   components = [];
   idTask;
   selectedForm;
@@ -31,15 +34,29 @@ export class ReviewFormComponent  {
 
   descriptionsId:number[] = [0];
   descriptionDetail:string[];
-  // descriptionDetail:string[];
-  // descriptionDetail:string[] = ["000"];
+  
   constructor(private componentFactoryResolver: ComponentFactoryResolver, 
               private router: Router,
               private tasksService: TasksService,
-              private taskFormService: FormsService) {
+              private taskFormService: FormsService,
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute) {
   }
 
+  get form() { return this.taskForm.controls; }
+  get titleSection() { return this.taskForm.get('titleSection').value };
+  get descriptionSection() { return this.taskForm.get('descriptionSection').value };
+
+  set titleSection(title) { this.form['titleSection'].setValue(title) };
+  set descriptionSection(description) { this.form['descriptionSection'].setValue(description) };
+
   async ngOnInit() {
+    this.idSubject = this.route.snapshot.params.idSubject;
+    this.taskForm = this.formBuilder.group({
+      titleSection: ['', Validators.required],
+      descriptionSection: ['', Validators.required]
+    });
+
     const idProffesor = (JSON.parse(localStorage.getItem("currentUser")))._id;
     await this.taskFormService
     .getFormsTasks(idProffesor)
@@ -50,8 +67,6 @@ export class ReviewFormComponent  {
   }
 
   addSection() {
-    const containerForm = document.getElementById("section");
-
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.inputsReviewFormComponent);
     const component = <InputsReviewFormComponent>this.container.createComponent(componentFactory).instance;
     component.idNumber = ++this.count;
@@ -66,7 +81,6 @@ export class ReviewFormComponent  {
         await this.tasksService.addFormTask(this.dataTittles[i], this.dataDescriptions[i],this.idTask).
         subscribe(form => {
           return form;
-          // this.router.navigate(['/proffesor/home']);
         });
       }
     }
@@ -80,7 +94,6 @@ export class ReviewFormComponent  {
         subscribe(document => {
         
         return document;
-        // this.router.navigate(['/proffesor/home']);
       });
     }
   }
@@ -115,17 +128,26 @@ export class ReviewFormComponent  {
   
 
   async createForm() {
+    
 
+    this.dataTittles = [];
+    this.dataDescriptions = [];
 
-    this.dataTittles.push((<HTMLInputElement>document.getElementById("descriptionTittle[0]")).value);
-    this.dataDescriptions.push((<HTMLInputElement>document.getElementById("descriptionDetail[0]")).value);
+    this.dataTittles.push(this.titleSection);
+    this.dataDescriptions.push(this.descriptionSection);
+    
     for(let i = 0; i < this.components.length; i++) {
       if(this.components[i].isRemoved)
         continue;
+      
+      if(this.components[i].title.invalid || this.components[i].description2.invalid)
+        return;    
+
       this.dataTittles.push(this.components[i].tittle);
       this.dataDescriptions.push(this.components[i].description);
     }
 
+    console.log(this.dataTittles);
     await this.createTask();
 
     this.router.navigate(['/proffesor/home']);
@@ -138,8 +160,8 @@ export class ReviewFormComponent  {
 
     console.log(tittles);
     console.log(descriptions);
-    this.tittle = tittles[0];
-    this.description = descriptions[0];
+    this.titleSection = tittles[0];
+    this.descriptionSection = descriptions[0];
     for(let i = 1; i < tittles.length; i ++) {
       this.addSection();
       this.components[i-1].tittle = tittles[i];
@@ -149,8 +171,6 @@ export class ReviewFormComponent  {
   }
 
   async selectForm(selectedFormId) {
-    console.log("deberia verse el id: ");
-    console.log(selectedFormId);
     if(selectedFormId != 'none') {
       await this.taskFormService
       .getFormTask(selectedFormId)

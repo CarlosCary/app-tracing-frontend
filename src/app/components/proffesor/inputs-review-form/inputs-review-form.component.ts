@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
-import { ThrowStmt } from '@angular/compiler';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -14,6 +15,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./inputs-review-form.component.css']
 })
 export class InputsReviewFormComponent implements OnInit {
+  inputsForm: FormGroup;
   emailFormControl = new FormControl('', [
     Validators.required
   ]);
@@ -27,6 +29,11 @@ export class InputsReviewFormComponent implements OnInit {
   @Input('descriptionLabel') descriptionLabel = "Descripción de la sección";
   @Input('isTittleDisabled') isTittleDisabled:boolean = false;
   @Input('hintTittleLabel') hintTittleLabel = "Máximo 30 carácteres";
+  
+  @Input ('title') title = new FormControl('', [Validators.required]);
+  @Input ('description2') description2 = new FormControl('', [Validators.required]);
+
+  @Output() isInvalid = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit() {
@@ -34,5 +41,12 @@ export class InputsReviewFormComponent implements OnInit {
 
   remove() {
     this.isRemoved = true;
+    this.title.clearValidators;
+    this.description2.clearValidators;
   }
+
+  isInvalidForm() {
+    this.isInvalid.emit(this.title.invalid || this.description2.invalid);
+  }
+  
 }

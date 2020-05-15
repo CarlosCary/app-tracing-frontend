@@ -33,10 +33,23 @@
 
 <br>
 <br>
-
-<ng-template #section>
-</ng-template>
-
-
+    <ng-template #section>
+    </ng-template>
 <br>
+
+<div class="section-container">
+    <div>
+        <mat-form-field class="tittle-section">
+            <input matInput disabled="true" maxlength="30" placeholder="Comentario" [(ngModel)]="commentTitle">
+        </mat-form-field>
+    </div>
+    <p>
+        <mat-form-field appearance="outline" class="text-box">
+            <mat-label>Sección no obligatoria</mat-label>
+            <textarea [(ngModel)]="comment" 
+                    matInput maxlength="300" rows="5">
+            </textarea>
+        </mat-form-field>
+    </p>
+</div>
 <button mat-raised-button class="form-button" color="primary" (click)="saveForm()">Enviar revisión</button>

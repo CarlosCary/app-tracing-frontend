@@ -65,8 +65,8 @@ export class HomeProffesorTableComponent implements OnInit {
   async getTasks() {
     const idProffesor = JSON.parse(localStorage.getItem("currentUser"))._id;
     
-    this.tasksService.getAllTasksProffesor(idProffesor).subscribe((data) => {
-      this.tasksData = data;
+    this.tasksService.getAllTasksProffesor(idProffesor).subscribe((data:any) => {
+      this.tasksData = data.reverse();
       console.log(data);
     });
   }

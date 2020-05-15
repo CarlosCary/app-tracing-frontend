@@ -95,13 +95,14 @@ export class TasksService {
     return this.http.get(url_api).pipe(map(data => data));
   }
 
-  sendTask(idTask, idStudent, fileDocument:Array<File>) {
+  sendTask(idTask, idStudent, idSubject, fileDocument:Array<File>) {
     const url_api = "http://localhost:3000/tasks/send";
     
     let formData = new FormData();
 
     formData.append("idTask", idTask);
     formData.append("idStudent", idStudent);
+    formData.append("idSubject", idSubject);
 
     for(let i = 0; i < fileDocument.length; i++) {
       formData.append("fileDocument", fileDocument[i]);

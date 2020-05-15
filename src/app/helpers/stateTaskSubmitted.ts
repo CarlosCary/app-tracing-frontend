@@ -15,6 +15,10 @@ class StateTaskSubmitted {
                 return "Rechazado"; 
             } 
 
+            case "reviewersAssigned": {
+                return "Tribunal asignado"; 
+            }
+
             default: { 
                 return "error";
             } 

@@ -6,28 +6,36 @@
         <mat-card-title>Crear cuenta</mat-card-title>
       </mat-card-header>
   
-      <form class="example-form" #formRegister="ngForm" (ngSubmit)="onRegister()">
+      <form class="example-form" [formGroup]="newStudentAccountForm" (ngSubmit)="onRegister()">
   
         <mat-card-content>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Nombre y apellido" [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}" required> 
+            <input matInput placeholder="Nombre y apellido" formControlName="name" required> 
+            <mat-error *ngIf="form.name.hasError('required')">Ingrese su nombre y apellido</mat-error>
           </mat-form-field>
   
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" required>
+            <input matInput placeholder="Correo electrónico" formControlName="email" required>
+            <mat-error *ngIf="form.email.hasError('required')">Ingrese su correo electrónico</mat-error>
+            <mat-error *ngIf="form.email.hasError('email')">Dirección de correo electrónico no válido</mat-error>
+            <mat-error *ngIf="form.email.hasError('incorrect')">{{emailErrorMessage}}</mat-error>
           </mat-form-field>
   
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Contraseña" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" type="password" required>
+            <input matInput placeholder="Contraseña" formControlName="password" type="password" required>
+            <mat-error *ngIf="form.password.hasError('required')">Ingrese su password</mat-error>
+            <mat-error *ngIf="form.password.hasError('minlength')">La contraseña debe tener al menos 6 caracteres</mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Repita su contraseña" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" type="password" required>
+            <input matInput placeholder="Confirme su contraseña" formControlName="confirmPassword" type="password" required>
+            <mat-error *ngIf="form.confirmPassword.hasError('required')">Confirme su contraseña</mat-error>
+            <mat-error *ngIf="form.confirmPassword.hasError('mustMatch')">Las contraseñas no son iguales</mat-error>
           </mat-form-field>
         </mat-card-content>
         <br>
         <br>
-        <button mat-raised-button color="primary" class="btn-block">Crear una cuenta</button>
+        <button mat-raised-button color="primary" class="btn-block">Crear cuenta</button>
       </form>
     </mat-card>
   </div>

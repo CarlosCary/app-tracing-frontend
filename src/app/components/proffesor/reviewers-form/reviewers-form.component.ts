@@ -68,6 +68,7 @@ export class ReviewersFormComponent implements OnInit {
     
     await this.proffesorService.getProffesorsAvaliableCommitte(this.idProffesor).subscribe( (proffesorsList) => {
       this.proffesorsList = proffesorsList;
+      console.log(this.proffesorsList);
       this.directors = this.proffesorsList.director;
       this.proffesors = this.proffesorsList.proffesors;
     })

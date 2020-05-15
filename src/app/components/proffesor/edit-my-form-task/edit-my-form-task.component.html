@@ -4,35 +4,39 @@
 <br>
 <br>
 
-<div class="section-container">    
+<form class="section-container" [formGroup]="taskForm" (ngSubmit)="editForm()">    
     <h1 class="tittle">Editar mi formulario de tarea</h1>
     <div>
         <mat-form-field  hintLabel="Máximo 30 carácteres" class="tittle-section">
-            <input matInput maxlength="30" placeholder="Nombre del formulario" [(ngModel)]="formTittle" required>
+            <input matInput maxlength="30" placeholder="Nombre del formulario" formControlName="formTitle" required>
+            <mat-error *ngIf="form.formTitle.hasError('required')">Ingrese un nombre</mat-error>
         </mat-form-field>
     </div>
 
     <h3 class="margin-left">Secciones: </h3>
+    
     <div>
         <mat-form-field  hintLabel="Máximo 30 carácteres" class="tittle-section">
-            <input matInput #input maxlength="30" placeholder="Ingrese el título de la sección" [(ngModel)]="sectionTittle" id="descriptionTittle[{{descriptionId}}]" required>
+            <input matInput #input maxlength="30" placeholder="Ingrese el título de la sección" formControlName="titleSection">
             <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
+            <mat-error *ngIf="form.titleSection.hasError('required')">Ingrese un título para esta sección</mat-error>
         </mat-form-field>
     </div>
     <p>
         <mat-form-field appearance="outline" class="text-box">
             <mat-label>Descripción de la sección</mat-label>
-            <textarea id="descriptionDetail[{{descriptionId}}]" [(ngModel)]="sectionDescription" matInput maxlength="300" rows="5" required></textarea>
-            <!-- <mat-hint>{{input.value?.length || 0}}/300</mat-hint> -->
+            <textarea formControlName="descriptionSection" matInput maxlength="300" rows="5" required></textarea>
+            <mat-error *ngIf="form.descriptionSection.hasError('required')">Ingrese una descripción para esta sección</mat-error>
+            
         </mat-form-field>
     </p>
     <mat-divider></mat-divider>
     <br>
 
     <ng-template #section></ng-template>
-</div>
+    <div class="options-buttons">
+        <button mat-button class="add-section" (click)="addSection()" type="button">Agregar sección</button>
+        <button mat-raised-button color="primary" class="save-button"  type="submit">Editar formulario</button>
+    </div>
+</form>
 
-<div class="options-buttons">
-    <button mat-button class="add-section" (click)="addSection()">Agregar sección</button>
-    <button mat-raised-button color="primary" class="save-button" (click)="editForm()">Editar formulario</button>
-</div>

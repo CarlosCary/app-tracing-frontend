@@ -48,7 +48,7 @@ import { ChangePasswordComponent } from './components/accounts/change-password/c
 import { AddReviewerComponent } from './components/utils/add-reviewer/add-reviewer.component';
 import { DocumentsAssignedTutorComponent } from './components/proffesor/documents-assigned-tutor/documents-assigned-tutor.component';
 import { DocumentsAssignedRapporteurComponent } from './components/proffesor/documents-assigned-rapporteur/documents-assigned-rapporteur.component';
-
+import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
 
 @NgModule({
   declarations: [
@@ -102,6 +102,7 @@ import { DocumentsAssignedRapporteurComponent } from './components/proffesor/doc
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
+    RxReactiveFormsModule,
   ],
   entryComponents: [
     SubjectFormComponent,

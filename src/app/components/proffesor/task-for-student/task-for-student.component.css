@@ -3,8 +3,8 @@
     flex-direction: column;
 }
   
-.section-container > * {
-  width: 60%;
+.section-container > *{
+  width: 80%;
   margin-left: 20%; 
   margin-right: 20%;
 }
@@ -21,10 +21,6 @@
 
 .text-box {
     width: 32%;
-}
-
-.tittle-section {
-    width: 30%;
 }
 
 .new-section {
@@ -44,11 +40,20 @@
 }
 
 .new-document-button {
-    width: 15% !important; 
+    width: 15% !important;
 }
 
 .next-button {
     width: 15% !important;
-    /* float: right !important; */
-    margin-left: 70%;
+    margin-left: 70% !important;
+}
+
+.date-section {
+    /* display: inline-block !important; */
+    width: 20% !important;
+}
+
+.tittle-section {
+    width: 20% !important;
+    /* display: inline-block !important; */
 }

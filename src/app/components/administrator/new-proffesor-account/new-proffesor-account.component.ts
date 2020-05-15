@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProffesorInterface } from 'src/app/models/proffesor-interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MustMatch } from '../../utils/Validators/must-match';
 
 @Component({
   selector: 'app-new-proffesor-account',
@@ -9,6 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./new-proffesor-account.component.css']
 })
 export class NewProffesorAccountComponent implements OnInit {
+  proffesorAccountForm: FormGroup;
+  isFormSubmitted:boolean = false;
+
   proffesor: ProffesorInterface = {
     name: "",
     email: "",
@@ -24,24 +29,49 @@ export class NewProffesorAccountComponent implements OnInit {
             'Administración de empresas'];
 
   constructor(private authService:AuthService,
-              private router:Router) { }
+              private router:Router,
+              private formBuilder: FormBuilder,) { }
+  
+  get form() { return this.proffesorAccountForm.controls; }
+
+
+  get name() { return this.proffesorAccountForm.get('name').value };
+  get email() { return this.proffesorAccountForm.get('email').value };
+  get career() { return this.proffesorAccountForm.get('career').value };
+  get role() { return this.proffesorAccountForm.get('role').value };
+  get academicDegree() { return this.proffesorAccountForm.get('academicDegree').value };
+  get password() { return this.proffesorAccountForm.get('password').value };
+  get confirmPassword() { return this.proffesorAccountForm.get('confirmPassword').value };
 
   ngOnInit() {
-  }
-
-  selectCareer(career) {
-    console.log("se selecciono: ");
-    console.log(this.careerSelected);
+    this.proffesorAccountForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      career: ['', Validators.required],
+      role: ['', Validators.required],
+      academicDegree: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+    }, 
+    {
+      validator: MustMatch('password', 'confirmPassword')
+    });
   }
 
   registerProffesor() {
-    console.log(this.proffesor);
+    if(this.proffesorAccountForm.invalid)
+      return;
+
     this.authService
-    .registerProffesor(this.proffesor.name, this.proffesor.email, this.proffesor.career,
-                      this.proffesor.role, this.proffesor.academicDegree, this.proffesor.password)
+    .registerProffesor(this.name, this.email, this.career,
+                      this.role, this.academicDegree, this.password)
     .subscribe( proffesor => {
       //Cuenta creada con exito
       this.router.navigate(['/administrator/home']);
     });
+  }
+
+  sendForm() {
+    this.isFormSubmitted = true;
   }
 }

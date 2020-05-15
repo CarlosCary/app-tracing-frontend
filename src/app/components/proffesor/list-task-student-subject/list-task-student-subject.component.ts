@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TasksService } from 'src/app/services/tasks.service';
 import { stateTaskSubmitted } from '../../../helpers/stateTaskSubmitted';
+
 @Component({
   selector: 'app-list-task-student-subject',
   templateUrl: './list-task-student-subject.component.html',
   styleUrls: ['./list-task-student-subject.component.css']
 })
 export class ListTaskStudentSubjectComponent implements OnInit {
-  columnsHeaderToDisplay: string[] = ['name', 'state'];
+  columnsHeaderToDisplay: string[] = ['name', 'state', 'dateSend'];
   idSubject;
   idStudent;
   tasksData;
@@ -21,26 +22,19 @@ export class ListTaskStudentSubjectComponent implements OnInit {
   }
 
   generateTableData(tasksAssignedAndSubmitted) {
-    
+    let taskData = [];
     for(let i = 0; i < (tasksAssignedAndSubmitted.tasksSubmitted).length; i ++) {  
-      if(tasksAssignedAndSubmitted.tasksSubmitted[i] !== null) {
-        tasksAssignedAndSubmitted.assignedTask[i].state = stateTaskSubmitted.getStateMessage(tasksAssignedAndSubmitted.tasksSubmitted[i].state);
-        tasksAssignedAndSubmitted.assignedTask[i].idTaskSubmitted = tasksAssignedAndSubmitted.tasksSubmitted[i]._id;
-        tasksAssignedAndSubmitted.assignedTask[i].idTask = tasksAssignedAndSubmitted.tasksSubmitted[i].idTask;
-      }
-      else 
-        tasksAssignedAndSubmitted.assignedTask[i].state = "undelivered";
-      
+      tasksAssignedAndSubmitted.tasksSubmitted[i].name = tasksAssignedAndSubmitted.tasksName[i];
+      tasksAssignedAndSubmitted.tasksSubmitted[i].state = stateTaskSubmitted.getStateMessage(tasksAssignedAndSubmitted.tasksSubmitted[i].state);
     }
     
-    console.log(tasksAssignedAndSubmitted.assignedTask);
-    return tasksAssignedAndSubmitted.assignedTask;
+    return tasksAssignedAndSubmitted.tasksSubmitted;
   }
 
   ngOnInit() {
-    this.tasksService.getTasksStudentSubject(this.idSubject, this.idStudent).subscribe((data => {
-      this.tasksData = this.generateTableData(data);
+    this.tasksService.getTasksStudentSubject(this.idSubject, this.idStudent).subscribe(((data:any) => {
       console.log(data);
+      this.tasksData = this.generateTableData(data);
     }));
   }
 

@@ -13,6 +13,7 @@ export class NewFeedbackDocumentReviewerComponent implements OnInit {
   components = [];
   private count:number = 0;
   inputsReviewFormComponent = InputsReviewFormComponent;
+  comment;
 
   APILink = "http://localhost:3000";
   
@@ -64,8 +65,8 @@ export class NewFeedbackDocumentReviewerComponent implements OnInit {
     for(let i = 0; i < review.reviewDataTittles.length; i ++) {
       this.addSection();
       this.components[i].tittle = review.reviewDataTittles[i];
-      this.components[i].descriptionLabel = "Justifiqué su respuesta*";
-      this.components[i].tittleLabel = "Sección a revisar*";
+      this.components[i].descriptionLabel = "Justifiqué su respuesta";
+      this.components[i].tittleLabel = "Sección a revisar";
       this.components[i].hintTittleLabel = "";
       this.components[i].isTittleDisabled = true;
     }
@@ -74,11 +75,23 @@ export class NewFeedbackDocumentReviewerComponent implements OnInit {
   saveForm() {
     let tittlesForm = [];
     let feedBackAnswers = [];
+
+    //revisamos todos los campos excepto el comentario
+    //porque no es un campo obligatorio
     for(let i = 0; i < this.components.length; i ++) {
-      if(this.components[i].description != undefined && this.components[i].description != "") {
-        tittlesForm.push(this.components[i].tittle);
-        feedBackAnswers.push(this.components[i].description);
+      if(this.components[i].description2.invalid) {
+        this.components[i].description2.markAsTouched();
+        return;
       }
+      tittlesForm.push(this.components[i].tittle);
+      feedBackAnswers.push(this.components[i].description);
+    }
+    
+    //Revisamos si se hizo un comentario
+
+    if(this.comment != undefined && this.comment != "") {
+      tittlesForm.push("Comentario");
+      feedBackAnswers.push(this.comment);
     }
     
     this.reviewService.saveRevisedDocument(tittlesForm, feedBackAnswers, this.idProffesor, this.idReview)
@@ -100,7 +113,6 @@ export class NewFeedbackDocumentReviewerComponent implements OnInit {
     this.reviewService.getAssignedReviewData(this.idReview).subscribe(review => {
       this.reviewData = this.generateTable(review);
       this.generateForm(review);
-      this.generateCommentSection();
     });
   }
 

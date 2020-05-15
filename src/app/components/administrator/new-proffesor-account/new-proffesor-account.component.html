@@ -1,55 +1,71 @@
 <app-toolbar></app-toolbar>
 
-
+<div></div>
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
     <mat-card class="box color-background">
       <mat-card-header>
         <mat-card-title>Crear cuenta docente</mat-card-title>
       </mat-card-header>
       <br>
-      <form class="example-form" #formRegister="ngForm" (ngSubmit)="registerProffesor()">
+      <form class="example-form" [formGroup]="proffesorAccountForm" (ngSubmit)="registerProffesor()">
   
         <mat-card-content>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Nombre y apellido" [(ngModel)]="proffesor.name" [ngModelOptions]="{standalone: true}" required> 
+              <input matInput placeholder="Nombre y apellido" formControlName="name" required> 
+              <mat-error *ngIf="form.name.hasError('required')">Ingrese el nombre y apellido del docente</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Email" [(ngModel)]="proffesor.email" [ngModelOptions]="{standalone: true}" required>
+              <input matInput placeholder="Email" formControlName="email" required>
+              <mat-error *ngIf="form.email.hasError('required')">Ingrese un correo electrónico</mat-error>
+              <mat-error *ngIf="form.email.hasError('email')">Correo electrónico no válido</mat-error>
             </mat-form-field>
           
             <mat-form-field class="example-full-width">
                 <mat-label>Seleccione una carrera</mat-label>
-                <mat-select [(ngModel)]="proffesor.career" [ngModelOptions]="{standalone: true}" required>
+                <mat-select formControlName="career" required>
                     <mat-option *ngFor="let career of careers" [value]="career">
                         {{career}}
                     </mat-option>
                 </mat-select>
+                <mat-error *ngIf="form.career.hasError('required')">Seleccione una carrera</mat-error>
             </mat-form-field>
 
             <section class="example-section">
                 <label>Elija un rol:</label>
-                <mat-radio-group [(ngModel)]="proffesor.role" [ngModelOptions]="{standalone: true}">
+                <mat-radio-group formControlName="role" required>
                   <mat-radio-button class="example-margin" value="proffesor">Docente</mat-radio-button>
                   <mat-radio-button class="example-margin" value="director">Director</mat-radio-button>
                 </mat-radio-group>
             </section>
+            <mat-error *ngIf="form.role.hasError('required') && isFormSubmitted">Seleccione un rol</mat-error>
+
             <section class="example-section">
                 <label>Elija un grado académico:</label>
-                <mat-radio-group [(ngModel)]="proffesor.academicDegree" [ngModelOptions]="{standalone: true}">
+                <mat-radio-group formControlName="academicDegree" required>
                     <mat-radio-button class="academic-degree" value="graduate">Ingeniero</mat-radio-button>
                     <mat-radio-button class="academic-degree" value="magister">Magister</mat-radio-button>
                     <mat-radio-button class="academic-degree" value="phd">Doctor</mat-radio-button>
                 </mat-radio-group>
             </section>
+            <mat-error *ngIf="form.academicDegree.hasError('required') && isFormSubmitted">Seleccione una carrera</mat-error>
+            
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Contraseña" [(ngModel)]="proffesor.password" [ngModelOptions]="{standalone: true}" type="password" required>
+              <input matInput placeholder="Contraseña" formControlName="password" required>
+              <mat-error *ngIf="form.password.hasError('required')">Ingrese su nueva contraseña</mat-error>
+              <mat-error *ngIf="form.password.hasError('minlength')">La contraseña debe tener al menos 6 caracteres</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Repita nueva contraseña" formControlName="confirmPassword" required>
+              <mat-error *ngIf="form.confirmPassword.hasError('required')">Confirme su nueva contraseña</mat-error>
+              <mat-error *ngIf="form.confirmPassword.hasError('mustMatch')">Las contraseñas no son iguales</mat-error>
             </mat-form-field>
           
         </mat-card-content>
         <br>
         <br>
-        <button mat-raised-button color="primary" class="btn-block">Crear cuenta</button>
+        <button mat-raised-button color="primary" class="btn-block" (click)="sendForm()">Crear cuenta</button>
       </form>
     </mat-card>
   </div>

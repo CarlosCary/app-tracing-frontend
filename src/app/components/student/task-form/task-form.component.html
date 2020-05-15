@@ -53,10 +53,12 @@
         <mat-label>
             <strong> Agregar documento a la tarea: </strong>
         </mat-label>
-        <input formControlName="file" type="file" id="file"> 
-        <!-- <mat-error *ngIf="filesF.file.hasError('required')">No se cargo un archivo</mat-error>  -->
-        <button mat-raised-button color="primary">Agregar documento</button>
+        <input formControlName="file" type="file" id="file" required> 
+        <button mat-raised-button color="primary" (click)="touchButton()"  type="submit">Entregar documento</button>
     </form>
+    <mat-error *ngIf="filesF.file.hasError('required') && isButtonSendTouched">No selecciono un archivo</mat-error> 
+    <mat-error *ngIf="filesF.file.hasError('extension')">El formato de archivo debe ser PDF</mat-error> 
+    <mat-error *ngIf="filesF.file.hasError('fileSize')">El archivo no puede ser mayor a 10 MB</mat-error> 
 </div>
 
 <!-- <div class="margin-left">

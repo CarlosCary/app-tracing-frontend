@@ -17,6 +17,7 @@ export class ChangePasswordComponent implements OnInit {
   changePasswordForm: FormGroup;
   submitted = false;
   role;
+  
   constructor(private authService: AuthService, 
               private router: Router,
               private route:ActivatedRoute,
@@ -53,10 +54,6 @@ export class ChangePasswordComponent implements OnInit {
       return;
     }
     else {
-      console.log(this.idAccount);
-      console.log(this.role);
-      console.log(this.currentPassword);
-      console.log(this.password);
       this.authService.changePassword(this.idAccount, this.role, this.currentPassword, this.password)
                       .subscribe( updatePassword => {
                         console.log(updatePassword);

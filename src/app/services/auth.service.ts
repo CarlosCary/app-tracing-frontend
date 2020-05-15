@@ -40,7 +40,7 @@ export class AuthService {
   }
   
 
-  registerUser(name:string , username:string, email:string, password:string) {
+  registerStudent(name:string, email:string, password:string) {
     const url_api = "http://localhost:3000/signup";
     
     return this.http
@@ -48,7 +48,6 @@ export class AuthService {
       url_api, 
       {
         name: name,
-        username: email, 
         email: email, 
         password: password
       },
@@ -58,7 +57,7 @@ export class AuthService {
   }
 
 
-  loginUser(email:string, password:string): Observable<any> {
+  loginUser(email, password): Observable<any> {
     const url_api = "http://localhost:3000/signin";
     return this.http
     .post(

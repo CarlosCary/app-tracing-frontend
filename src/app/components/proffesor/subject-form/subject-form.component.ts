@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SubjectInterface } from 'src/app/models/subject-interface';
 import { SubjectsService } from 'src/app/services/subjects.service';
 import { Router } from '@angular/router';
-import {FormControl, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 export interface Animal {
   name: string;
@@ -15,13 +15,18 @@ export interface Animal {
   styleUrls: ['./subject-form.component.css']
 })
 export class SubjectFormComponent implements OnInit {
+  
+  subjectForm: FormGroup;
+  isFormSubmitted = false;
   private subject: SubjectInterface = {
     name: "",
     semester: "",
     year: "2020",
     idProffesor: ""
   }
-  constructor(private subjectsService: SubjectsService, private router: Router) { }
+  constructor(private subjectsService: SubjectsService, 
+              private router: Router,
+              private formBuilder: FormBuilder,) { }
   selectFormControlSubject = new FormControl('', Validators.required);
   selectFormControlSemester = new FormControl('', Validators.required);
   semesters: String[] = [
@@ -34,17 +39,32 @@ export class SubjectFormComponent implements OnInit {
     "Taller de grado"
   ];
 
+  get form() { return this.subjectForm.controls; }
+  
+  get subjectSelected () { return this.subjectForm.get('subjectSelected').value };
+  get semesterSelected () { return this.subjectForm.get('semesterSelected').value };
   ngOnInit() {
+    this.subjectForm = this.formBuilder.group({
+      subjectSelected: ['', Validators.required],
+      semesterSelected: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
 
   onRegisterSubject(): void {
+    if (this.subjectForm.invalid) 
+      return;
+    
     const user = JSON.parse(localStorage.getItem("currentUser"));
     this.subject.idProffesor = user._id;
     console.log(this.subject);
     this.subjectsService
-    .createSubject(this.subject.name, this.subject.semester, this.subject.year, this.subject.idProffesor)
+    .createSubject(this.subjectSelected, this.semesterSelected, this.subject.year, this.subject.idProffesor)
     .subscribe( subject => {
       this.router.navigate(['/proffesor/home']);
     });
+  }
+
+  sendForm() {
+    this.isFormSubmitted = true;
   }
 }

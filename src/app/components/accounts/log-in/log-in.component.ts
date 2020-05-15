@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserInterface } from 'src/app/models/user-interface';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import { ToolbarComponent } from '../toolbar/toolbar.component';
 @Component({
   selector: 'app-log-in',
@@ -10,18 +11,36 @@ import { Router } from '@angular/router';
 })
 export class LogInComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  loginForm: FormGroup;
+
+  constructor(private authService: AuthService, 
+              private router: Router,
+              private formBuilder: FormBuilder) { }
   user: UserInterface = {
     email: "",
     password: ""
   }
   
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
+  get loginFormControls() { return this.loginForm.controls; }
+
+  get email() { return this.loginForm.get('email').value};
+  get password() { return this.loginForm.get('password').value};
+
   onLogin() {
+    if (this.loginForm.invalid) {
+      return;
+    }
+    console.log(this.email);
+    console.log(this.password);
     return this.authService
-      .loginUser(this.user.email, this.user.password)
+      .loginUser(this.email, this.password)
       .subscribe(
         data => {
           console.log(data);
@@ -30,7 +49,14 @@ export class LogInComponent implements OnInit {
           this.authService.setToken(token);
           this.router.navigate(['/student/home']);
         },
-        error => console.log(error)
+        error => {
+          if(error.error.data.invalidEmail)
+            this.loginFormControls['email'].setErrors({'incorrect': true});
+          if(error.error.data.invalidPassword)
+            this.loginFormControls['password'].setErrors({'incorrect': true});
+          
+          console.log(error.error);
+        }
       );
   }
 

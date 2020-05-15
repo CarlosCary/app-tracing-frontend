@@ -45,10 +45,6 @@ export class MyFormTaskComponent {
     
     const idProffesor = (JSON.parse(localStorage.getItem("currentUser")))._id;
     
-    // for(let i = 0; i <= this.count; i++) {
-    //   this.dataTittles.push((<HTMLInputElement>document.getElementById("descriptionTittle["+i+"]")).value);
-    //   this.dataDescriptions.push((<HTMLInputElement>document.getElementById("descriptionDetail["+i+"]")).value);
-    // }
     this.dataTittles.push(descriptionTittle);
     this.dataDescriptions.push(descriptionDetail);
 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { RxwebValidators } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-task-form',
@@ -11,6 +12,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class TaskFormComponent implements OnInit {
 
   APILink = "http://localhost:3000";
+  idSubject;
+  idTask;
+  isButtonSendTouched:boolean = false;
   
   documentsRequested;
   documentsRequestedTask;
@@ -34,7 +38,8 @@ export class TaskFormComponent implements OnInit {
   
   constructor(private tasksService: TasksService,
               private router: Router,
-              private formBuilder: FormBuilder) { 
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute) { 
     this.filesForm = this.formBuilder.group({
       file: ['', Validators.required]
     });
@@ -42,20 +47,23 @@ export class TaskFormComponent implements OnInit {
 
   
   ngOnInit() {
-    const idTask = localStorage.getItem("taskId");
+    this.idSubject = this.route.snapshot.params.idSubject;
+    this.idTask = this.route.snapshot.params.idTask;
+    
+    this.filesForm = this.formBuilder.group({
+      file: ['', [Validators.required, 
+        RxwebValidators.extension({extensions:["pdf"]}),
+        RxwebValidators.fileSize({maxSize: 30000})
+      ]]
+    });
+    
     const idStudent = (JSON.parse(localStorage.getItem("currentUser")))._id;
-    this.tasksService.getFormRequestedTask(idTask).subscribe((data) => {
+    this.tasksService.getFormRequestedTask(this.idTask).subscribe((data) => {
       this.getFormRequestedData(data);
       this.dataSource = this.generateDataTable();
     });
 
-    this.tasksService.getTaskSubmittedData(idTask, idStudent).subscribe((data:any) => {
-      // console.log('xdxd');
-      // console.log(data.taskSubmittedData);
-      // this.documentsLinks = data.taskSubmittedData.documents;
-      // console.log('info del servicio')
-      console.log(data);
-
+    this.tasksService.getTaskSubmittedData(this.idTask, idStudent).subscribe((data:any) => {
       this.documentsSubmittedData = this.generateDocumentsSubmittedData(data.taskSubmittedData, data.idsReviewAssigned);
     });
   }
@@ -97,19 +105,19 @@ export class TaskFormComponent implements OnInit {
   }
 
   async sendTask() {
-    let documents:Array<File> = new Array<File>();
-    
-    // for(let i = 0; i < this.documentsRequestedTask.length; i ++) {
-    //   documents.push(((<HTMLInputElement>document.getElementById("file-"+i)).files)[0]);
-    // }
+    if(this.filesForm.invalid) {
+      
+      console.log(this.file);
+      return;
+    }
     
     let fileUpload: Array<File> = new Array<File>();
     fileUpload.push(((<HTMLInputElement>document.getElementById("file")).files)[0]);
     
-    const idTask = localStorage.getItem("taskId");
+    
     const idStudent = JSON.parse(localStorage.getItem("currentUser"))._id;
     
-    await this.tasksService.sendTask( idTask, idStudent, fileUpload ).
+    await this.tasksService.sendTask( this.idTask, idStudent, this.idSubject, fileUpload ).
     subscribe(task => {
       this.router.navigate(['/student/home']);
       return task;
@@ -123,5 +131,8 @@ export class TaskFormComponent implements OnInit {
       return false;
   }
 
+  touchButton() {
+    this.isButtonSendTouched = true;
+  }
   
 }

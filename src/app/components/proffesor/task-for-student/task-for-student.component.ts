@@ -1,9 +1,9 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, Directive, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { RequestedDocumentComponent } from '../requested-document/requested-document.component';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
-import {FormControl} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export const DATE_FORMAT = {
   parse: {
@@ -16,6 +16,7 @@ export const DATE_FORMAT = {
     monthYearA11yLabel: 'YYYY',
   },
 };
+
 @Component({
   selector: 'app-task-for-student',
   templateUrl: './task-for-student.component.html',
@@ -29,24 +30,33 @@ export const DATE_FORMAT = {
 export class TaskForStudentComponent implements OnInit {
   @ViewChild('requestedDocuments', {read: ViewContainerRef, static:false}) container: ViewContainerRef;
   requestedDocumentComponent = RequestedDocumentComponent;
-
-  
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private router: Router) {
+  newTaskForm: FormGroup;
+  idSubject;
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, 
+              private router: Router,
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute) {
   }
-
+  
   private documentIdCount:number = 0;
 
-  // documentRequestedId:number[];
   documentRequestedDetail:string[] = [];
-  
-  taskName:string;
-  deadline;
-  visibilityDate;
 
   ngOnInit() {
+    this.idSubject = this.route.snapshot.params.idSubject;
+    this.newTaskForm = this.formBuilder.group({
+      taskName: ['', Validators.required],
+      visibilityDate: ['', Validators.required],
+      deadline: ['', Validators.required]
+    });
   }
 
+  get form() { return this.newTaskForm.controls; }
 
+  get taskName() { return this.newTaskForm.get('taskName').value };
+  get visibilityDate() { return this.newTaskForm.get('visibilityDate').value };
+  get deadline() { return this.newTaskForm.get('deadline').value };
+  
   addDocument() {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.requestedDocumentComponent);
     const component = <RequestedDocumentComponent>this.container.createComponent(componentFactory).instance;
@@ -54,22 +64,18 @@ export class TaskForStudentComponent implements OnInit {
   }
 
   getTaskData() {
-    this.taskName = (<HTMLInputElement>document.getElementById("task-name")).value;
-    this.deadline = (<HTMLInputElement>document.getElementById("deadline")).value;
-    this.visibilityDate = (<HTMLInputElement>document.getElementById("visibility-date")).value;
-
     for(let i = 0; i < this.documentIdCount; i++) {
       this.documentRequestedDetail.push((<HTMLInputElement>document.getElementById("documentRequested["+i+"]")).value);
     }
 
     const taskData = {
       "taskName": this.taskName,
-      "deadline": this.deadline,
-      "visibilityDate": this.visibilityDate,
+      "deadline": this.deadline.format("DD-MM-YYYY"),
+      "visibilityDate": this.visibilityDate.format("DD-MM-YYYY"),
       "documentsRequested": this.documentRequestedDetail,
-      "idSubject": localStorage.getItem("idSubject")
+      "idSubject": this.idSubject
     }
-    
+
     return taskData;
   }
 

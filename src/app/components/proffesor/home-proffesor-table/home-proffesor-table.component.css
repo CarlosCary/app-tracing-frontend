@@ -52,7 +52,9 @@ a.add-button {
     color: black;
 }
 
-
+a.calendar-button {
+  color: black;
+}
 
 table {
     width: 100%;

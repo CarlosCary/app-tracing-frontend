@@ -10,3 +10,7 @@ table.table1 {
     text-align:center;
     box-align: center;
 }
+
+a ~ a {
+  margin-left: 10%;
+}

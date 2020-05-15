@@ -10,3 +10,32 @@ table.table1 {
   margin-left: 20%; 
   margin-bottom: 5%;
 }
+
+.section-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-container > * {
+width: 60%;
+margin-left: 20%; 
+margin-right: 20%;
+}
+
+
+.center {
+  margin-top: 7%;
+}
+
+.tittle {
+  text-align: center;
+}
+
+.text-box {
+  width: 70%;
+  height: auto;
+}
+
+.tittle-section {
+  width: 30% !important;
+}
