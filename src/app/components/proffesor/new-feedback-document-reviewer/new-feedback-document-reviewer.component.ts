@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReviewsService } from 'src/app/services/reviews.service';
 import { InputsReviewFormComponent } from '../inputs-review-form/inputs-review-form.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-new-feedback-document-reviewer',
@@ -15,7 +16,7 @@ export class NewFeedbackDocumentReviewerComponent implements OnInit {
   inputsReviewFormComponent = InputsReviewFormComponent;
   comment;
 
-  APILink = "http://localhost:3000";
+  APILink = environment.APIEndpoint;
   
   columnsHeaderToDisplay: string[] = ['author', 'file'];
   reviewData;

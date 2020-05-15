@@ -35,11 +35,12 @@ import { DocumentsAssignedTutorComponent } from './components/proffesor/document
 import { DocumentsAssignedRapporteurComponent } from './components/proffesor/documents-assigned-rapporteur/documents-assigned-rapporteur.component';
 
 import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'student/home', canActivate: [AuthGuard] },
-  { path: 'login', component: LogInComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LogInComponent, canActivate: [LoginGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] },
   { path: 'student/home', component: HomeStudentComponent, canActivate: [AuthGuard], 
     data: { roles: ['student']} },
   { path: 'student/enrolled', component: EnrolledSubjectComponent, canActivate: [AuthGuard], 

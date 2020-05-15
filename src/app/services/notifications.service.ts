@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationsService {
-
+  API_URL = environment.APIEndpoint;
   constructor(private http: HttpClient) { }
 
   headers: HttpHeaders = new HttpHeaders ({
@@ -14,7 +15,7 @@ export class NotificationsService {
   });
 
   notifyCommittee(director, rapporteur, tutor) {
-    const url_api = "http://localhost:3000/notifications/notify/committee";
+    const url_api = this.API_URL + "/notifications/notify/committee";
     console.log('se deberia incrementar');
     return this.http
     .put(
@@ -30,12 +31,12 @@ export class NotificationsService {
   }
 
   getNotificationsProffesor(idProffesor) {
-    const url_api = "http://localhost:3000/notifications/proffesors/" + idProffesor;
+    const url_api = this.API_URL + "/notifications/proffesors/" + idProffesor;
     return this.http.get(url_api).pipe(map(data => data));
   }
 
   clearTutorNotifications(idProffesor) {
-    const url_api = "http://localhost:3000/notifications/proffesors/clear/tutor";
+    const url_api = this.API_URL + "/notifications/proffesors/clear/tutor";
     return this.http
     .put(
       url_api, 
@@ -48,7 +49,7 @@ export class NotificationsService {
   }
 
   clearRapporteurNotifications(idProffesor) {
-    const url_api = "http://localhost:3000/notifications/proffesors/clear/rapporteur";
+    const url_api = this.API_URL + "/notifications/proffesors/clear/rapporteur";
     return this.http
     .put(
       url_api, 
@@ -61,7 +62,7 @@ export class NotificationsService {
   }
 
   clearAllNotifications(idProffesor) {
-    const url_api = "http://localhost:3000/notifications/proffesors/clear/all";
+    const url_api = this.API_URL + "/notifications/proffesors/clear/all";
     return this.http
     .put(
       url_api, 

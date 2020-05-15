@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectsService {
-
+  API_URL = environment.APIEndpoint;
   constructor(private http: HttpClient, private router:Router) { 
   }
   
@@ -16,7 +17,7 @@ export class SubjectsService {
   });
 
   createSubject(name:string , subjectSemester:string, year:string, idProffesor:string) {
-    const url_api = "http://localhost:3000/subjects/new";
+    const url_api = this.API_URL + "/subjects/new";
     
     return this.http
     .post(
@@ -33,7 +34,7 @@ export class SubjectsService {
   }
 
   enrolledSubject(subject_code:string, id_student:string) {
-    const url_api = "http://localhost:3000/subjects/new/enrolled";
+    const url_api = this.API_URL + "/subjects/new/enrolled";
     
     return this.http
     .post(
@@ -48,30 +49,28 @@ export class SubjectsService {
   }
 
   getSubjects() {
-    const url_api = "http://localhost:3000/subjects";
+    const url_api = this.API_URL + "/subjects";
     return this.http.get(url_api).pipe(map(data => data));
   }
 
   getStudentSubjects(id, semester, year) {
-    
-    console.log("semestre");
-    console.log(semester);
-    const url_api = "http://localhost:3000/subjects/student/" + id+ "/" + semester + "/" + year;
+  
+    const url_api = "/subjects/student/" + id+ "/" + semester + "/" + year;
     return this.http.get(url_api).pipe(map(data => data));
   }
 
   getProffesorSubjects(id) {
-    const url_api = "http://localhost:3000/subjects/proffesor/"+id;
+    const url_api = this.API_URL +  "/subjects/proffesor/" + id;
     return this.http.get(url_api).pipe(map(data => data));
   }
 
   getProffesorSubjects2(id, semester, year) {
-    const url_api = "http://localhost:3000/subjects/proffesor/" + id + "/" + semester + "/" + year;
+    const url_api = this.API_URL + "/subjects/proffesor/" + id + "/" + semester + "/" + year;
     return this.http.get(url_api).pipe(map(data => data));
   }
 
   getStudentsDataEnrolledSubject(idSubject) {
-    const url_api = "http://localhost:3000/subjects/enrolled/"+idSubject;
+    const url_api = this.API_URL + "/subjects/enrolled/" + idSubject;
     return this.http.get(url_api).pipe(map(data => data));
   }
 }

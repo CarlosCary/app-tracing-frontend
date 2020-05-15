@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TasksService } from 'src/app/services/tasks.service';
 import { stateTaskSubmitted } from '../../../helpers/stateTaskSubmitted';
 import { ReviewsService } from 'src/app/services/reviews.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-review-task-submitted',
   templateUrl: './review-task-submitted.component.html',
@@ -10,7 +11,7 @@ import { ReviewsService } from 'src/app/services/reviews.service';
 })
 export class ReviewTaskSubmittedComponent implements OnInit {
 
-  APILink = "http://localhost:3000";
+  APILink = environment.APIEndpoint;
   
   columnsHeaderToDisplay: string[] = ['tittle', 'description'];
   columnsHeaderToDisplayReviewers: string[] = ['name', 'email'];

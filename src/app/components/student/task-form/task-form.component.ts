@@ -3,6 +3,7 @@ import { TasksService } from 'src/app/services/tasks.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-task-form',
@@ -11,7 +12,7 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
 })
 export class TaskFormComponent implements OnInit {
 
-  APILink = "http://localhost:3000";
+  APILink = environment.APIEndpoint;
   idSubject;
   idTask;
   isButtonSendTouched:boolean = false;

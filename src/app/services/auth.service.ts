@@ -6,12 +6,14 @@ import { isNullOrUndefined } from 'util';
 import { UserInterface } from 'src/app/models/user-interface';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   
+  API_URL = environment.APIEndpoint;
   constructor(private http: HttpClient, private router:Router) { 
     
   }
@@ -21,8 +23,17 @@ export class AuthService {
     "Content-type": "application/json"
   });
 
+  isLoggedIn() {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    
+    if(user)
+      return true;
+
+    return false;
+  }
+
   registerProffesor(name:string , email:string, career:string, role:string, academicDegree:string,  password:string) {
-    const url_api = "http://localhost:3000/proffesor/new";
+    const url_api = this.API_URL + "/proffesor/new";
     return this.http
     .post(
       url_api, 
@@ -41,7 +52,7 @@ export class AuthService {
   
 
   registerStudent(name:string, email:string, password:string) {
-    const url_api = "http://localhost:3000/signup";
+    const url_api = this.API_URL + "/signup";
     
     return this.http
     .post(
@@ -58,7 +69,7 @@ export class AuthService {
 
 
   loginUser(email, password): Observable<any> {
-    const url_api = "http://localhost:3000/signin";
+    const url_api = this.API_URL + "/signin";
     return this.http
     .post(
       url_api, 
@@ -84,23 +95,21 @@ export class AuthService {
 
   setToken(token): void {    
     localStorage.setItem("accessToken", token);
-    //TODO in backend
   }
 
   logoutUser() {
-    let accessToken = localStorage.getItem("accessToken");
-    // const url_api = "http://localhost:3000/logout/accessToken"//Close session TODO
+    
     localStorage.removeItem("accessToken");
     localStorage.removeItem("currentUser");
   }
 
   getProffesorsList() {
-    const url_api = "http://localhost:3000/proffesors";
+    const url_api = this.API_URL + "/proffesors";
     return this.http.get(url_api).pipe(map(data => data));
   }
 
   getProffesors() {
-    const url_api = "http://localhost:3000/proffesor/all";
+    const url_api = this.API_URL + "/proffesor/all";
     return this.http.get(url_api).pipe(map(data => data));
   }
 
@@ -110,12 +119,12 @@ export class AuthService {
   }
 
   getProffesor(idProffesor) {
-    const url_api = "http://localhost:3000/proffesor/" + idProffesor;
+    const url_api = this.API_URL + "/proffesor/" + idProffesor;
     return this.http.get(url_api).pipe(map(data => data));
   }
 
   updataProffesorAccount(idProffesor, name, career, role, academicDegree) {
-    const url_api = "http://localhost:3000/proffesor/update";
+    const url_api = this.API_URL + "/proffesor/update";
     return this.http.put(url_api, 
       {
         idProffesor,
@@ -130,12 +139,12 @@ export class AuthService {
   }
 
   getDataAccount(idAccount) {
-    const url_api = "http://localhost:3000/account/" + idAccount;
+    const url_api = this.API_URL + "/account/" + idAccount;
     return this.http.get(url_api).pipe(map(data => data));
   }
 
   updateDataAccount(idAccount, name, email, role) {
-    const url_api = "http://localhost:3000/account/update";
+    const url_api = this.API_URL + "/account/update";
     return this.http.put(url_api, 
       {
         idAccount,
@@ -162,7 +171,7 @@ export class AuthService {
   }
   
   changePassword(idAccount, role, currentPassword, newPassword) {
-    const url_api = "http://localhost:3000/account/update/password";
+    const url_api = this.API_URL + "/account/update/password";
     return this.http.put(url_api, 
       {
         idAccount,

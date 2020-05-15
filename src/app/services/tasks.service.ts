@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
-
+  API_URL = environment.APIEndpoint;
   constructor(private http: HttpClient, private router:Router) { }
 
   headers: HttpHeaders = new HttpHeaders ({
@@ -15,7 +16,7 @@ export class TasksService {
   });
   
   createTask(taskName:string , idSubject:string, deadline:string, visibilityDate:string, documentsRequested, formTittles, formDescriptions) {
-    const url_api = "http://localhost:3000/tasks/new";
+    const url_api = this.API_URL + "/tasks/new";
     
     return this.http
     .post(

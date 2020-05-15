@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormsService {
-
+  API_URL = environment.APIEndpoint;
   constructor(private http: HttpClient) { }
 
   headers: HttpHeaders = new HttpHeaders ({
@@ -14,7 +15,7 @@ export class FormsService {
   });
 
   createFormTask(formTittle:string, tittles, descriptions, idProffesor) {
-    const url_api = "http://localhost:3000/form/task/new";
+    const url_api = this.API_URL + "/form/task/new";
     
     return this.http
     .post(
@@ -31,18 +32,18 @@ export class FormsService {
   }
 
   getFormsTasks(idProffesor) {
-    const url_api = "http://localhost:3000/form/task/all/" + idProffesor;
+    const url_api = this.API_URL + "/form/task/all/" + idProffesor;
     return this.http.get(url_api).pipe(map(data => data));
   }
 
   getFormTask(idForm) {
-    const url_api = "http://localhost:3000/form/task/" + idForm;
+    const url_api = this.API_URL + "/form/task/" + idForm;
     return this.http.get(url_api).pipe(map(data => data));
   }
 
   updateTaskForm(idTaskForm, formTittle, formDescription, tittles, descriptions) {
 
-    const url_api = "http://localhost:3000/form/task/update";
+    const url_api = this.API_URL + "/form/task/update";
     return this.http.put(url_api, 
       {
         idTaskForm: idTaskForm,
