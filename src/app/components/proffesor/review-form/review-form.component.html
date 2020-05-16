@@ -5,7 +5,7 @@
     <div class="new-section">
         <mat-form-field>
             <mat-label>Mis formularios</mat-label>
-            <mat-select [(value)]="selectedForm">
+            <mat-select>
                 <mat-option (click)="selectForm('none')">*Ninguno</mat-option>
                 <mat-option *ngFor="let formTask of formTasks" [value]="formTask._id" (click)="selectForm(formTask._id)">
                     {{formTask.formTittle}}

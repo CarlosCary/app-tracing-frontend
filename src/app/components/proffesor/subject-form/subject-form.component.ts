@@ -56,7 +56,7 @@ export class SubjectFormComponent implements OnInit {
     
     const user = JSON.parse(localStorage.getItem("currentUser"));
     this.subject.idProffesor = user._id;
-    console.log(this.subject);
+    
     this.subjectsService
     .createSubject(this.subjectSelected, this.semesterSelected, this.subject.year, this.subject.idProffesor)
     .subscribe( subject => {

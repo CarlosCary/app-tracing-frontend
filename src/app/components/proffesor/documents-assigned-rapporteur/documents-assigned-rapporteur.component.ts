@@ -23,7 +23,9 @@ export class DocumentsAssignedRapporteurComponent {
     this.idProffesor = (JSON.parse(localStorage.getItem("currentUser")))._id;
     this.notificationsService.clearRapporteurNotifications(this.idProffesor).subscribe(clearNotification => {
     });
+    
     this.reviewsService.getAssignedReviews(this.idProffesor, 'rapporteur').subscribe(reviewData => {
+      console.log(reviewData);
       this.documentsData = reviewData; 
       this.addToolbar();
       this.documentsData.reverse();
@@ -35,8 +37,8 @@ export class DocumentsAssignedRapporteurComponent {
   ngOnInit() {
   }
 
-    addToolbar() {
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.toolbarComponent);
-      const component = <ToolbarComponent>this.container.createComponent(componentFactory).instance;
-    }
+  addToolbar() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.toolbarComponent);
+    const component = <ToolbarComponent>this.container.createComponent(componentFactory).instance;
+  }
 }

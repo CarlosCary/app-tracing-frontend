@@ -58,7 +58,7 @@
     </form>
     <mat-error *ngIf="filesF.file.hasError('required') && isButtonSendTouched">No selecciono un archivo</mat-error> 
     <mat-error *ngIf="filesF.file.hasError('extension')">El formato de archivo debe ser PDF</mat-error> 
-    <mat-error *ngIf="filesF.file.hasError('fileSize')">El archivo no puede ser mayor a 10 MB</mat-error> 
+    <!-- <mat-error *ngIf="filesF.file.hasError('fileSize')">El archivo no puede ser mayor a 10 MB</mat-error>  -->
 </div>
 
 <!-- <div class="margin-left">

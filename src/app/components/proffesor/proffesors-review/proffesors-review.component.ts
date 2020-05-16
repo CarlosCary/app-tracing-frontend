@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReviewsService } from 'src/app/services/reviews.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-proffesors-review',
@@ -13,6 +14,8 @@ export class ProffesorsReviewComponent implements OnInit {
   reviewData;
   taskName; 
   reviewsProffesorData = [];
+  
+  APILink = environment.APIEndpoint;
 
   constructor(private route: ActivatedRoute,
               private reviewService: ReviewsService) { 

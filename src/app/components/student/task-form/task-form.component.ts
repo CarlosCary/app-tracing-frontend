@@ -54,7 +54,7 @@ export class TaskFormComponent implements OnInit {
     this.filesForm = this.formBuilder.group({
       file: ['', [Validators.required, 
         RxwebValidators.extension({extensions:["pdf"]}),
-        RxwebValidators.fileSize({maxSize: 30000})
+        // RxwebValidators.fileSize({maxSize: 10}) This validation doesnt work
       ]]
     });
     

@@ -11,7 +11,7 @@
   
         <mat-card-content>
             <mat-label ><strong>Seleccione una materia: </strong></mat-label>
-            <mat-radio-group [value]="selected" formControlName="subjectSelected" required>
+            <mat-radio-group formControlName="subjectSelected" required>
               <mat-radio-button class="example-radio-button" *ngFor="let subject of subjects" [value]="subject">
                 {{subject}}
               </mat-radio-button>
@@ -21,7 +21,7 @@
             <br>
 
             <mat-label ><strong>Seleccione el semestre: </strong></mat-label>
-            <mat-radio-group class="top-space" [value]="selected" formControlName="semesterSelected">
+            <mat-radio-group class="top-space" formControlName="semesterSelected">
               <mat-radio-button class="example-radio-button" *ngFor="let semester of semesters" [value]="semester">
                 {{semester}}
               </mat-radio-button>
