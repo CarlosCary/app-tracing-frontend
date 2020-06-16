@@ -6,6 +6,7 @@ import {MatIconRegistry} from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { TasksService } from 'src/app/services/tasks.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { currentDate } from '../../../helpers/currentDate';
 
 export interface Subject {
   id: number;
@@ -36,8 +37,8 @@ export class HomeProffesorTableComponent implements OnInit {
   subjectsData:any[];
   tasksData;
   
-  semesterSelected = "Primero";
-  yearSelected = "2020";
+  semesterSelected = currentDate.getCurrentSemester();
+  yearSelected = currentDate.getCurrentYear();
 
   semester = [
     {value: 'Primero'},
@@ -45,7 +46,6 @@ export class HomeProffesorTableComponent implements OnInit {
   ];
 
   year = [
-    {value: '2018'},
     {value: '2019'},
     {value: '2020'},
     {value: '2021'},
@@ -57,6 +57,7 @@ export class HomeProffesorTableComponent implements OnInit {
     sanitizer: DomSanitizer,
     private router: Router,
     private tasksService: TasksService) { 
+    console.log("El helper: " + currentDate.getCurrentYear());
     iconRegistry.addSvgIcon(
       'thumbs-up',
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/new-task.svg'));

@@ -55,12 +55,12 @@ export class SubjectsService {
 
   getStudentSubjects(id, semester, year) {
   
-    const url_api = "/subjects/student/" + id+ "/" + semester + "/" + year;
+    const url_api = this.API_URL + "/subjects/student/" + id+ "/" + semester + "/" + year;
     return this.http.get(url_api).pipe(map(data => data));
   }
 
   getProffesorSubjects(id) {
-    const url_api = this.API_URL +  "/subjects/proffesor/" + id;
+    const url_api = this.API_URL + "/subjects/proffesor/" + id;
     return this.http.get(url_api).pipe(map(data => data));
   }
 

@@ -3,6 +3,7 @@ import { SubjectsService } from 'src/app/services/subjects.service';
 import { TasksService } from 'src/app/services/tasks.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Router } from '@angular/router';
+import { currentDate } from '../../../helpers/currentDate';
 
 @Component({
   selector: 'app-home-student-table',
@@ -27,8 +28,8 @@ export class HomeStudentTableComponent implements OnInit {
   subjectsStudent;
   tasksStudent;
 
-  semesterSelected = "Primero";
-  yearSelected = "2020";
+  semesterSelected = currentDate.getCurrentSemester();
+  yearSelected = currentDate.getCurrentYear();
 
   semester = [
     {value: 'Primero'},
@@ -56,8 +57,6 @@ export class HomeStudentTableComponent implements OnInit {
     const idStudent = JSON.parse(localStorage.getItem("currentUser"))._id;
     this.subjectsService.getStudentSubjects(idStudent, semester, year).subscribe((data) => {
       this.dataSource = data;
-      console.log("Materias");
-      console.log(data);
       this.dataSource.reverse();
     });
   }
@@ -86,8 +85,6 @@ export class HomeStudentTableComponent implements OnInit {
 
   async getTasks() {
     const idStudent = JSON.parse(localStorage.getItem("currentUser"))._id;
-    console.log("idStudent: ");
-    console.log(idStudent);
     this.tasksService.getAllTasksStudent(idStudent).subscribe((data) => {
       this.tasksData = data;
     });
