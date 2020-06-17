@@ -82,7 +82,6 @@ export class EditReviewersFormComponent implements OnInit {
   }
 
   chargeCommitteSelected(idProffesorsSelected) {
-    console.log(idProffesorsSelected);
     this.director = idProffesorsSelected[0].idProffesor;
     this.rapporteur = idProffesorsSelected[1].idProffesor;
     this.tutor = idProffesorsSelected[2].idProffesor;

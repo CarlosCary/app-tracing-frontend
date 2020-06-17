@@ -38,8 +38,6 @@ export class EditProffesorAccountComponent implements OnInit {
     await this.auth.getProffesor(this.idProffesor).subscribe( proffesor => {
       // this.chargeData(proffesor);
       this.proffesorData = proffesor;
-      console.log("data")
-      console.log(this.proffesorData);
     });
   }
 
@@ -54,9 +52,7 @@ export class EditProffesorAccountComponent implements OnInit {
         this.proffesorData.academicDegree
     )
     .subscribe( proffesorUpdated => {
-      console.log(proffesorUpdated);
       this.router.navigate(['/proffesor/forms/task']);
-      // this.router.navigate(['/proffesor/forms/task']);
     });
   }
 }

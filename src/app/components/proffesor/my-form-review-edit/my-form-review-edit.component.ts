@@ -73,7 +73,6 @@ export class MyFormReviewEditComponent implements OnInit {
     this.formTitle = taskForm.formTittle;
     this.titleSection = taskForm.tittles[0];
     this.descriptionSection = taskForm.descriptions[0];
-    console.log(taskForm);
     for(let i = 1; i < taskForm.tittles.length; i++) {
       this.addSection();
       this.components[i - 1].tittle = taskForm.tittles[i];

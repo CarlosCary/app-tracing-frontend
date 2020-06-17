@@ -15,8 +15,10 @@ export class TaskFormComponent implements OnInit {
   APILink = environment.APIEndpoint;
   idSubject;
   idTask;
+
   isButtonSendTouched:boolean = false;
-  
+  isSubmitAvaliable:boolean = true;
+
   documentsRequested;
   documentsRequestedTask;
   
@@ -59,7 +61,8 @@ export class TaskFormComponent implements OnInit {
     });
     
     const idStudent = (JSON.parse(localStorage.getItem("currentUser")))._id;
-    this.tasksService.getFormRequestedTask(this.idTask).subscribe((data) => {
+    this.tasksService.getFormRequestedTask(this.idTask).subscribe(( data:any ) => {
+      this.isDeadLineAvaliable(data.deadline);
       this.getFormRequestedData(data);
       this.dataSource = this.generateDataTable();
     });
@@ -69,6 +72,16 @@ export class TaskFormComponent implements OnInit {
     });
   }
 
+  isDeadLineAvaliable(deadline) {
+    const deadLineDate = new Date(deadline);
+    let todayDate = new Date();
+    todayDate.setHours(0,0,0,0);
+    
+    
+    if(deadLineDate < todayDate)
+      this.isSubmitAvaliable = false;
+    
+  }
   generateDocumentsSubmittedData(taskSubmittedData, idsReviewAssigned) {
     let data = []
 
@@ -108,7 +121,6 @@ export class TaskFormComponent implements OnInit {
   async sendTask() {
     if(this.filesForm.invalid) {
       
-      console.log(this.file);
       return;
     }
     

@@ -57,7 +57,6 @@ export class HomeProffesorTableComponent implements OnInit {
     sanitizer: DomSanitizer,
     private router: Router,
     private tasksService: TasksService) { 
-    console.log("El helper: " + currentDate.getCurrentYear());
     iconRegistry.addSvgIcon(
       'thumbs-up',
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/new-task.svg'));
@@ -68,7 +67,7 @@ export class HomeProffesorTableComponent implements OnInit {
     
     this.tasksService.getAllTasksProffesor(idProffesor).subscribe((data:any) => {
       this.tasksData = data.reverse();
-      console.log(data);
+  
     });
   }
 
@@ -102,7 +101,7 @@ export class HomeProffesorTableComponent implements OnInit {
     
     this.subjectsService.getProffesorSubjects2(idProffesor, semester, year).subscribe((data:any) => {
       this.subjectsData = data;
-      // console.log(data);
+
       // this.dataSource.reverse();
     });
     

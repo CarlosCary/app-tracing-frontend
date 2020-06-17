@@ -68,7 +68,6 @@ export class ReviewersFormComponent implements OnInit {
     
     await this.proffesorService.getProffesorsAvaliableCommitte(this.idProffesor).subscribe( (proffesorsList) => {
       this.proffesorsList = proffesorsList;
-      console.log(this.proffesorsList);
       this.directors = this.proffesorsList.director;
       this.proffesors = this.proffesorsList.proffesors;
     })
@@ -108,7 +107,6 @@ export class ReviewersFormComponent implements OnInit {
     }
     
     await this.notificationsService.notifyCommittee(this.director, this.rapporteur, this.tutor).subscribe(notifications => {
-      console.log(notifications);
     });
 
     await this.reviewsService.createReview ( 
@@ -119,7 +117,6 @@ export class ReviewersFormComponent implements OnInit {
       this.idSubmittedTask
       ).
       subscribe(review => {
-        console.log(review);
         this.router.navigate(['/proffesor/home']);
     });
   }

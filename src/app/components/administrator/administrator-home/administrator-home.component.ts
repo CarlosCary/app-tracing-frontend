@@ -13,7 +13,6 @@ export class AdministratorHomeComponent implements OnInit {
 
   ngOnInit() {
     this.auth.getProffesors().subscribe( proffesors => {
-      console.log(proffesors);
       this.dataSource = proffesors;
     });
   }

@@ -30,8 +30,6 @@ export class ListFeedbackDocumentReviewerComponent implements OnInit {
   ngOnInit() {
     this.reviewsService.getAssignedReviews(this.idProffesor, 'all').subscribe(reviewData => {
       this.documentsData = reviewData;
-      console.log(this.documentsData);
-      // this.addToolbar();
     })
   }
 

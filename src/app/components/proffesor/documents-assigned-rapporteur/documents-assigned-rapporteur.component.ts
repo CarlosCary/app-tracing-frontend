@@ -25,7 +25,6 @@ export class DocumentsAssignedRapporteurComponent {
     });
     
     this.reviewsService.getAssignedReviews(this.idProffesor, 'rapporteur').subscribe(reviewData => {
-      console.log(reviewData);
       this.documentsData = reviewData; 
       this.addToolbar();
       this.documentsData.reverse();

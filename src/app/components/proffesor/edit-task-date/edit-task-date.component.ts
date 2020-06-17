@@ -39,9 +39,6 @@ export class EditTaskDateComponent implements OnInit {
     this.idTask = this.route.snapshot.params.idTask;
     this.tasksService.getTaskDate(this.idTask).subscribe((studentsTask:any) => {
       this.currentDate = new Date(studentsTask.deadline);
-      // console.log(this.currentDate);
-      console.log(studentsTask.deadline);
-      // console.log(studentsTask.deadline);
     });
   }
 

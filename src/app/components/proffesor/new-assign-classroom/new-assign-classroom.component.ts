@@ -23,7 +23,6 @@ export class NewAssignClassroomComponent implements OnInit {
   async assignClassroom() {
     await this.classroomsService.assignClassroom(this.classroom, this.idTaskSubmitted)
                           .subscribe(assign => {
-      console.log(this.classroom);
       this.router.navigate(['/proffesor/home']);
     });
   }

@@ -54,7 +54,6 @@ export class ReviewTaskSubmittedComponent implements OnInit {
     this.idTask = this.route.snapshot.params.idTask;
     this.idStudent = this.route.snapshot.params.idStudent;
     this.idTaskSubmitted = this.route.snapshot.params.idTaskSubmitted;
-    console.log(this.idTaskSubmitted);
   }
 
   generateDataTable() {
@@ -72,7 +71,6 @@ export class ReviewTaskSubmittedComponent implements OnInit {
       isText: true
     });
 
-    // console.log(this.documentsSubmitted);
     for(let i =0; i < this.documentsSubmitted.length; i++) {
       dataTable.push ({
                       tittle: this.documentsRequested[i], 
@@ -103,8 +101,6 @@ export class ReviewTaskSubmittedComponent implements OnInit {
   }
 
   stablishDataTaskSubmitted() {
-    console.log('estableciendo datos de la entrega');
-    console.log(this.taskData);
     this.idTaskSubmitted = this.taskData._id;
     this.documentsSubmitted = this.taskData.documents;
     this.isNotReviewed = this.isReviewed(this.taskData.state);
@@ -122,7 +118,6 @@ export class ReviewTaskSubmittedComponent implements OnInit {
   }
 
   getTaskSubmittedData(data) {
-    // console.log(data.taskSubmittedData);
     return data.taskSubmittedData;
   }
 
@@ -133,7 +128,6 @@ export class ReviewTaskSubmittedComponent implements OnInit {
     return data.author;
   }
 
-  //Este metodo hace dos cosas, refactorizar
   _areReviewersAssigned(reviewers) {
     if(reviewers) {
       this.areReviewersAssigned = true;
@@ -150,13 +144,12 @@ export class ReviewTaskSubmittedComponent implements OnInit {
       this.formTaskData = this.getTaskFormData(data);
       this.taskData = this.getTaskSubmittedData(data);
       this.authorName = this.getAuthorName(data);
-      // console.log(data);
+
       this.stablishDataTaskSubmitted();
       this.stablishDataTaskRequested();
 
       this.reviewService.getReviewTaskSubmitted(this.idTaskSubmitted).subscribe((reviewData:any) => {
         this.reviewers = this._areReviewersAssigned(reviewData.reviewersData);
-        // console.log(reviewData);
         this.idReview = reviewData.idReview;
       });
       this.dataSource = this.generateDataTable();

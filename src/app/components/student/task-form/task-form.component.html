@@ -48,12 +48,16 @@
 
 <br>
 
-<div class="margin-left">
+<div class="margin-left" *ngIf="isSubmitAvaliable">
     <form class="example-form" [formGroup]="filesForm" (ngSubmit)="sendTask()">
         <mat-label>
             <strong> Agregar documento a la tarea: </strong>
         </mat-label>
+        <br>
+        <br>
         <input formControlName="file" type="file" id="file" required> 
+        <br>
+        <br>
         <button mat-raised-button color="primary" (click)="touchButton()"  type="submit">Entregar documento</button>
     </form>
     <mat-error *ngIf="filesF.file.hasError('required') && isButtonSendTouched">No selecciono un archivo</mat-error> 
@@ -61,17 +65,7 @@
     <!-- <mat-error *ngIf="filesF.file.hasError('fileSize')">El archivo no puede ser mayor a 10 MB</mat-error>  -->
 </div>
 
-<!-- <div class="margin-left">
-    <mat-label>
-        <strong> Agregar documento solicitado: </strong>
-    </mat-label>
-    <input type="file" id="file">
-    <button mat-raised-button color="primary" (click)="sendTask()">Entregar tarea</button>
-</div> -->
 
-<!-- <div>
-    <h3>Aún no se han realizado entregas</h3>
-</div> -->
 <div>
     <h3 class="margin-left">Entregas realizadas: </h3>
     <table mat-table [dataSource]="documentsSubmittedData" class="mat-elevation-z8 table1">
@@ -94,12 +88,6 @@
         <ng-container matColumnDef="options">
             <th mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let reviewForm" class="button-edit"> 
-                <!-- Para llegar hasta aca hace falta que se hayan asignado revisores
-                por ende hay q hacer el metodo para ver si hay revisores,
-                y cuando busquemos ahi veremos si mandamos o no al otro lado
-                refactorizar esta cosa 
-                ACTUALMENTE NO ESTA FUNCIONANDO CORRECTAMENTE, SE MUESTRA SIEMPRE-->
-                
                 <a *ngIf='reviewForm.idReviewAssigned' class="material-icons button-size" 
                 [routerLink]="['/proffesors/review', reviewForm.idReviewAssigned, taskName]">
                     remove_red_eye

@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
     this.authService
     .registerStudent(this.name, this.email, this.password)
     .subscribe( user => {
-      // console.log(user);
+  
       this.authService.setUser(user);
       this.router.navigate(['/student/home']);
     },err => {

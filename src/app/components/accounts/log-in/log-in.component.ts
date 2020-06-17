@@ -37,13 +37,10 @@ export class LogInComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    console.log(this.email);
-    console.log(this.password);
     return this.authService
       .loginUser(this.email, this.password)
       .subscribe(
         data => {
-          console.log(data);
           this.authService.setUser(data.user);
           let token = data.id;
           this.authService.setToken(token);
@@ -54,8 +51,6 @@ export class LogInComponent implements OnInit {
             this.loginFormControls['email'].setErrors({'incorrect': true});
           if(error.error.data.invalidPassword)
             this.loginFormControls['password'].setErrors({'incorrect': true});
-          
-          console.log(error.error);
         }
       );
   }

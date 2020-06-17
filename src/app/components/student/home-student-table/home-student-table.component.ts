@@ -79,16 +79,8 @@ export class HomeStudentTableComponent implements OnInit {
           tasks.push(subjectsTasks[i].tasksSubject[j]);
         }
     }
-
+    tasks.reverse();
     return tasks;
-  }
-
-  async getTasks() {
-    const idStudent = JSON.parse(localStorage.getItem("currentUser"))._id;
-    this.tasksService.getAllTasksStudent(idStudent).subscribe((data) => {
-      this.tasksData = data;
-    });
-
   }
 
   async ngOnInit() {

@@ -61,7 +61,6 @@ export class ReviewFormComponent  {
     await this.taskFormService
     .getFormsTasks(idProffesor)
     .subscribe( taskForms => {
-      console.log(taskForms);
       this.formTasks = taskForms;
     });
   }
@@ -147,7 +146,6 @@ export class ReviewFormComponent  {
       this.dataDescriptions.push(this.components[i].description);
     }
 
-    console.log(this.dataTittles);
     await this.createTask();
 
     this.router.navigate(['/proffesor/home']);
@@ -158,8 +156,6 @@ export class ReviewFormComponent  {
     const tittles = taskForm.tittles;
     const descriptions = taskForm.descriptions;
 
-    console.log(tittles);
-    console.log(descriptions);
     this.titleSection = tittles[0];
     this.descriptionSection = descriptions[0];
     for(let i = 1; i < tittles.length; i ++) {

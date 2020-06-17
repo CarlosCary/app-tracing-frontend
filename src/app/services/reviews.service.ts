@@ -60,8 +60,6 @@ export class ReviewsService {
   }
   
   updateReview(reviewers, idSubmittedTask) {
-    console.log(reviewers);
-    console.log(idSubmittedTask);
     const url_api = this.API_URL + "/review/proffesors/update";
     return this.http.put(url_api, 
       {

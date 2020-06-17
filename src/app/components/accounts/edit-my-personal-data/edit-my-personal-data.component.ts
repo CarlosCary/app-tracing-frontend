@@ -39,7 +39,6 @@ export class EditMyPersonalDataComponent implements OnInit {
   editMyData() {
     this.authService.updateDataAccount(this.idAccount, this.name, this.email, this.role)
     .subscribe( accountUpdated => {
-      console.log(accountUpdated);
       this.router.navigate(['/proffesor/home']);
     });
     

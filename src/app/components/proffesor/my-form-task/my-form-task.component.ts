@@ -56,12 +56,9 @@ export class MyFormTaskComponent {
       // this.dataDescriptions.push((<HTMLInputElement>document.getElementById("descriptionDetail["+i+"]")).value);
     }
 
-    console.log(this.dataTittles);
-    console.log(this.dataDescriptions);
     await this.formsService
     .createFormTask(formTittle, this.dataTittles, this.dataDescriptions, idProffesor)
     .subscribe( taskForm => {
-      console.log(taskForm);
       this.router.navigate(['/proffesor/forms/task']);
     });
   }

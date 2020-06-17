@@ -16,7 +16,6 @@ export class NotificationsService {
 
   notifyCommittee(director, rapporteur, tutor) {
     const url_api = this.API_URL + "/notifications/notify/committee";
-    console.log('se deberia incrementar');
     return this.http
     .put(
       url_api, 

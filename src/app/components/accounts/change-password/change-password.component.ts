@@ -56,7 +56,6 @@ export class ChangePasswordComponent implements OnInit {
     else {
       this.authService.changePassword(this.idAccount, this.role, this.currentPassword, this.password)
                       .subscribe( updatePassword => {
-                        console.log(updatePassword);
                         this.router.navigate(['/proffesor/home']);
                         this.snackBar.open('Contraseña cambiada', 'Ok',{
                           duration: 3000,

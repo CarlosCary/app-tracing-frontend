@@ -104,7 +104,6 @@ export class EditMyFormTaskComponent implements OnInit {
         this.dataDescriptions
     )
     .subscribe( taskFormUpdated => {
-      console.log(taskFormUpdated);
       this.router.navigate(['/proffesor/forms/task']);
       // this.router.navigate(['/proffesor/forms/task']);
     });
