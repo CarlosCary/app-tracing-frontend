@@ -183,4 +183,9 @@ export class AuthService {
     )
     .pipe(map(data => data));
   }
+
+  deleteAccount(id) {
+    const url_api = this.API_URL + "/account/delete/" + id;
+    return this.http.delete(url_api).pipe(map(data => data));
+  }
 }

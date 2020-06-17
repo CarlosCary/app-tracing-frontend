@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-administrator-home',
@@ -9,11 +10,25 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AdministratorHomeComponent implements OnInit {
   columnsHeaderToDisplay: string[] = ['name', 'email', 'career', 'role', 'options'];
   dataSource;
-  constructor(private auth:AuthService) { }
+  constructor(private auth:AuthService,
+              private router: Router) { }
 
   ngOnInit() {
+    this.loadProffesorAccounts();
+  }
+
+  loadProffesorAccounts() { 
     this.auth.getProffesors().subscribe( proffesors => {
       this.dataSource = proffesors;
+    });
+  }
+
+  deleteAccount(id) {
+    console.log("se llama al metodo");
+    window.location.reload();
+    
+    this.auth.deleteAccount(id).subscribe( account => {
+      this.loadProffesorAccounts();
     });
   }
 
