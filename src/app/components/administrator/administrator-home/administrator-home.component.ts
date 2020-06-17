@@ -32,6 +32,13 @@ export class AdministratorHomeComponent implements OnInit {
     });
   }
 
+  isAdministrator(role) { 
+    
+    if(role == "administrator")
+      return true;
+    
+    return false;
+  }
   getRoleLabel(role) {
     if(role === 'administrator')
       return 'Administrador';

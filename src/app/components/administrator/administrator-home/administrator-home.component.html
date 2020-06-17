@@ -40,7 +40,8 @@
         <td mat-cell *matCellDef="let element">
             <i class="material-icons button-size" matTooltip="Editar cuenta" [routerLink]="['/administrator/edit/account', element._id]">edit</i>
             <i class="material-icons button-size" matTooltip="Eliminar cuenta"
-            matTooltipClass="tooltip-red" (click)="deleteAccount(element._id)">delete</i>
+            matTooltipClass="tooltip-red" (click)="deleteAccount(element._id)"
+            *ngIf="!isAdministrator(element.role)">delete</i>
         </td>
     </ng-container>
     
