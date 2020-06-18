@@ -19,6 +19,7 @@
               <input matInput placeholder="Email" formControlName="email" required>
               <mat-error *ngIf="form.email.hasError('required')">Ingrese un correo electrónico</mat-error>
               <mat-error *ngIf="form.email.hasError('email')">Correo electrónico no válido</mat-error>
+              <mat-error *ngIf="form.email.hasError('incorrect')">{{emailErrorMessage}}</mat-error>
             </mat-form-field>
           
             <mat-form-field class="example-full-width">

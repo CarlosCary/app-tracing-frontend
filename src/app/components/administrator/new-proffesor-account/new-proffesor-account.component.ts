@@ -13,7 +13,8 @@ import { MustMatch } from '../../utils/Validators/must-match';
 export class NewProffesorAccountComponent implements OnInit {
   proffesorAccountForm: FormGroup;
   isFormSubmitted:boolean = false;
-
+  emailErrorMessage: String;
+  
   proffesor: ProffesorInterface = {
     name: "",
     email: "",
@@ -68,7 +69,11 @@ export class NewProffesorAccountComponent implements OnInit {
     .subscribe( proffesor => {
       //Cuenta creada con exito
       this.router.navigate(['/administrator/home']);
-    });
+    },err => {
+      this.proffesorAccountForm.controls['email'].setErrors({'incorrect': true});
+      this.emailErrorMessage = err.error.message;
+    }
+    );
   }
 
   sendForm() {
