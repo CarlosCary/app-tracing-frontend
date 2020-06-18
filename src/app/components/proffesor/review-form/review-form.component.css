@@ -34,12 +34,8 @@
 }
 
 .create-form {
-    float: right;
-    margin-left: 20%; 
-    margin-right: 20%;
-    margin-bottom: 2%;
+    width: 10% !important;
 }
-
 /* div button {
     float: right;
 } */
