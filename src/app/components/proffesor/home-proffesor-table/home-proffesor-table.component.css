@@ -129,3 +129,16 @@ table {
   color: black;
   height: 28px;
 }
+
+.calendar-button ~ .calendar-button {
+  margin-left: 10%;
+}
+
+/*If you will add more options, change this width*/
+.mat-column-options {
+  width: 15% !important;
+}
+
+.no-avaliable {
+  color: red;
+}

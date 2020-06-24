@@ -30,6 +30,7 @@ export class DocumentsAssignedTutorComponent implements OnInit {
   ngOnInit() {
     this.reviewsService.getAssignedReviews(this.idProffesor, 'tutor').subscribe(reviewData => {
       this.documentsData = reviewData;
+      console.log(reviewData);
       this.addToolbar();
       // this.documentsData.reverse();
     })

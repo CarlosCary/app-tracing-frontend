@@ -4,6 +4,7 @@ import { TasksService } from 'src/app/services/tasks.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Router } from '@angular/router';
 import { currentDate } from '../../../helpers/currentDate';
+import { IsDateExpired } from '../../utils/Validators/date-validator';
 
 @Component({
   selector: 'app-home-student-table',
@@ -19,7 +20,7 @@ import { currentDate } from '../../../helpers/currentDate';
 })
 
 export class HomeStudentTableComponent implements OnInit {
-  columnsHeaderToDisplay: string[] = ['name', 'subjectCode', 'semester', 'year'];
+  columnsHeaderToDisplay: string[] = ['name', 'subjectCode', 'semester', 'year', 'options'];
   dataSource:any = []
   tasksData:any = [];
   subjectsData:any[] = [];
@@ -102,5 +103,11 @@ export class HomeStudentTableComponent implements OnInit {
 
   public filter() {
     this.getSubjects(this.semesterSelected, this.yearSelected);
+  }
+
+  isTaskAvaliable(date) {
+    if(IsDateExpired(date))
+      return false;
+    return true;
   }
 }

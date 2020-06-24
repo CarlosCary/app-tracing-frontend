@@ -1,0 +1,52 @@
+<app-toolbar></app-toolbar>
+
+<br>
+<br>
+<br>
+<br>
+
+<h1 class="center-text">Documentos de la materia</h1>
+<br>
+
+<div class="add-document">
+    <a class="material-icons add-button" [routerLink]="['/subject/file/new', idSubject]"
+                                        
+        matTooltip="Agregar documentos a la materia">
+        add_box
+    </a>
+</div>
+
+
+<table mat-table [dataSource]="filesData" multiTemplateDataRows class="mat-elevation-z8 table1">
+    
+    <ng-container matColumnDef="fileName">
+        <th mat-header-cell *matHeaderCellDef> Nombre del documento </th>
+        <td mat-cell *matCellDef="let file"> 
+            {{file.fileName}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="download">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let file">
+            <a href="{{APILink}}/{{file.path}}" target="_blank">Descargar documento</a>
+        </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let file">
+            <i class="material-icons button-size" matTooltip="Eliminar documento"
+            matTooltipClass="tooltip-red" (click)="deleteFile(file._id)"
+            *ngIf="isProffesor">
+                delete
+            </i>
+        </td>
+    </ng-container>
+
+    
+    <tr mat-header-row *matHeaderRowDef="columnsHeaderToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsHeaderToDisplay;"
+      class="example-element-row">
+    </tr>
+</table>

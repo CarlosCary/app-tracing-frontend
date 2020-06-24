@@ -1,0 +1,33 @@
+<app-toolbar></app-toolbar>
+
+<br>
+<br>
+<br>
+<br>
+
+<h1 class="center-text">Nuevo documento</h1>
+
+<div class="margin-left">
+    <form class="example-form" [formGroup]="filesForm" (ngSubmit)="addDocument()">
+        <mat-label>
+            <strong> Agregar documento a la materia </strong>
+        </mat-label>
+        <br>
+        <br>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nombre del archivo" formControlName="fileName" required> 
+            <mat-error *ngIf="filesF.fileName.hasError('required')">Ingrese el nombre del archivo</mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <input formControlName="file" type="file" id="file" required> 
+        <br>
+        <br>
+
+        <mat-error *ngIf="filesF.file.hasError('required') && isButtonSendTouched">No selecciono un archivo</mat-error> 
+        <mat-error *ngIf="filesF.file.hasError('extension')">El formato de archivo debe ser Word o PDF</mat-error> 
+        <br>
+        <button mat-raised-button color="primary" (click)="touchButton()"  type="submit">Agregar documento</button>
+    </form>
+    
+</div>

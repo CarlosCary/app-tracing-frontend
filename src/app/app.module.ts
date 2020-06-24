@@ -48,7 +48,9 @@ import { ChangePasswordComponent } from './components/accounts/change-password/c
 import { AddReviewerComponent } from './components/utils/add-reviewer/add-reviewer.component';
 import { DocumentsAssignedTutorComponent } from './components/proffesor/documents-assigned-tutor/documents-assigned-tutor.component';
 import { DocumentsAssignedRapporteurComponent } from './components/proffesor/documents-assigned-rapporteur/documents-assigned-rapporteur.component';
-import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
+import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators";
+import { ListSubjectFilesComponent } from './components/utils/list-subject-files/list-subject-files.component';
+import { NewSubjectFileComponent } from './components/utils/new-subject-file/new-subject-file.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +93,9 @@ import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
     ChangePasswordComponent,
     AddReviewerComponent,
     DocumentsAssignedTutorComponent,
-    DocumentsAssignedRapporteurComponent
+    DocumentsAssignedRapporteurComponent,
+    ListSubjectFilesComponent,
+    NewSubjectFileComponent
   ],
   imports: [
     BrowserModule,

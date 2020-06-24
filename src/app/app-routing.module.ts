@@ -33,6 +33,8 @@ import { EditMyPersonalDataComponent } from './components/accounts/edit-my-perso
 import { ChangePasswordComponent } from './components/accounts/change-password/change-password.component';
 import { DocumentsAssignedTutorComponent } from './components/proffesor/documents-assigned-tutor/documents-assigned-tutor.component';
 import { DocumentsAssignedRapporteurComponent } from './components/proffesor/documents-assigned-rapporteur/documents-assigned-rapporteur.component';
+import { ListSubjectFilesComponent } from './components/utils/list-subject-files/list-subject-files.component';
+import { NewSubjectFileComponent } from './components/utils/new-subject-file/new-subject-file.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
@@ -103,6 +105,10 @@ const routes: Routes = [
     data: { roles: ['proffesor', 'director']} },
   { path: 'proffesor/documents/review/rapporteur', component: DocumentsAssignedRapporteurComponent, canActivate: [AuthGuard], 
     data: { roles: ['proffesor', 'director']} },
+  { path: 'subject/files/:idSubject', component: ListSubjectFilesComponent, canActivate: [AuthGuard], 
+  data: { roles: ['proffesor', 'student']} },
+  { path: 'subject/file/new/:idSubject', component: NewSubjectFileComponent, canActivate: [AuthGuard], 
+    data: { roles: ['proffesor']} }
 ];
 
 @NgModule({

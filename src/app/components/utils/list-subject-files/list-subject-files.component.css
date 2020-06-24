@@ -1,0 +1,28 @@
+table.table1 {
+    width:70%; 
+    margin-left:15%; 
+    margin-right:15%;
+    
+  overflow: hidden;
+}
+
+.center-text {
+    text-align:center;
+    box-align: center;
+}
+
+a ~ a {
+  margin-left: 10%;
+}
+
+a.add-button {
+  float: right;   
+  margin-left:15%; 
+  margin-right:15%;
+  margin-bottom:0.5%;
+  font-size: 38px;
+}
+
+.button-size {
+  font-size: 34px;
+}

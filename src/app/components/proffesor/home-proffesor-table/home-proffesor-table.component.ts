@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { TasksService } from 'src/app/services/tasks.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { currentDate } from '../../../helpers/currentDate';
+import { IsDateExpired } from '../../utils/Validators/date-validator';
 
 export interface Subject {
   id: number;
@@ -109,5 +110,11 @@ export class HomeProffesorTableComponent implements OnInit {
 
   filter() {
     this.getSubjects(this.semesterSelected, this.yearSelected);
+  }
+
+  isTaskAvaliable(date) {
+    if(IsDateExpired(date))
+      return false;
+    return true;
   }
 }

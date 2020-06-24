@@ -77,7 +77,6 @@ export class TaskFormComponent implements OnInit {
     let todayDate = new Date();
     todayDate.setHours(0,0,0,0);
     
-    
     if(deadLineDate < todayDate)
       this.isSubmitAvaliable = false;
     

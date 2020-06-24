@@ -32,6 +32,7 @@
         matTooltip="Nueva materia">
         add_box
     </a>
+
     
 </div>
 
@@ -63,17 +64,18 @@
         <td mat-cell *matCellDef="let subject"> {{subject.year}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="options">
+    <ng-container matColumnDef="options" class="prueba">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let subject">
          
-            <!-- <button mat-button (click)="newTask(subject._id)">
-                <mat-icon matTooltip="Nueva tarea" svgIcon="thumbs-up" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
-            </button> -->
-
             <a class="material-icons calendar-button" [routerLink]="['/proffesor/task', subject._id]"
             matTooltip="Nueva tarea">
                 post_add
+            </a>
+
+            <a class="material-icons calendar-button"  [routerLink]="['/subject/files', subject._id]"
+            matTooltip="Lista de documentos">
+                folder_shared
             </a>
 
         </td>
@@ -89,9 +91,15 @@
                         <a [routerLink]="['/proffesor/students/tasks',task._id, task.name]">{{task.name}}</a>
                     </div>
 
-                    <div class="example-element-description">
-                        Fecha límite: {{task.deadline}}
+                    <div class="example-element-description" *ngIf='isTaskAvaliable(task.deadline) else noAvaliable'>
+                        <strong>Fecha límite: {{task.deadline}}</strong>
                     </div>
+                    
+                    <ng-template #noAvaliable>
+                        <div class="no-avaliable example-element-description">
+                            <strong>Fecha límite: {{task.deadline}}</strong>
+                        </div>    
+                    </ng-template>
                     
                     <a class="material-icons calendar-button" [routerLink]="['/proffesor/task/edit/', task._id]"
                         matTooltip="Cambiar fecha">

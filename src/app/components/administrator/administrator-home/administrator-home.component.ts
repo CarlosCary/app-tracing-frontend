@@ -24,7 +24,6 @@ export class AdministratorHomeComponent implements OnInit {
   }
 
   deleteAccount(id) {
-    console.log("se llama al metodo");
     window.location.reload();
     
     this.auth.deleteAccount(id).subscribe( account => {

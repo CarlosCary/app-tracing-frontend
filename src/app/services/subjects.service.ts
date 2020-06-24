@@ -73,4 +73,34 @@ export class SubjectsService {
     const url_api = this.API_URL + "/subjects/enrolled/" + idSubject;
     return this.http.get(url_api).pipe(map(data => data));
   }
+
+  addDocumentSubject(idSubject, fileName, fileDocument:Array<File>) {
+    const url_api = this.API_URL + "/subjects/document/new";
+    
+    let formData = new FormData();
+
+    formData.append("idSubject", idSubject);
+    formData.append("fileName", fileName);
+
+    for(let i = 0; i < fileDocument.length; i++) {
+      formData.append("fileDocument", fileDocument[i]);
+    }
+
+    return this.http
+    .post(
+      url_api,  
+      formData
+    )
+    .pipe(map(data => data));
+  }
+
+  getFilesSubject(idSubject) {
+    const url_api = this.API_URL + "/subjects/files/" + idSubject;
+    return this.http.get(url_api).pipe(map(data => data));
+  }
+
+  deleteFile(id) {
+    const url_api = this.API_URL + "/subjects/file/delete/" + id;
+    return this.http.delete(url_api).pipe(map(data => data));
+  }
 }

@@ -126,3 +126,11 @@ table {
   }
 
   
+
+  a.documents {
+    color: black;
+  }
+
+  .no-avaliable {
+    color: red;
+  }
