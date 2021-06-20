@@ -21,9 +21,11 @@ export class SubjectFormComponent implements OnInit {
   private subject: SubjectInterface = {
     name: "",
     semester: "",
-    year: "2020",
+    year: "",
     idProffesor: ""
   }
+
+
   constructor(private subjectsService: SubjectsService, 
               private router: Router,
               private formBuilder: FormBuilder,) { }
@@ -56,7 +58,9 @@ export class SubjectFormComponent implements OnInit {
     
     const user = JSON.parse(localStorage.getItem("currentUser"));
     this.subject.idProffesor = user._id;
-    
+    let currentYear = new Date().getFullYear();
+
+    this.subject.year = currentYear.toString();  
     this.subjectsService
     .createSubject(this.subjectSelected, this.semesterSelected, this.subject.year, this.subject.idProffesor)
     .subscribe( subject => {

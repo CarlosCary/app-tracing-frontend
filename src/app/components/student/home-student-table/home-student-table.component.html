@@ -39,7 +39,7 @@
     
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Nombre </th>
-        <td mat-cell *matCellDef="let element"> <a href="google.com.bo">{{element.name}} </a></td>
+        <td mat-cell *matCellDef="let element"> <strong> {{element.name}} </strong> </td>
     </ng-container>
 
     <ng-container matColumnDef="subjectCode">
@@ -58,7 +58,7 @@
     </ng-container>
     
     <ng-container matColumnDef="options">
-        <th mat-header-cell *matHeaderCellDef> Año </th>
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let element"> 
             <a class="material-icons documents"  [routerLink]="['/subject/files', element._id]"
             matTooltip="Lista de documentos">

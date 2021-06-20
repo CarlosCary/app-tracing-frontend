@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material'
 
 import { HttpClientModule} from '@angular/common/http';
 import { HomeStudentComponent } from './components/student/home-student/home-student.component';
@@ -107,6 +108,7 @@ import { NewSubjectFileComponent } from './components/utils/new-subject-file/new
     ReactiveFormsModule,
     HttpClientModule,
     RxReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [
     SubjectFormComponent,
