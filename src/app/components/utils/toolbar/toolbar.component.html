@@ -59,6 +59,9 @@
                 <a *ngIf="!isLoggedIn" mat-button routerLink="/register" routerLinkActive="mat-raised-button">Crear cuenta</a>
                 <button *ngIf="isLoggedIn" mat-raised-button [matMenuTriggerFor]="menu">{{role}}: {{userName}}<mat-icon>keyboard_arrow_down</mat-icon></button>
                 <mat-menu #menu="matMenu">
+                    <button mat-menu-item [routerLink]="['/proffesor/home']">
+                        Mis materias
+                    </button>
                     <button mat-menu-item [routerLink]="['/edit/account', idAccount] ">
                         Editar mis datos personales
                     </button>

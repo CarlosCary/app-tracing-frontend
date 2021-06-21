@@ -1,8 +1,4 @@
-<br>
-<br>
-<br>
-<br>
-<div>
+<div class="container-dimensions">
     <h1 class="center-text">Materias</h1>
     <div class="search-options"> 
         <mat-form-field class="option-size">
@@ -98,4 +94,7 @@
       class="example-element-row">
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+
 </table> 
+
+<div *ngIf="dataSource.length == 0" class="empty-state"> Aún no se inscribío en ninguna materia</div>

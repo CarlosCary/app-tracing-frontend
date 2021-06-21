@@ -1,5 +1,9 @@
+.container-dimensions {
+  padding-top: 8vh;
+}
+
 .center-text {
-    text-align:center;
+    text-align: center;
     box-align: center;
 }
 
@@ -7,8 +11,7 @@ table.table1 {
     width:70%; 
     margin-left:15%; 
     margin-right:15%;
-    
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .mat-column-name{

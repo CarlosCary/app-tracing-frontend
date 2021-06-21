@@ -16,7 +16,7 @@ export class ListFeedbackDocumentReviewerComponent implements OnInit {
   columnsHeaderToDisplay: string[] = ['taskName', 'studentName', 'options'];
   dataSource;
   idProffesor;
-  documentsData;
+  documentsData: any = [];
 
   constructor(private reviewsService: ReviewsService,
               private notificationsService: NotificationsService,

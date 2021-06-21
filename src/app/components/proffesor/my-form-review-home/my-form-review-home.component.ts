@@ -9,7 +9,7 @@ import { FormsReviewsService } from 'src/app/services/forms-reviews.service';
 
 export class MyFormReviewHomeComponent implements OnInit {
   columnsHeaderToDisplay: string[] = ['name', 'options'];
-  dataSource;
+  dataSource:any = [];
   idProffesor;
   constructor(private reviewFormService: FormsReviewsService) { 
     this.idProffesor = (JSON.parse(localStorage.getItem("currentUser")))._id;

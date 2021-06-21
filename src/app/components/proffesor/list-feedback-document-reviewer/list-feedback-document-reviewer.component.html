@@ -5,7 +5,7 @@
 <br>
 <br>
 
-<h1 class="center-text">Documentos asignados</h1>
+<h1 class="center-text">Todos los documentos asignados</h1>
 <br>
 
 <table mat-table [dataSource]="documentsData" multiTemplateDataRows class="mat-elevation-z8 table1">
@@ -47,3 +47,5 @@
       class="example-element-row">
     </tr>
 </table>
+
+<div *ngIf="documentsData.length == 0" class="empty-state"> Aún no se le asignó ningun documento</div>

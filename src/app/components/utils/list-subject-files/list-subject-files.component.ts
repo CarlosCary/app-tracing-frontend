@@ -11,9 +11,8 @@ import { environment } from 'src/environments/environment';
 export class ListSubjectFilesComponent implements OnInit {
   columnsHeaderToDisplay: string[] = ['fileName', 'download', 'options'];
   APILink = environment.APIEndpoint;
-  filesData;
+  filesData:any = [];
   accountRole;
-  documentsData;
   idSubject;
   isProffesor:boolean = true;
 

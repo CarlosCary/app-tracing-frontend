@@ -34,10 +34,11 @@ export interface Subject {
 
 export class HomeProffesorTableComponent implements OnInit {
   displayedColumns: string[] = ['name', 'enrolled','semester', 'code', 'year', 'options'];
-  subjectsEnrolled:any[];
-  subjectsData:any[];
+  subjectsEnrolled:any = [];
+  subjectsData:any = [];
   tasksData;
-  
+  isEmpty:boolean = false;
+
   semesterSelected = currentDate.getCurrentSemester();
   yearSelected = currentDate.getCurrentYear();
 
@@ -68,13 +69,15 @@ export class HomeProffesorTableComponent implements OnInit {
     
     this.tasksService.getAllTasksProffesor(idProffesor).subscribe((data:any) => {
       this.tasksData = data.reverse();
-  
+      
     });
   }
 
   async ngOnInit() {
     this.getSubjects(this.semesterSelected, this.yearSelected);
     await this.getTasks();
+    
+
   }
 
   getIdSubject() {
@@ -102,7 +105,8 @@ export class HomeProffesorTableComponent implements OnInit {
     
     this.subjectsService.getProffesorSubjects2(idProffesor, semester, year).subscribe((data:any) => {
       this.subjectsData = data;
-
+      if(!this.subjectsData.length)
+        this.isEmpty = true;
       // this.dataSource.reverse();
     });
     

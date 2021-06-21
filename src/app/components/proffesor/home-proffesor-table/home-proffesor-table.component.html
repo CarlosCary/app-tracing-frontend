@@ -119,5 +119,8 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let element; columns: displayedColumns;"
     class="example-element-row"></tr>
+    
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
+
+<div *ngIf="subjectsData.length == 0" class="empty-state"> Aún no agregó ninguna materia</div>

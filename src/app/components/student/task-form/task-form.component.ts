@@ -27,7 +27,7 @@ export class TaskFormComponent implements OnInit {
   columnsHeaderToDisplay: string[] = ['tittle', 'description'];
   tittlesForm;
   descriptionsForm;
-  dataSource = [];
+  dataSource:any = [];
   taskName;
 
   

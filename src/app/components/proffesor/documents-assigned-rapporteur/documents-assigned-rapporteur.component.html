@@ -1,7 +1,5 @@
-<!-- <app-toolbar></app-toolbar> -->
-<ng-template #toolbar>
+<app-toolbar></app-toolbar>
 
-</ng-template>
 <br>
 <br>
 <br>
@@ -47,3 +45,5 @@
       class="example-element-row">
     </tr>
 </table>
+
+<div *ngIf="documentsData.length == 0" class="empty-state"> Aún no se le asignó ningun documento como relator</div>

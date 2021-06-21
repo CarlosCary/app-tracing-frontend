@@ -58,7 +58,7 @@
         <input formControlName="file" type="file" id="file" required> 
         <br>
         <br>
-        <button mat-raised-button color="primary" (click)="touchButton()"  type="submit">Subir documento</button>
+        <button mat-raised-button color="primary" (click)="touchButton()"  type="submit">Subir Documento</button>
     </form>
     <mat-error *ngIf="filesF.file.hasError('required') && isButtonSendTouched">No selecciono un archivo</mat-error> 
     <mat-error *ngIf="filesF.file.hasError('extension')">El formato de archivo debe ser PDF</mat-error> 
@@ -102,7 +102,7 @@
     </table>
 
 </div>
-
+<div *ngIf="documentsSubmittedData.length == 0" class="empty-state"> Aún no hizó ninguna entrega</div>
 <br>
 <br>
 <br>

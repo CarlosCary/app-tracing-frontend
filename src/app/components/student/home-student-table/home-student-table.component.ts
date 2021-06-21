@@ -21,7 +21,7 @@ import { IsDateExpired } from '../../utils/Validators/date-validator';
 
 export class HomeStudentTableComponent implements OnInit {
   columnsHeaderToDisplay: string[] = ['name', 'subjectCode', 'semester', 'year', 'options'];
-  dataSource:any = []
+  dataSource:any = [];
   tasksData:any = [];
   subjectsData:any[] = [];
   subjectsInfo: Array<any> = new Array<any>();

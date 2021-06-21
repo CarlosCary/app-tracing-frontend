@@ -16,7 +16,7 @@ export class DocumentsAssignedTutorComponent implements OnInit {
   columnsHeaderToDisplay: string[] = ['taskName', 'studentName', 'options'];
   dataSource;
   idProffesor;
-  documentsData;
+  documentsData:any = [];
 
   constructor(private reviewsService: ReviewsService,
               private notificationsService: NotificationsService,
@@ -30,7 +30,6 @@ export class DocumentsAssignedTutorComponent implements OnInit {
   ngOnInit() {
     this.reviewsService.getAssignedReviews(this.idProffesor, 'tutor').subscribe(reviewData => {
       this.documentsData = reviewData;
-      console.log(reviewData);
       this.addToolbar();
       // this.documentsData.reverse();
     })

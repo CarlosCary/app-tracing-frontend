@@ -15,7 +15,7 @@ export class DocumentsAssignedRapporteurComponent {
   columnsHeaderToDisplay: string[] = ['taskName', 'studentName', 'options'];
   dataSource;
   idProffesor;
-  documentsData;
+  documentsData:any = [];
 
   constructor(private reviewsService: ReviewsService,
               private notificationsService: NotificationsService,
@@ -26,7 +26,6 @@ export class DocumentsAssignedRapporteurComponent {
     
     this.reviewsService.getAssignedReviews(this.idProffesor, 'rapporteur').subscribe(reviewData => {
       this.documentsData = reviewData; 
-      this.addToolbar();
       this.documentsData.reverse();
     });
     
@@ -34,10 +33,5 @@ export class DocumentsAssignedRapporteurComponent {
   }
 
   ngOnInit() {
-  }
-
-  addToolbar() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.toolbarComponent);
-    const component = <ToolbarComponent>this.container.createComponent(componentFactory).instance;
   }
 }
