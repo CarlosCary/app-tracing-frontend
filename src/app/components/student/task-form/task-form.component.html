@@ -89,7 +89,8 @@
             <th mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let reviewForm" class="button-edit"> 
                 <a *ngIf='reviewForm.idReviewAssigned' class="material-icons button-size" 
-                [routerLink]="['/proffesors/review', reviewForm.idReviewAssigned, taskName]">
+                [routerLink]="['/proffesors/review', reviewForm.idReviewAssigned, taskName]"
+                matTooltip="Ver revisiones">
                     remove_red_eye
                 </a>
             </td>

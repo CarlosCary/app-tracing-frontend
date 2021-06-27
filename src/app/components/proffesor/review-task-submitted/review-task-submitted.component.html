@@ -5,7 +5,6 @@
 <br>
 
 <h1 class="center-text">{{taskName}}</h1>
-
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table1">
     
     <ng-container matColumnDef="tittle" >
@@ -81,12 +80,12 @@
     <br>
     <mat-form-field appearance="outline" class="text-box left-space">
         <mat-label>Descripción de la revisión</mat-label>
-        <textarea id="review-description" matInput maxlength="300" rows="5"></textarea>    
+        <textarea id="review-description" matInput maxlength="500" rows="5"></textarea>    
     </mat-form-field>
 
     <br>
     <div>
-        <button class="left-space" mat-raised-button color="primary" (click)="sendReviewTask()">Corregir tarea</button>
+        <button class="left-space" mat-raised-button color="primary" (click)="sendReviewTask()">Agregar revisión</button>
     </div>
 
 </div>

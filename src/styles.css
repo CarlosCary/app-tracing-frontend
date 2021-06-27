@@ -21,3 +21,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding-top: 5vh;
   font-weight: bold;
 }
+
+mat-cell {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}

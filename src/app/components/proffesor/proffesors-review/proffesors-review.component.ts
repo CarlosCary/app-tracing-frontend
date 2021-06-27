@@ -13,7 +13,7 @@ export class ProffesorsReviewComponent implements OnInit {
   idReview;
   reviewData;
   taskName; 
-  reviewsProffesorData = [];
+  reviewsProffesorData:any = [];
   
   APILink = environment.APIEndpoint;
 
@@ -51,6 +51,7 @@ export class ProffesorsReviewComponent implements OnInit {
 
     this.reviewService.getAllAnswersReviewProffesors(this.idReview).subscribe((answerReviewProffesors:any) => {
       this.reviewsProffesorData = answerReviewProffesors;
+      
     });
   }
 

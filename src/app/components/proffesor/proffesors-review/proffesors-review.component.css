@@ -12,5 +12,10 @@ table.table1 {
 }
 
 .reviews {
-  margin-bottom: 5%;
+  padding-bottom: 10vh;
 }
+/* 
+.mat-cell {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+} */

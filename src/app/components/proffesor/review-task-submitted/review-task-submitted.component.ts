@@ -163,6 +163,7 @@ export class ReviewTaskSubmittedComponent implements OnInit {
   sendReviewTask() {
     this.reviewDesciption = (<HTMLInputElement>document.getElementById("review-description")).value;
     
+
     this.tasksService
     .taskChecked(this.idTaskSubmitted, this.actualState, this.reviewDesciption)
     .subscribe( taskChecked => {

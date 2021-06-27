@@ -66,7 +66,7 @@ export class NewFeedbackDocumentReviewerComponent implements OnInit {
     for(let i = 0; i < review.reviewDataTittles.length; i ++) {
       this.addSection();
       this.components[i].tittle = review.reviewDataTittles[i];
-      this.components[i].descriptionLabel = "Justifiqué su respuesta";
+      this.components[i].descriptionLabel = "Detalle su respuesta";
       this.components[i].tittleLabel = "Sección a revisar";
       this.components[i].hintTittleLabel = "";
       this.components[i].isTittleDisabled = true;

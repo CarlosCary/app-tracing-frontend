@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { environment } from 'src/environments/environment';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-task-form',
@@ -43,7 +44,8 @@ export class TaskFormComponent implements OnInit {
   constructor(private tasksService: TasksService,
               private router: Router,
               private formBuilder: FormBuilder,
-              private route: ActivatedRoute) { 
+              private route: ActivatedRoute,
+              private _snackBar: MatSnackBar) { 
     this.filesForm = this.formBuilder.group({
       file: ['', Validators.required]
     });
@@ -120,7 +122,6 @@ export class TaskFormComponent implements OnInit {
 
   async sendTask() {
     if(this.filesForm.invalid) {
-      
       return;
     }
     
@@ -133,8 +134,12 @@ export class TaskFormComponent implements OnInit {
     await this.tasksService.sendTask( this.idTask, idStudent, this.idSubject, fileUpload ).
     subscribe(task => {
       this.router.navigate(['/student/home']);
-      return task;
+      this.openSnackBar("¡Tarea entregada!", "Ok");
     });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
   isDataSourceReady() {
