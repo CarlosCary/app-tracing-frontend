@@ -31,6 +31,7 @@ export class ReviewersFormComponent implements OnInit {
   otherReviewers = [];
 
   idSubmittedTask;
+  idStudent;
   proffesorsList;
   proffesorsReviewersSelected = [];
 
@@ -41,9 +42,9 @@ export class ReviewersFormComponent implements OnInit {
   components = [];
   idProffesor;
   private count:number = 0;
-  get director() { return this.committeForm.get('director').value };
-  get rapporteur() { return this.committeForm.get('rapporteur').value };
-  get tutor() { return this.committeForm.get('tutor').value };
+  // get director() { return this.committeForm.get('director').value };
+  // get rapporteur() { return this.committeForm.get('rapporteur').value };
+  // get tutor() { return this.committeForm.get('tutor').value };
   
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -51,26 +52,25 @@ export class ReviewersFormComponent implements OnInit {
               private componentFactoryResolver: ComponentFactoryResolver,
               private reviewsService: ReviewsService,
               private proffesorService: ProffesorService,
-              private formBuilder: FormBuilder,
+              // private formBuilder: FormBuilder,
               private notificationsService: NotificationsService ) { 
     this.idSubmittedTask = this.route.snapshot.params.idSubmittedTask;
+    this.idStudent = this.route.snapshot.params.idStudent;
     this.idProffesor = (JSON.parse(localStorage.getItem("currentUser")))._id;
     
-    this.committeForm = this.formBuilder.group({
-      director: ['', Validators.required],
-      rapporteur: ['', Validators.required],
-      tutor: ['', Validators.required]
-    });
+    // this.committeForm = this.formBuilder.group({
+    //   director: ['', Validators.required],
+    //   rapporteur: ['', Validators.required],
+    //   tutor: ['', Validators.required]
+    // });
   }
 
   async ngOnInit() {
-    
-    
-    await this.proffesorService.getProffesorsAvaliableCommitte(this.idProffesor).subscribe( (proffesorsList) => {
-      this.proffesorsList = proffesorsList;
-      this.directors = this.proffesorsList.director;
-      this.proffesors = this.proffesorsList.proffesors;
-    })
+    // await this.proffesorService.getProffesorsAvaliableCommitte(this.idProffesor).subscribe( (proffesorsList) => {
+    //   this.proffesorsList = proffesorsList;
+    //   this.directors = this.proffesorsList.director;
+    //   this.proffesors = this.proffesorsList.proffesors;
+    // })
 
     
     await this.formsReviewsService
@@ -79,17 +79,16 @@ export class ReviewersFormComponent implements OnInit {
       this.reviewForms = reviewForms;
     });
 
-
   }
 
   async saveFormReview() {
-    if (this.committeForm.invalid) {
-      this.committeForm.markAllAsTouched();
-      return;
-    }
-    let proffesorsSelected = [{idProffesor: this.director, role: 'director'},
-                              {idProffesor: this.rapporteur, role: 'rapporteur'},
-                              {idProffesor: this.tutor, role: 'tutor'}];
+    // if (this.committeForm.invalid) {
+    //   this.committeForm.markAllAsTouched();
+    //   return;
+    // }
+    // let proffesorsSelected = [{idProffesor: this.director, role: 'director'},
+    //                           {idProffesor: this.rapporteur, role: 'rapporteur'},
+    //                           {idProffesor: this.tutor, role: 'tutor'}];
     
 
     let dataTittles = [];
@@ -106,19 +105,28 @@ export class ReviewersFormComponent implements OnInit {
       dataDescriptions.push(this.components[i].description);
     }
     
-    await this.notificationsService.notifyCommittee(this.director, this.rapporteur, this.tutor).subscribe(notifications => {
+    await this.notificationsService.notifyCommittee(this.idStudent).subscribe(notifications => {
     });
 
     await this.reviewsService.createReview ( 
       dataTittles,
       dataDescriptions,
-      proffesorsSelected,
+      this.idStudent,
       this.idProffesor,
       this.idSubmittedTask
       ).
       subscribe(review => {
         this.router.navigate(['/proffesor/home']);
     });
+
+    // await this.reviewsService.assignReviewers (
+    //   proffesorsSelected,
+    //   this.idProffesor,
+    //   this.idSubmittedTask
+    //   ).
+    //   subscribe(review => {
+    //     this.router.navigate(['/proffesor/home']);
+    // });
   }
 
   async selectForm(selectedFormId) {
@@ -145,15 +153,14 @@ export class ReviewersFormComponent implements OnInit {
     this.components.push(component);
   }
 
-  addReviewer() {
-    if(this.otherReviewers.length > 2)
-      return;
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.addReviewerComponent);
-    const extraReviewer = <AddReviewerComponent>this.reviewerContainer.createComponent(componentFactory).instance;
-    extraReviewer.proffesors = this.proffesors;
-    this.otherReviewers.push(extraReviewer);
-    
-  }
+  // addReviewer() {
+  //   if(this.otherReviewers.length > 2)
+  //     return;
+  //   const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.addReviewerComponent);
+  //   const extraReviewer = <AddReviewerComponent>this.reviewerContainer.createComponent(componentFactory).instance;
+  //   extraReviewer.proffesors = this.proffesors;
+  //   this.otherReviewers.push(extraReviewer);
+  // }
 
   chargeForm(taskForm) {
     this.clearAllForm();

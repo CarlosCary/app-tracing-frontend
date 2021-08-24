@@ -24,4 +24,9 @@ export class ProffesorService {
     const url_api = this.API_URL + "/proffesor/committe/" + idAccount + "/" + idTaskSubmitted;
     return this.http.get(url_api).pipe(map(data => data));
   }
+
+  getReviewersAssigned(idProffesor, idStudent) {
+    const url_api = this.API_URL + "/review/reviewers/" + idStudent + "/" + idProffesor;
+    return this.http.get(url_api).pipe(map(data => data));
+  }
 }

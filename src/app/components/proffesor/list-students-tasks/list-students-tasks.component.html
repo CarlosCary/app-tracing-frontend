@@ -17,7 +17,7 @@
             <th mat-header-cell *matHeaderCellDef> Estudiante </th>
             <td mat-cell *matCellDef="let studentTask"> 
                 <div *ngIf="isSubmitted(studentTask.taskState) else noSubmitted">
-                    <a [routerLink]="['/proffesor/task/submitted', studentTask.idTask, studentTask.idTaskSubmitted,studentTask.idStudent]"> {{studentTask.studentName}} </a> 
+                    <a [routerLink]="['/proffesor/task/submitted', studentTask.idTask, studentTask.idTaskSubmitted, studentTask.idStudent]"> {{studentTask.studentName}} </a> 
                 </div>
                 <ng-template #noSubmitted>
                     <p>{{studentTask.studentName}}</p>
@@ -39,11 +39,19 @@
                     <!-- <a class="material-icons" title="Asignar aula" [routerLink]="['/proffesors/new/assign/classroom/', studentTask.idTaskSubmitted]">
                         meeting_room
                     </a> -->
-                    <a [routerLink]="['/proffesor/reviewers', studentTask.idTaskSubmitted]" 
+
+                    <!-- Asignar tribunal para cada tarea-->
+                    <!-- <a [routerLink]="['/proffesor/reviewers', studentTask.idTaskSubmitted]" 
                         *ngIf="!studentTask.areReviewersAssigned else editReviewers" 
-                        class="material-icons margin-left" matTooltip="Asignar tribunal">
+                        class="material-icons" matTooltip="Asignar tribunal">
                         person_add
-                    </a>
+                    </a> -->
+
+                    <a [routerLink]="['/proffesor/task/submitted', studentTask.idTask, studentTask.idTaskSubmitted,studentTask.idStudent]"
+                        class="material-icons margin-left" matTooltip="Ver detalles">
+                        description
+                    </a>  
+                    
                     <ng-template #editReviewers>
                             <!-- proffesor/reviewers/edit/:idSubmittedTask/:idTask/:idStudent -->
                         <a [routerLink]="['/proffesor/reviewers/edit', studentTask.idTaskSubmitted, studentTask.idTask, studentTask.idStudent]" 

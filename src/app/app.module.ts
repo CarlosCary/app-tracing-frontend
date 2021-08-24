@@ -52,6 +52,8 @@ import { DocumentsAssignedRapporteurComponent } from './components/proffesor/doc
 import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators";
 import { ListSubjectFilesComponent } from './components/utils/list-subject-files/list-subject-files.component';
 import { NewSubjectFileComponent } from './components/utils/new-subject-file/new-subject-file.component';
+import { AssignReviewersComponent } from './components/proffesor/assign-reviewers/assign-reviewers.component';
+import { EditReviewersComponent } from './components/proffesor/edit-reviewers/edit-reviewers.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,9 @@ import { NewSubjectFileComponent } from './components/utils/new-subject-file/new
     DocumentsAssignedTutorComponent,
     DocumentsAssignedRapporteurComponent,
     ListSubjectFilesComponent,
-    NewSubjectFileComponent
+    NewSubjectFileComponent,
+    AssignReviewersComponent,
+    EditReviewersComponent
   ],
   imports: [
     BrowserModule,

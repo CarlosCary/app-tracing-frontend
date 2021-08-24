@@ -1,0 +1,45 @@
+<app-toolbar></app-toolbar>
+
+<br>
+<br>
+<br>
+<br>
+
+<h2 class="left-space">Seleccione a los revisores: </h2>
+<form class="example-form" [formGroup]="committeForm" (ngSubmit)="assignReviewers()">
+    <div class = "left-space label-selector selector-space">
+        <h4>Director:</h4>
+        <mat-form-field>
+            <mat-label>Seleccione revisor</mat-label>
+            <mat-select formControlName="director">
+                <mat-option *ngFor="let director of directors" [value]="director._id">
+                    {{director.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="committeFromControls.director.hasError('required')">Debe seleccionar un director</mat-error>
+        </mat-form-field>
+        
+        <h4>Relator:</h4>
+        <mat-form-field>
+            <mat-label>Seleccione revisor</mat-label>
+            <mat-select formControlName="rapporteur">
+                <mat-option *ngFor="let proffesor of proffesors" [value]="proffesor._id">
+                    {{proffesor.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="committeFromControls.rapporteur.hasError('required')">Debe seleccionar un relator</mat-error>
+        </mat-form-field>
+        
+        <h4>Tutor:</h4>
+        <mat-form-field>
+            <mat-label>Seleccione revisor</mat-label>
+            <mat-select formControlName="tutor">
+                <mat-option *ngFor="let proffesor of proffesors" [value]="proffesor._id">
+                    {{proffesor.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="committeFromControls.tutor.hasError('required')">Debe seleccionar un tutor</mat-error>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" class="btn-block left-space">Asignar revisores</button>
+</form>

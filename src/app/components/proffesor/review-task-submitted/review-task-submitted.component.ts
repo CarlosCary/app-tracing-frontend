@@ -39,12 +39,14 @@ export class ReviewTaskSubmittedComponent implements OnInit {
   reviewDesciption;
 
   isNotReviewed;
+  
   idSubject;
   authorName;
   dateSend;
   dateModify;
 
-  areReviewersAssigned:boolean;
+  areFormAssigned:boolean;
+  areReviewers:boolean;
 
 
   constructor(private route: ActivatedRoute,
@@ -71,13 +73,7 @@ export class ReviewTaskSubmittedComponent implements OnInit {
       isText: true
     });
 
-    for(let i =0; i < this.documentsSubmitted.length; i++) {
-      dataTable.push ({
-                      tittle: this.documentsRequested[i], 
-                      isText: false, 
-                      id:"file-" + i, 
-                      path: this.documentsSubmitted[0]});
-    }
+    
 
     dataTable.push ({
       tittle: "Estado",
@@ -96,6 +92,14 @@ export class ReviewTaskSubmittedComponent implements OnInit {
       description: this.dateModify,
       isText: true
     })
+
+    for(let i =0; i < this.documentsSubmitted.length; i++) {
+      dataTable.push ({
+                      tittle: "Documento", 
+                      isText: false, 
+                      id:"file-" + i, 
+                      path: this.documentsSubmitted[0]});
+    }
 
     return dataTable;
   }
@@ -128,13 +132,13 @@ export class ReviewTaskSubmittedComponent implements OnInit {
     return data.author;
   }
 
-  _areReviewersAssigned(reviewers) {
+  _areFormAssigned(reviewers) {
     if(reviewers) {
-      this.areReviewersAssigned = true;
+      this.areFormAssigned = true;
       return reviewers;
     }
     else {
-      this.areReviewersAssigned = false;
+      this.areFormAssigned = false;
       return null;
     }
   }
@@ -149,15 +153,25 @@ export class ReviewTaskSubmittedComponent implements OnInit {
       this.stablishDataTaskRequested();
 
       this.reviewService.getReviewTaskSubmitted(this.idTaskSubmitted).subscribe((reviewData:any) => {
-        this.reviewers = this._areReviewersAssigned(reviewData.reviewersData);
+        this.reviewers = this._areFormAssigned(reviewData.reviewersData);
         this.idReview = reviewData.idReview;
       });
       this.dataSource = this.generateDataTable();
     });
 
+    this.reviewService.getReviewersAssigned(this.idStudent).subscribe((data) => {
+      this.areReviewers = this.areReviewersAssigned(data);
+    });
     
     
 
+  }
+
+  areReviewersAssigned(reviewers) {
+    if(reviewers)
+      return true;
+
+    return false;
   }
 
   sendReviewTask() {

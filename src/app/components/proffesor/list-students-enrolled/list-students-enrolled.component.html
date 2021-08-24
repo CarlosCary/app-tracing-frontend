@@ -6,13 +6,30 @@
 
 <h1 class="tittle-students">Estudiantes inscritos</h1>
 
-
 <table mat-table [dataSource]="studentsData" multiTemplateDataRows class="mat-elevation-z8 table1">
     
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Estudiante </th>
         <td mat-cell *matCellDef="let student"> 
-            <a [routerLink]="['/proffesor/tasks',idSubject ,student._id]"> {{student.name}} </a> 
+            <a [routerLink]="['/proffesor/tasks',idSubject ,student.studentData._id]"> {{student.studentData.name}} </a> 
+        </td>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let student"> 
+            <a [routerLink]="['/proffesor/editReviewers', student.studentData._id]" 
+                *ngIf="student.reviewersId; else addReviewers"
+                class="material-icons" matTooltip="Cambiar tribunal">
+                people
+            </a>
+            <ng-template #addReviewers>
+                <a [routerLink]="['/proffesor/assignReviewers', student.studentData._id]" 
+                    class="material-icons" matTooltip="Asignar tribunal">
+                    person_add
+                </a>
+            </ng-template>
         </td>
     </ng-container>
 

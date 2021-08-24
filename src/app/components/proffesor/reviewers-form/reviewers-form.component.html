@@ -5,6 +5,7 @@
 <br>
 <br>
 
+<!-- <h2 class="left-space">Seleccione a los revisores: </h2>
 <h2 class="left-space">Seleccione a los revisores: </h2>
 <form class="example-form" [formGroup]="committeForm">
     <div class = "left-space label-selector selector-space">
@@ -41,14 +42,15 @@
             <mat-error *ngIf="committeFromControls.tutor.hasError('required')">Debe seleccionar un tutor</mat-error>
         </mat-form-field>
     </div>
-</form>
-    <div class="left-space reviewers-size">
-        <ng-template #reviewer></ng-template>
-        <!-- <div>
-            <h4 class="button-inline">Agregar otro revisor: </h4>
-            <button class="button-add-reviewers" (click)="addReviewer()"><mat-icon>group_add</mat-icon></button>
-        </div> -->
-    </div>
+</form> -->
+    
+<!-- <div class="left-space reviewers-size"> -->
+    <!-- <ng-template #reviewer></ng-template> -->
+    <!-- <div>
+        <h4 class="button-inline">Agregar otro revisor: </h4>
+        <button class="button-add-reviewers" (click)="addReviewer()"><mat-icon>group_add</mat-icon></button>
+    </div> -->
+
     
     <h2 class="left-space">Formulario de revisión: </h2>
 
@@ -75,16 +77,20 @@
                 <input matInput [(ngModel)]="tittleSection" maxlength="30" placeholder="Ingrese el título de la sección">
             </mat-form-field>
         </div>
-        <p>
-            <mat-form-field appearance="outline" class="text-box">
-                <mat-label>Descripción de la sección</mat-label>
-                <textarea [(ngModel)]="descriptionSection" matInput maxlength="300" rows="5"></textarea>
-            </mat-form-field>
-        </p>
-        <mat-divider></mat-divider>
-        <br>
+        <div>
+            <p>
+                <mat-form-field appearance="outline" class="text-box">
+                    <mat-label>Descripción de la sección</mat-label>
+                    <textarea [(ngModel)]="descriptionSection" matInput maxlength="300" rows="5"></textarea>
+                </mat-form-field>
+            </p>
+        </div>
+        <div class="left-space">
+            <mat-divider></mat-divider>
+        </div>
         <ng-template #section></ng-template>
     </div>
+    
     <div class="left-space">
         <button mat-raised-button color="primary" (click)="saveFormReview()">Crear revisión</button>
     </div>

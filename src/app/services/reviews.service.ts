@@ -16,7 +16,7 @@ export class ReviewsService {
     "Content-type": "application/json",
   });
 
-  public createReview(formTittles , formDescriptions, reviewers, idProffesor, idSubmittedTask) {
+  public createReview(formTittles , formDescriptions, idStudent, idProffesor, idSubmittedTask) {
     const url_api = this.API_URL + "/review/new";
     return this.http
     .post(
@@ -24,13 +24,34 @@ export class ReviewsService {
       {
         formTittles: formTittles,
         formDescriptions: formDescriptions, 
-        reviewers: reviewers,
+        idStudent: idStudent,
         idProffesor: idProffesor,
         idSubmittedTask: idSubmittedTask
       },
       { headers: this.headers }
     )
     .pipe(map(data => data));
+  }
+
+  public assignReviewers(reviewers, idProffesor, idStudent) {
+    const url_api = this.API_URL + "/review/new/reviewers";
+    console.log(reviewers);
+    return this.http
+    .post(
+      url_api, 
+      {
+        reviewersBody: reviewers,
+        idProffesor: idProffesor,
+        idStudent: idStudent
+      },
+      { headers: this.headers }
+    )
+    .pipe(map(data => data));
+  }
+
+  getReviewersAssigned(idStudent) {
+    const url_api = this.API_URL + "/review/reviewers/" + idStudent;
+    return this.http.get(url_api).pipe(map(data => data));
   }
 
   getReviewTaskSubmitted(idTaskSubmitted) {
@@ -84,5 +105,17 @@ export class ReviewsService {
   getAssignedReviews(idProffesor, role) {
     const url_api = this.API_URL + "/review/" + idProffesor + "/" + role;
     return this.http.get(url_api).pipe(map(data => data));
+  }
+
+  updateReviewers(reviewers, idReviewers) {
+    const url_api = this.API_URL + "/review/reviewers/update";
+    return this.http.put(url_api, 
+      {
+        idReviewers: idReviewers,
+        reviewers
+      },
+      { headers: this.headers }
+    )
+    .pipe(map(data => data));
   }
 }

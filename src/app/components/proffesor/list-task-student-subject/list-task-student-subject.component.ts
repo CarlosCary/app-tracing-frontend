@@ -34,6 +34,7 @@ export class ListTaskStudentSubjectComponent implements OnInit {
   ngOnInit() {
     this.tasksService.getTasksStudentSubject(this.idSubject, this.idStudent).subscribe(((data:any) => {
       this.tasksData = this.generateTableData(data);
+      console.log(data);
     }));
   }
 

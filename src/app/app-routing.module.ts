@@ -35,6 +35,8 @@ import { DocumentsAssignedTutorComponent } from './components/proffesor/document
 import { DocumentsAssignedRapporteurComponent } from './components/proffesor/documents-assigned-rapporteur/documents-assigned-rapporteur.component';
 import { ListSubjectFilesComponent } from './components/utils/list-subject-files/list-subject-files.component';
 import { NewSubjectFileComponent } from './components/utils/new-subject-file/new-subject-file.component';
+import { AssignReviewersComponent } from './components/proffesor/assign-reviewers/assign-reviewers.component';
+import { EditReviewersComponent } from './components/proffesor/edit-reviewers/edit-reviewers.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
@@ -77,7 +79,7 @@ const routes: Routes = [
     data: { roles: ['proffesor', 'director']} },
   { path: 'proffesor/edit/form/review/:idReviewForm', component: MyFormReviewEditComponent, canActivate: [AuthGuard], 
     data: { roles: ['proffesor', 'director']} },
-  { path: 'proffesor/reviewers/:idSubmittedTask', component: ReviewersFormComponent, canActivate: [AuthGuard], 
+  { path: 'proffesor/reviewers/:idSubmittedTask/:idStudent', component: ReviewersFormComponent, canActivate: [AuthGuard], 
     data: { roles: ['proffesor', 'director']} },
   { path: 'proffesor/new/review/:idReview/:taskName', component: NewFeedbackDocumentReviewerComponent, canActivate: [AuthGuard], 
     data: { roles: ['proffesor', 'director']} },
@@ -108,7 +110,11 @@ const routes: Routes = [
   { path: 'subject/files/:idSubject', component: ListSubjectFilesComponent, canActivate: [AuthGuard], 
   data: { roles: ['proffesor', 'student']} },
   { path: 'subject/file/new/:idSubject', component: NewSubjectFileComponent, canActivate: [AuthGuard], 
-    data: { roles: ['proffesor']} }
+    data: { roles: ['proffesor']} },
+  { path: 'proffesor/assignReviewers/:idStudent', component: AssignReviewersComponent, canActivate: [AuthGuard], 
+  data: { roles: ['proffesor']} },
+  { path: 'proffesor/editReviewers/:idStudent', component: EditReviewersComponent, canActivate: [AuthGuard], 
+  data: { roles: ['proffesor']} }
 ];
 
 @NgModule({

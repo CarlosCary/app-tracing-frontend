@@ -14,15 +14,13 @@ export class NotificationsService {
     "Content-type": "application/json",
   });
 
-  notifyCommittee(director, rapporteur, tutor) {
+  notifyCommittee(idStudent) {
     const url_api = this.API_URL + "/notifications/notify/committee";
     return this.http
     .put(
       url_api, 
       {
-        director,
-        rapporteur,
-        tutor 
+        idStudent
       },
       { headers: this.headers }
     )

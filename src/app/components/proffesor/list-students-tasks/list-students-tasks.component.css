@@ -12,7 +12,11 @@ table.table1 {
 }
 
 .margin-left {
-  margin-left: 30%;
+  margin-left: 10%;
+}
+
+.mat-column-options {
+  width: 30% !important;
 }
 
 

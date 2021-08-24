@@ -28,7 +28,7 @@ export class EditReviewersFormComponent implements OnInit {
 
   directors;
   proffesors;
-  //********* */
+  
   idTask;
   idStudent;
 
@@ -74,7 +74,7 @@ export class EditReviewersFormComponent implements OnInit {
       this.proffesors = this.proffesorsList.proffesors;
       this.idReview = this.proffesorsList.idReview;
       
-      this.chargeCommitteSelected(proffesorsList.committe.reviewers)
+      this.chargeCommitteSelected(proffesorsList.committe.reviewers);
       
     })
 
@@ -86,6 +86,7 @@ export class EditReviewersFormComponent implements OnInit {
     this.rapporteur = idProffesorsSelected[1].idProffesor;
     this.tutor = idProffesorsSelected[2].idProffesor;
   }
+
   async saveFormReview() {
 
     
