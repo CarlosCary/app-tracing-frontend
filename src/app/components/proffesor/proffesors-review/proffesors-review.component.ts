@@ -40,7 +40,7 @@ export class ProffesorsReviewComponent implements OnInit {
                       path: review.documents[i],
                       isText: false});
     }
-
+    // console.log(review);
     return reviewData;
   }
 
@@ -51,7 +51,7 @@ export class ProffesorsReviewComponent implements OnInit {
 
     this.reviewService.getAllAnswersReviewProffesors(this.idReview).subscribe((answerReviewProffesors:any) => {
       this.reviewsProffesorData = answerReviewProffesors;
-      
+      console.log(answerReviewProffesors);
     });
   }
 

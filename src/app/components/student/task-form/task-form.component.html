@@ -71,7 +71,7 @@
     <table mat-table [dataSource]="documentsSubmittedData" class="mat-elevation-z8 table1">
         
         <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef> Fecha de entrega</th>
+            <th mat-header-cell *matHeaderCellDef> Hora y fecha de entrega</th>
             <td mat-cell *matCellDef="let reviewForm"> {{reviewForm.dateDelivery}}</td>
         </ng-container>
 
@@ -88,11 +88,17 @@
         <ng-container matColumnDef="options">
             <th mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let reviewForm" class="button-edit"> 
-                <a *ngIf='reviewForm.idReviewAssigned' class="material-icons button-size" 
+                <a *ngIf='reviewForm.idReviewAssigned else iconDisabled' class="material-icons button-size" 
                 [routerLink]="['/proffesors/review', reviewForm.idReviewAssigned, taskName]"
                 matTooltip="Ver revisiones">
                     remove_red_eye
                 </a>
+                <ng-template #iconDisabled>
+                    <a class="material-icons button-size icon-disabled"
+                    matTooltip="Aún no tiene revisiones">
+                        remove_red_eye
+                    </a>
+                </ng-template>
             </td>
         </ng-container>
 

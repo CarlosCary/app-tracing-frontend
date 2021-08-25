@@ -87,11 +87,11 @@ export class ReviewTaskSubmittedComponent implements OnInit {
       isText: true
     })
 
-    dataTable.push ({
-      tittle: "Última modificación",
-      description: this.dateModify,
-      isText: true
-    })
+    // dataTable.push ({
+    //   tittle: "Última modificación",
+    //   description: this.dateModify,
+    //   isText: true
+    // })
 
     for(let i =0; i < this.documentsSubmitted.length; i++) {
       dataTable.push ({

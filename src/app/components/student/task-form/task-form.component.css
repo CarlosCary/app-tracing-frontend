@@ -69,7 +69,13 @@ table {
   width: 50%;
 }
 
-/* .icon-disabled {
+.icon-disabled {
   cursor: not-allowed;
   opacity: 0.5;
-} */
+}
+
+
+.mat-cell {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}

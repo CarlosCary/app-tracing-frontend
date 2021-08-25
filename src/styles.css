@@ -22,7 +22,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-weight: bold;
 }
 
-mat-cell {
-  padding-top: 5vh;
-  padding-bottom: 5vh;
+.padding-rows {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
 }

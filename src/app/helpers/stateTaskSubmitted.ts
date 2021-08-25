@@ -4,7 +4,7 @@ class StateTaskSubmitted {
 
         switch(state) { 
             case "none": { 
-                return "Sin tribunal asignado";
+                return "Sin formulario de revisión asignado";
             } 
 
             case "checked": { 
@@ -13,10 +13,10 @@ class StateTaskSubmitted {
 
             case "rejected": { 
                 return "Rechazado"; 
-            } 
+            }
 
             case "reviewersAssigned": {
-                return "Tribunal asignado"; 
+                return "Formulario de revisión asignado"; 
             }
 
             default: { 

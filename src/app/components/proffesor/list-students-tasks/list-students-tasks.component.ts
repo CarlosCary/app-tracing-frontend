@@ -11,7 +11,7 @@ import { ReviewsService } from 'src/app/services/reviews.service';
 })
 export class ListStudentsTasksComponent implements OnInit {
   
-  columnsHeaderToDisplay: string[] = ['name', 'state', 'options'];
+  columnsHeaderToDisplay: string[] = ['name', 'state', 'date','options'];
   idTask;
   studentsData;
   dataSource;
@@ -27,6 +27,7 @@ export class ListStudentsTasksComponent implements OnInit {
 
   generateTable(studentsTasksSubmitted) {
     let studentsTasks = [];
+    
     for(let i = 0; i < studentsTasksSubmitted.length; i ++) {
       if(studentsTasksSubmitted[i].taskSubmitted) {
         studentsTasks.push({studentName: studentsTasksSubmitted[i].student.name,
@@ -34,7 +35,8 @@ export class ListStudentsTasksComponent implements OnInit {
                             taskState: stateTaskSubmitted.getStateMessage(studentsTasksSubmitted[i].taskSubmitted.state),
                             idTask: studentsTasksSubmitted[i].taskSubmitted.idTask,
                             idTaskSubmitted: studentsTasksSubmitted[i].taskSubmitted._id,
-                            areReviewersAssigned: studentsTasksSubmitted[i].reviewAssigned
+                            areReviewersAssigned: studentsTasksSubmitted[i].reviewAssigned,
+                            date: studentsTasksSubmitted[i].taskSubmitted.dateSend
                           })
       }
       else {

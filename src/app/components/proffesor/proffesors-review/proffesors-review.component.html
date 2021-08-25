@@ -24,7 +24,7 @@
                 </div>
     
                 <ng-template #file>
-                    <a href="{{APILink}}/{{review.path}}" target="_blank">Descargar documento</a>
+                    <a href="{{APILink}}/{{review.path}}" target="_blank">Ver documento</a>
                 </ng-template>
         </td>
     </ng-container>
@@ -36,8 +36,8 @@
     <h2 class="left-space">Revisiones </h2>
     
     <div *ngFor="let reviewProffesorData of reviewsProffesorData">
-        <h3 class="left-space"> {{reviewProffesorData.proffesorName}}: </h3>
-
+        <h3 class="left-space"> {{reviewProffesorData.proffesorName}} </h3>
+        <h5 class="left-space"> Hora y fecha de la revisión: {{reviewProffesorData.dateHourReview}} </h5>
         <table mat-table [dataSource]="reviewProffesorData.answersProffesor" class="mat-elevation-z8 table1">
     
             <ng-container matColumnDef="tittle" >
